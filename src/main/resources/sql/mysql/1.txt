@@ -1,0 +1,124 @@
+CREATE TABLE `user` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `full_name` varchar(25) DEFAULT NULL,
+  `login_name` varchar(25) DEFAULT NULL,
+  `password` varchar(255) DEFAULT NULL,
+  `plain_password` char(10) DEFAULT NULL,
+  `salt` varchar(255) DEFAULT NULL,
+  `email` varchar(25) DEFAULT NULL,
+  `register_date` datetime DEFAULT NULL,
+  `icon` varchar(255) DEFAULT NULL,
+  `user_desc` varchar(255) DEFAULT NULL,
+  `roles` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8;
+
+CREATE TABLE `ssh4_user` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `login_name` varchar(64) NOT NULL,
+  `name` varchar(64) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `salt` varchar(64) NOT NULL,
+  `roles` varchar(255) NOT NULL,
+  `register_date` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `icon` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `login_name` (`login_name`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+
+CREATE TABLE `ssh4_task` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `title` varchar(128) NOT NULL,
+  `description` varchar(255) DEFAULT NULL,
+  `user_id` bigint(20) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+
+CREATE TABLE `message` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `sender_id` int(11) DEFAULT NULL,
+  `send_date` datetime DEFAULT NULL,
+  `content` varchar(255) DEFAULT NULL,
+  `img` varchar(255) DEFAULT NULL,
+  `video` varchar(255) DEFAULT NULL,
+  `receiver_id` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `group_message` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `group_id` int(11) DEFAULT NULL,
+  `sender_id` int(11) DEFAULT NULL,
+  `send_date` datetime DEFAULT NULL,
+  `content` varchar(255) DEFAULT NULL,
+  `img` varchar(255) DEFAULT NULL,
+  `video` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `group_member` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `group_id` int(11) DEFAULT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `is_manager` char(1) DEFAULT NULL,
+  `recommender_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `group_info` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `group_desc` varchar(255) DEFAULT NULL,
+  `group_name` varchar(255) DEFAULT NULL,
+  `create_date` datetime DEFAULT NULL,
+  `creator_id` int(11) DEFAULT NULL,
+  `group_icon` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `friend` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) DEFAULT NULL,
+  `friend_id` int(11) DEFAULT NULL,
+  `friend_note` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+
+CREATE TABLE `fck` (
+  `content` varchar(2000) DEFAULT NULL,
+  `author` varchar(20) DEFAULT NULL,
+  `name` varchar(100) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `d301kqzjb` (
+  `id_kqjl` int(10) NOT NULL AUTO_INCREMENT,
+  `F301xxID` varchar(30) DEFAULT NULL,
+  `f301bjID` varchar(30) DEFAULT NULL,
+  `f301wbdh` varchar(30) DEFAULT NULL,
+  `f301wblx` varchar(30) DEFAULT NULL,
+  `f301kqsj` datetime DEFAULT NULL,
+  PRIMARY KEY (`id_kqjl`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+
+CREATE TABLE `comment` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `article_id` int(11) DEFAULT NULL,
+  `replyer_id` int(11) DEFAULT NULL,
+  `content` varchar(255) DEFAULT NULL,
+  `publish_time` datetime DEFAULT NULL,
+  `img` varchar(255) DEFAULT NULL,
+  `video` varchar(255) DEFAULT NULL,
+  `client_info` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `article` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `publisher_id` int(11) DEFAULT NULL,
+  `content` varchar(255) DEFAULT NULL,
+  `publish_time` datetime DEFAULT NULL,
+  `img` varchar(255) DEFAULT NULL,
+  `video` varchar(255) DEFAULT NULL,
+  `client_info` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+

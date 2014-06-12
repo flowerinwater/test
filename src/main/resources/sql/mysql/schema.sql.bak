@@ -1,0 +1,130 @@
+drop table if exists ssh4_task;
+drop table if exists ssh4_user;
+drop table if exists article;
+
+create table ssh4_task (
+	id bigint auto_increment,
+	title varchar(128) not null,
+	description varchar(255),
+	user_id bigint not null,
+    primary key (id)
+) engine=InnoDB;
+
+create table ssh4_user (
+	id bigint auto_increment,
+	login_name varchar(64) not null unique,
+	name varchar(64) not null,
+	password varchar(255) not null,
+	salt varchar(64) not null,
+	roles varchar(255) not null,
+	register_date timestamp not null default 0,	
+	icon varchar(255) ,
+	primary key (id)
+) engine=InnoDB;
+
+
+create table article
+(
+   id 					bigint auto_increment,
+   publisher_id         int,
+   content              varchar(255),
+   publishtime          timestamp not null,
+   img                  varchar(255),
+   video                varchar(255),
+   client_info          varchar(255),
+   primary key (id)
+);
+
+
+drop table if exists friend;
+
+drop table if exists group;
+
+drop table if exists group_member;
+
+drop table if exists group_message;
+
+drop table if exists message;
+
+drop table if exists user;
+
+/*==============================================================*/
+/* Table: friend                                                */
+/*==============================================================*/
+create table friend
+(
+   id                   int,
+   user_id              int,
+   friend_id            int,
+   friend_note          varchar(255)
+);
+
+/*==============================================================*/
+/* Table: group                                                 */
+/*==============================================================*/
+create table group
+(
+   group_id             int,
+   group_desc           varchar(255),
+   group_name           varchar(255),
+   create_date          datetime,
+   creator_id           int,
+   group_icon           varchar(255)
+);
+
+/*==============================================================*/
+/* Table: group_member                                          */
+/*==============================================================*/
+create table group_member
+(
+   id                   int,
+   group_id             int,
+   user_id              int,
+   is_manager           char(1),
+   recommender_id       int
+);
+
+/*==============================================================*/
+/* Table: group_message                                         */
+/*==============================================================*/
+create table group_message
+(
+   group_message_id     int,
+   group_id             int,
+   sender_id            int,
+   send_date            datetime,
+   content              varchar(255),
+   img                  varchar(255),
+   video                varchar(255)
+);
+
+/*==============================================================*/
+/* Table: message                                               */
+/*==============================================================*/
+create table message
+(
+   id bigint auto_increment,
+   sender_id            int,
+   send_date            datetime,
+   content              varchar(255),
+   img                  varchar(255),
+   video                varchar(255),
+   receiver_id          varchar(20)
+);
+
+/*==============================================================*/
+/* Table: user                                                  */
+/*==============================================================*/
+create table user
+(
+   id bigint auto_increment,
+   full_name            varchar(25),
+   login_name           varchar(25),
+   password             varchar(20),
+   plain_password       char(10),
+   salt                 varchar(255),
+   email                varchar(25),
+   register_date        datetime,
+   icon                 varchar(255),
+   "desc"               varchar(255)
+);

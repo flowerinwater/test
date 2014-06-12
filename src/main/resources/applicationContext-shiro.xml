@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd"
+	default-lazy-init="true">
+
+	<description>Shiro安全配置</description>
+
+	<!-- Shiro's main business-tier object for web-enabled applications -->
+	<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+		<property name="realm" ref="shiroDbRealm" />
+		<property name="cacheManager" ref="shiroEhcacheManager" />
+	</bean>
+
+	<!-- 項目自定义的Realm, 所有accountService依赖的dao都需要用depends-on声明--> 
+	<!--<bean id="shiroDbRealm" class="com.test.service.account.ShiroDbRealm" depends-on="userDao,taskDao,apnUserDao,friendDao,groupInfoDao">
+		<property name="accountService" ref="accountService"/>
+	</bean>-->
+	<bean id="shiroDbRealm" class="com.bnu.card.service.ShiroDbRealm" depends-on="sysUserDao">
+		<property name="sysUserService" ref="sysUserService"/>
+	</bean>
+	
+	<!-- Shiro Filter -->
+	<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+		<property name="securityManager" ref="securityManager" />
+		<property name="loginUrl" value="/bnulogin" />
+		<property name="successUrl" value="/main3.jsp" />
+		<property name="filterChainDefinitions">
+			<value>
+				/login = authc
+				/bnulogin = authc
+				/logout = logout
+				/static/** = anon
+				/api/** = anon
+				/register/** = anon
+				/admin/** = roles[admin]
+				/json1 = anon
+				/json2 = anon
+				/jsonlogin = anon
+				/jsonregister = anon
+				/jsonfinduser = anon
+				/jsonfinduserbyid = anon
+				/jsonfindalluserpage = anon
+				/jsonsaveuser = anon
+				/jsonremoveuserbyid = anon
+				/sendblog = anon
+				/getblogs = anon
+				/getusericon = anon
+				/getblogimgorvideo = anon
+				/helloworld.jsp = anon
+				/upload.jsp = anon
+				/main*.jsp = authc
+				/*.html = anon
+				/json* = anon
+				/jsonfindallhistorypage = anon
+				/** = user
+			</value>
+		</property>
+	</bean>
+	
+	<!-- 用户授权信息Cache, 采用EhCache -->
+	<bean id="shiroEhcacheManager" class="org.apache.shiro.cache.ehcache.EhCacheManager">
+		<property name="cacheManagerConfigFile" value="classpath:ehcache/ehcache-shiro.xml"/>
+	</bean>
+	
+	<!-- 保证实现了Shiro内部lifecycle函数的bean执行 -->
+	<bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/>
+</beans>
