@@ -108,10 +108,17 @@
 	<div class="wrapper" >
 		<form id="loginForm" action="${ctx}/bnulogin" method="post">
 		<div class="loginBox">
+			<div class="loginBoxButtons">
+				<span id="logo" > <img
+						src="${ctx}/static/images/bnu.jpg" style="width:40px;height:40px;vertical-align:middle"></span>
+				<span 
+						style=" margin:10px 0px 0px 30px;font-size:24px;">户籍管理系统</span>
+		
+			</div>
 			<div class="loginBoxCenter">
 				<p><label for="username">用户名：</label></p>
 				<p><input type="text" id="username" name="username"  value="${username}" class="loginInput" autofocus="autofocus" required="required" placeholder="请输入用户名" autocomplete="off" /></p>
-				<p><label for="password">密码：</label><a class="forgetLink" href="#">忘记密码?</a></p>
+				<p><label for="password">密码：</label><!--  <a class="forgetLink" href="#">忘记密码?</a></p>-->
 				<p><input type="password" id="password" name="password" class="loginInput" required="required" placeholder="请输入密码" value="" /></p>
 			</div>
 			<div class="loginBoxButtons">
