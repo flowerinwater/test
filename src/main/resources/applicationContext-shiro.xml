@@ -23,7 +23,7 @@
 	<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
 		<property name="securityManager" ref="securityManager" />
 		<property name="loginUrl" value="/bnulogin" />
-		<property name="successUrl" value="/main3.jsp" />
+		<property name="successUrl" value="/main4.jsp" />
 		<property name="filterChainDefinitions">
 			<value>
 				/login = authc
