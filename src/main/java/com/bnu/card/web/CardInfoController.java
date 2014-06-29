@@ -1054,7 +1054,10 @@ public class CardInfoController {
                 if(errMsgs.length() > 0){
                 	lr.setSuccess(false);
                 	lr.setMsg("错误信息如下：<br>" + errMsgs);  
-                }else{
+                }else if(cifs.size()==0){
+                	lr.setSuccess(false);
+                	lr.setMsg("错误信息如下：<br>" + "文件["+fileName+"]未能解析出数据!");
+            	}else{
                 	List<CardInfo> cis = new ArrayList<CardInfo>();
                 	for (Iterator iterator = cifs.iterator(); iterator.hasNext();) {
                 		CardInfoXlsVo cif1 = (CardInfoXlsVo) iterator.next();
