@@ -70,7 +70,9 @@
 		<![endif]-->
 
 		<!-- page specific plugin styles -->
-
+		
+		<link rel="stylesheet" href="${ctx}/assets/css/jquery-ui-1.10.3.full.min.css"/>
+		
 		<!-- fonts 00000000000000000000000000000
 
 		<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400,300" />
@@ -902,10 +904,10 @@
 					<div class="page-content">
 						<div class="page-header">
 							<h1>
-								控制台
+								系统管理
 								<small>
 									<i class="icon-double-angle-right"></i>
-									 查看
+									 修改密码
 								</small>
 							</h1>
 						</div><!-- /.page-header -->
@@ -917,89 +919,44 @@
 
 											<div class=" row-fluid position-relative" id="">
 														
-															<h3 class="lighter block green">Enter the following information</h3>
+															<h3 class="lighter block green">修改密码</h3>
 
-															<form class="form-horizontal" id="sample-form">
-																<div class="form-group has-warning">
-																	<label for="inputWarning" class="col-xs-12 col-sm-3 control-label no-padding-right">Input with warning</label>
-
-																	<div class="col-xs-12 col-sm-5">
-																		<span class="block input-icon input-icon-right">
-																			<input type="text" id="inputWarning" class="width-100" />
-																			<i class="icon-leaf"></i>
-																		</span>
-																	</div>
-																	<div class="help-block col-xs-12 col-sm-reset inline">
-																		Warning tip help!
-																	</div>
-																</div>
-
-																<div class="form-group has-error">
-																	<label for="inputError" class="col-xs-12 col-sm-3 col-md-3 control-label no-padding-right">Input with error</label>
-
-																	<div class="col-xs-12 col-sm-5">
-																		<span class="block input-icon input-icon-right">
-																			<input type="text" id="inputError" class="width-100" />
-																			<i class="icon-remove-sign"></i>
-																		</span>
-																	</div>
-																	<div class="help-block col-xs-12 col-sm-reset inline"> Error tip help! </div>
-																</div>
-
-																<div class="form-group has-success">
-																	<label for="inputSuccess" class="col-xs-12 col-sm-3 control-label no-padding-right">Input with success</label>
-
-																	<div class="col-xs-12 col-sm-5">
-																		<span class="block input-icon input-icon-right">
-																			<input type="text" id="inputSuccess" class="width-100" />
-																			<i class="icon-ok-sign"></i>
-																		</span>
-																	</div>
-																	<div class="help-block col-xs-12 col-sm-reset inline">
-																		Success tip help!
-																	</div>
-																</div>
-
-																<div class="form-group has-info">
-																	<label for="inputInfo" class="col-xs-12 col-sm-3 control-label no-padding-right">Input with info</label>
-
-																	<div class="col-xs-12 col-sm-5">
-																		<span class="block input-icon input-icon-right">
-																			<input type="text" id="inputInfo" class="width-100" />
-																			<i class="icon-info-sign"></i>
-																		</span>
-																	</div>
-																	<div class="help-block col-xs-12 col-sm-reset inline"> Info tip help! </div>
-																</div>
-
+															<form class="form-horizontal" id="fmChangePass"  method="post" contentType="application/json">
 																<div class="form-group">
-																	<label for="inputError2" class="col-xs-12 col-sm-3 control-label no-padding-right">Input with error</label>
-
-																	<div class="col-xs-12 col-sm-5">
-																		<span class="input-icon block">
-																			<input type="text" id="inputError2" class="width-100" />
-																			<i class="icon-remove-sign red"></i>
-																		</span>
-																	</div>
-																	<div class="help-block col-xs-12 col-sm-reset inline"> Error tip help! </div>
-																</div>
-															</form>
-
-															<form class="form-horizontal" id="validation-form" method="get">
-																<div class="form-group">
-																	<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="email">Email Address:</label>
+																	<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="id">ID</label>
 
 																	<div class="col-xs-12 col-sm-9">
 																		<div class="clearfix">
-																			<input type="email" name="email" id="email" class="col-xs-12 col-sm-6" />
+																			<input type="text" name="id" id="id" readOnly class="col-xs-12 col-sm-4" />
 																		</div>
 																	</div>
 																</div>
 
+																<div class="form-group">
+																	<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="name">名称:</label>
+
+																	<div class="col-xs-12 col-sm-9">
+																		<div class="clearfix">
+																			<input type="text" name="name" id="name" readOnly class="col-xs-12 col-sm-4" />
+																		</div>
+																	</div>
+																</div>
+
+																<div class="form-group">
+																	<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="email">登录名:</label>
+
+																	<div class="col-xs-12 col-sm-9">
+																		<div class="clearfix">
+																			<input type="text" name="loginName" id="loginName"  readOnly class="col-xs-12 col-sm-4" />
+																		</div>
+																	</div>
+																</div>
+
+																
 																<div class="space-2"></div>
 
 																<div class="form-group">
-																	<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="password">Password:</label>
+																	<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="password">当前密码:</label>
 
 																	<div class="col-xs-12 col-sm-9">
 																		<div class="clearfix">
@@ -1011,213 +968,83 @@
 																<div class="space-2"></div>
 
 																<div class="form-group">
-																	<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="password2">Confirm Password:</label>
+																	<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="newpassword">新密码:</label>
 
 																	<div class="col-xs-12 col-sm-9">
 																		<div class="clearfix">
-																			<input type="password" name="password2" id="password2" class="col-xs-12 col-sm-4" />
+																			<input type="password" name="newpassword" id="newpassword" class="col-xs-12 col-sm-4" />
 																		</div>
 																	</div>
 																</div>
-
-																<div class="hr hr-dotted"></div>
+																
+																<div class="space-2"></div>
 
 																<div class="form-group">
-																	<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="name">Company Name:</label>
+																	<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="repassword">确认密码:</label>
 
 																	<div class="col-xs-12 col-sm-9">
 																		<div class="clearfix">
-																			<input type="text" id="name" name="name" class="col-xs-12 col-sm-5" />
+																			<input type="password" name="repassword" id="repassword" class="col-xs-12 col-sm-4" />
 																		</div>
 																	</div>
+																</div>
+																
+																<div class="space-2"></div>
+																<div class="form-group">
+																<div class="col-md-offset-2 col-xs-12 col-sm-5">
+																	<center>
+																	<button class="btn btn-info" type="submit">
+																		<i class="icon-ok bigger-110"></i>
+																		确定
+																	</button>
+						
+																	&nbsp; &nbsp; &nbsp;
+																	<button class="btn" type="reset">
+																		<i class="icon-undo bigger-110"></i>
+																		重置
+																	</button>
+																	</center>
+																</div>
 																</div>
 
 																<div class="space-2"></div>
-
 																<div class="form-group">
-																	<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="phone">Phone Number:</label>
-
-																	<div class="col-xs-12 col-sm-9">
-																		<div class="input-group">
-																			<span class="input-group-addon">
-																				<i class="icon-phone"></i>
-																			</span>
-
-																			<input type="tel" id="phone" name="phone" />
-																		</div>
-																	</div>
+																<div class="col-md-offset-2 col-xs-12 col-sm-5">
+																				<div class="alert alert-info">
+																					<button type="button" class="close" data-dismiss="alert">
+																						<i class="icon-remove"></i>
+																					</button>
+																					<strong>Heads up!</strong>
+																					<span>
+																					This alert needs your attention, but it's not super important.
+																					</span>
+																					<br />
+																				</div>
+																				
+																				<div class="alert alert-danger">
+																					<button type="button" class="close" data-dismiss="alert">
+																						<i class="icon-remove"></i>
+																					</button>
+										
+																					<strong>
+																						<i class="icon-remove"></i>
+																						Oh snap!
+																					</strong>
+																					<span>
+																					Change a few things up and try submitting again.
+																					</span>
+																					<br />
+																				</div>
 																</div>
-
-																<div class="space-2"></div>
-
-																<div class="form-group">
-																	<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="url">Company URL:</label>
-
-																	<div class="col-xs-12 col-sm-9">
-																		<div class="clearfix">
-																			<input type="url" id="url" name="url" class="col-xs-12 col-sm-8" />
-																		</div>
-																	</div>
 																</div>
+																
+															
 
-																<div class="hr hr-dotted"></div>
 
-																<div class="form-group">
-																	<label class="control-label col-xs-12 col-sm-3 no-padding-right">Subscribe to</label>
-
-																	<div class="col-xs-12 col-sm-9">
-																		<div>
-																			<label>
-																				<input name="subscription" value="1" type="checkbox" class="ace" />
-																				<span class="lbl"> Latest news and announcements</span>
-																			</label>
-																		</div>
-
-																		<div>
-																			<label>
-																				<input name="subscription" value="2" type="checkbox" class="ace" />
-																				<span class="lbl"> Product offers and discounts</span>
-																			</label>
-																		</div>
-																	</div>
-																</div>
-
-																<div class="space-2"></div>
-
-																<div class="form-group">
-																	<label class="control-label col-xs-12 col-sm-3 no-padding-right">Gender</label>
-
-																	<div class="col-xs-12 col-sm-9">
-																		<div>
-																			<label class="blue">
-																				<input name="gender" value="1" type="radio" class="ace" />
-																				<span class="lbl"> Male</span>
-																			</label>
-																		</div>
-
-																		<div>
-																			<label class="blue">
-																				<input name="gender" value="2" type="radio" class="ace" />
-																				<span class="lbl"> Female</span>
-																			</label>
-																		</div>
-																	</div>
-																</div>
-
-																<div class="hr hr-dotted"></div>
-
-																<div class="form-group">
-																	<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="state">State</label>
-
-																	<div class="col-xs-12 col-sm-9">
-																		<select id="state" name="state" class="select2" data-placeholder="Click to Choose...">
-																			<option value="">&nbsp;</option>
-																			<option value="AL">Alabama</option>
-																			<option value="AK">Alaska</option>
-																			<option value="AZ">Arizona</option>
-																			<option value="AR">Arkansas</option>
-																			<option value="CA">California</option>
-																			<option value="CO">Colorado</option>
-																			<option value="CT">Connecticut</option>
-																			<option value="DE">Delaware</option>
-																			<option value="FL">Florida</option>
-																			<option value="GA">Georgia</option>
-																			<option value="HI">Hawaii</option>
-																			<option value="ID">Idaho</option>
-																			<option value="IL">Illinois</option>
-																			<option value="IN">Indiana</option>
-																			<option value="IA">Iowa</option>
-																			<option value="KS">Kansas</option>
-																			<option value="KY">Kentucky</option>
-																			<option value="LA">Louisiana</option>
-																			<option value="ME">Maine</option>
-																			<option value="MD">Maryland</option>
-																			<option value="MA">Massachusetts</option>
-																			<option value="MI">Michigan</option>
-																			<option value="MN">Minnesota</option>
-																			<option value="MS">Mississippi</option>
-																			<option value="MO">Missouri</option>
-																			<option value="MT">Montana</option>
-																			<option value="NE">Nebraska</option>
-																			<option value="NV">Nevada</option>
-																			<option value="NH">New Hampshire</option>
-																			<option value="NJ">New Jersey</option>
-																			<option value="NM">New Mexico</option>
-																			<option value="NY">New York</option>
-																			<option value="NC">North Carolina</option>
-																			<option value="ND">North Dakota</option>
-																			<option value="OH">Ohio</option>
-																			<option value="OK">Oklahoma</option>
-																			<option value="OR">Oregon</option>
-																			<option value="PA">Pennsylvania</option>
-																			<option value="RI">Rhode Island</option>
-																			<option value="SC">South Carolina</option>
-																			<option value="SD">South Dakota</option>
-																			<option value="TN">Tennessee</option>
-																			<option value="TX">Texas</option>
-																			<option value="UT">Utah</option>
-																			<option value="VT">Vermont</option>
-																			<option value="VA">Virginia</option>
-																			<option value="WA">Washington</option>
-																			<option value="WV">West Virginia</option>
-																			<option value="WI">Wisconsin</option>
-																			<option value="WY">Wyoming</option>
-																		</select>
-																	</div>
-																</div>
-
-																<div class="space-2"></div>
-
-																<div class="form-group">
-																	<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="platform">Platform</label>
-
-																	<div class="col-xs-12 col-sm-9">
-																		<div class="clearfix">
-																			<select class="input-medium" id="platform" name="platform">
-																				<option value="">------------------</option>
-																				<option value="linux">Linux</option>
-																				<option value="windows">Windows</option>
-																				<option value="mac">Mac OS</option>
-																				<option value="ios">iOS</option>
-																				<option value="android">Android</option>
-																			</select>
-																		</div>
-																	</div>
-																</div>
-
-																<div class="space-2"></div>
-
-																<div class="form-group">
-																	<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="comment">Comment</label>
-
-																	<div class="col-xs-12 col-sm-9">
-																		<div class="clearfix">
-																			<textarea class="input-xlarge" name="comment" id="comment"></textarea>
-																		</div>
-																	</div>
-																</div>
-
-																<div class="space-8"></div>
-
-																<div class="form-group">
-																	<div class="col-xs-12 col-sm-4 col-sm-offset-3">
-																		<label>
-																			<input name="agree" id="agree" type="checkbox" class="ace" />
-																			<span class="lbl"> I accept the policy</span>
-																		</label>
-																	</div>
-																</div>
-															</form>
-														
-
-														
+															</form>														
 													</div>
 
-<!----------------------------------->
-								
-
-																									
-								
+<!----------------------------------->							
 
 								<!-- PAGE CONTENT ENDS -->
 							
@@ -1297,7 +1124,7 @@
 			window.jQuery || document.write("<script src='${ctx}/assets/js/jquery-2.0.3.min.js'>"+"<"+"/script>");
 		</script>
 
-		<!-- <![endif]-->
+		<!-- <![endif]--> 
 
 		<!--[if IE]>
 <script type="text/javascript">
@@ -1312,7 +1139,9 @@
 		<script src="${ctx}/assets/js/typeahead-bs2.min.js"></script>
 
 		<!-- page specific plugin scripts -->
-
+		<script src="assets/js/jquery-ui-1.10.3.full.min.js"></script>  
+		<script src="assets/js/jquery.ui.touch-punch.min.js"></script>
+                                                                  
 		<script src="assets/js/fuelux/fuelux.wizard.min.js"></script>
 		<script src="assets/js/jquery.validate.min.js"></script>
 		<script src="assets/js/additional-methods.min.js"></script>
@@ -1328,10 +1157,101 @@
 		<!-- inline scripts related to this page -->
 
 		<script type="text/javascript">
+				$('.alert-danger').hide();
+				$('.alert-info').hide();
+		
+			function changePass(){  
+				$.ajax({
+					type:'POST',
+					async:false,
+					url:'${ctx}/jsongetcurrloginname',
+					dataType: 'json',
+					contentType : 'application/json',
+					success: function(result){  
+						//alert(result.success);
+						//var result = eval('('+result+')');  
+						if (!result.success){  
+							$.messager.show({  
+								title: 'Error',  
+								msg: result.msg  
+							});  
+						} else {                  
+							var row = result.obj;  
+							if (row){  
+								$('#dlgChangePass').dialog('open').dialog('setTitle','修改密码');  
+								//$('#fmChangePass').form('load',row);    
+								$('#id').val(row.id);
+								$('#name').val(row.name);
+								$('#loginName').val(row.loginName);
+								$('#password').val("");       
+							}else{
+								alert("please choose one row!");
+							}                   
+						}
+					}  
+				});		    
+			} 
+		
+			function saveChangePass(){
+				//if(!$('#fmChangePass').valid())
+				//	return;
+				
+				var frmDataObj = $('#fmChangePass').serializeObject();
+				var frmDataStr = JSON.stringify(frmDataObj);
+				$.ajax({
+					type:'POST',
+					async:false,
+					url:'${ctx}/jsonchangepass',
+					data:frmDataStr,
+					dataType: 'json',
+					contentType : 'application/json',
+					success: function(result){  
+						//alert(result.msg);
+						//var result = eval('('+result+')');  
+						if (!result.success){  
+							$('.alert-danger strong').text("错误!");
+							$('.alert-danger span').text(result.msg);
+							$('.alert-danger').show();
+							$('.alert-info').hide();
+						} else {
+							//alert("密码修改成功!");
+							$('.alert-info strong').text("提示!");
+							$('.alert-info span').text("密码修改成功!");
+							$('.alert-danger').hide();
+							$('.alert-info').show();
+							$('#password').val("");       
+							$('#newpassword').val("");       
+							$('#repassword').val("");       
+							//$('#dlgChangePass').dialog('close');                  
+						}
+					}  
+				});		    
+			}
+				
+			
+			$.fn.serializeObject = function() {
+				var o = {};
+				var a = this.serializeArray();
+				$.each(a, function() {
+					if (o[this.name]) {
+						if (!o[this.name].push) {
+							o[this.name] = [ o[this.name] ];
+						}
+						o[this.name].push(this.value || '');
+					} else {
+						o[this.name] = this.value || '';
+					}
+				});
+				return o;
+			}
+		
+//			$('[data-rel=tooltip]').tooltip();
+
+		
 			jQuery(function($) {
 			
 				$('[data-rel=tooltip]').tooltip();
-			
+				
 				$(".select2").css('width','200px').select2({allowClear:true})
 				.on('change', function(){
 					$(this).closest('form').validate().element($(this));
@@ -1339,106 +1259,45 @@
 			
 			
 				var $validation = false;
-				$('#fuelux-wizard').ace_wizard().on('change' , function(e, info){
-					if(info.step == 1 && $validation) {
-						if(!$('#validation-form').valid()) return false;
-					}
-				}).on('finished', function(e) {
-					bootbox.dialog({
-						message: "Thank you! Your information was successfully saved!", 
-						buttons: {
-							"success" : {
-								"label" : "OK",
-								"className" : "btn-sm btn-primary"
-							}
-						}
-					});
-				}).on('stepclick', function(e){
-					//return false;//prevent clicking on steps
-				});
-			
-			
-				$('#skip-validation').removeAttr('checked').on('click', function(){
-					$validation = this.checked;
-					if(this.checked) {
-						$('#sample-form').hide();
-						$('#validation-form').removeClass('hide');
-					}
-					else {
-						$('#validation-form').addClass('hide');
-						$('#sample-form').show();
-					}
-				});
-			
-			
-			
+							
 				//documentation : http://docs.jquery.com/Plugins/Validation/validate
+		
 			
-			
-				$.mask.definitions['~']='[+-]';
-				$('#phone').mask('(999) 999-9999');
-			
-				jQuery.validator.addMethod("phone", function (value, element) {
-					return this.optional(element) || /^\(\d{3}\) \d{3}\-\d{4}( x\d{1,6})?$/.test(value);
-				}, "Enter a valid phone number.");
-			
-				$('#validation-form').validate({
+				$('#fmChangePass').validate({
 					errorElement: 'div',
 					errorClass: 'help-block',
 					focusInvalid: false,
-					rules: {
-						email: {
-							required: true,
-							email:true
-						},
+					rules:{ 
 						password: {
 							required: true,
-							minlength: 5
+							minlength: 6
 						},
-						password2: {
+						newpassword: {
 							required: true,
-							minlength: 5,
-							equalTo: "#password"
+							minlength: 6
 						},
-						name: {
-							required: true
-						},
-						phone: {
+						repassword: {
 							required: true,
-							phone: 'required'
-						},
-						url: {
-							required: true,
-							url: true
-						},
-						comment: {
-							required: true
-						},
-						state: {
-							required: true
-						},
-						platform: {
-							required: true
-						},
-						subscription: {
-							required: true
-						},
-						gender: 'required',
-						agree: 'required'
+							minlength: 6,
+							equalTo: "#newpassword"
+						}						
 					},
 			
 					messages: {
-						email: {
-							required: "Please provide a valid email.",
-							email: "Please provide a valid email."
-						},
 						password: {
-							required: "Please specify a password.",
-							minlength: "Please specify a secure password."
+							required: "请输入密码.",
+							minlength: "请输入最少6位的密码."
 						},
-						subscription: "Please choose at least one option",
-						gender: "Please choose gender",
-						agree: "Please accept our policy"
+						newpassword: {
+							required: "请输入密码.",
+							minlength: "请输入最少6位的密码."
+						},
+						repassword: {
+							required: "请输入密码.",
+							minlength: "请输入最少6位的密码.",
+							equalTo:"两次输入的密码不相同."
+						},
+						
 					},
 			
 					invalidHandler: function (event, validator) { //display error alert on form submit   
@@ -1470,12 +1329,18 @@
 					},
 			
 					submitHandler: function (form) {
+					 event.preventDefault() ;
+						saveChangePass();
 					},
 					invalidHandler: function (form) {
 					}
 				});
 			
 			})
+			
+			$(document).ready(function(){					
+				changePass();
+			});	
 		</script>
 </body>
 </html>
