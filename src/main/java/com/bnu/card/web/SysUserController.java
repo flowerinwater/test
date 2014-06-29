@@ -228,8 +228,11 @@ public class SysUserController {
     		
     		if(as!=null){
     			lr.setRows(bis);
-    			lr.setTotal(as.getTotalElements());
+//    			lr.setTotal(as.getTotalElements());
     			
+    			lr.setTotal(as.getTotalPages());
+    			lr.setPage(as.getNumber());
+    			lr.setRecords(Integer.valueOf(""+as.getTotalElements()));
     		}
     	}catch(Exception e){
     		e.printStackTrace();

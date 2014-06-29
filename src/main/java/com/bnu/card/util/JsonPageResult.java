@@ -9,6 +9,26 @@ public class JsonPageResult<T> {
 	
 	private long total;
 	
+	private int page;
+	
+	private int records;
+	
+	public int getPage() {
+		return page;
+	}
+
+	public void setPage(int page) {
+		this.page = page;
+	}
+
+	public int getRecords() {
+		return records;
+	}
+
+	public void setRecords(int records) {
+		this.records = records;
+	}
+
 	public JsonPageResult(){
 		
 	}
