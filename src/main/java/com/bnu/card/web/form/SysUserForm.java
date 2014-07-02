@@ -45,7 +45,7 @@ public class SysUserForm  extends BaseForm {
 		this.loginName = loginName;
 	}
 	// 设定JSON序列化时的日期格式
-	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+08:00")
+	@JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+08:00")
 	public Date getCreateDate() {
 		return createDate;
 	}

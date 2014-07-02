@@ -150,14 +150,23 @@ public class SysUserController {
     
     @RequestMapping("/jsonremovesysuserbyid")
     @ResponseBody
-	public JsonSimpleResult jsonRemoveSysUserById(@RequestParam(value="id") long uid){
+	public JsonSimpleResult jsonRemoveSysUserById(@RequestParam(value="id",required=false) Long uid,HttpServletRequest r){
     	log.info("jsonremovesysUserbyid");
     	log.info(""+uid);
+    	
+    	Long puid = uid;
+    	
+    	if(puid == null){
+    		String id = r.getParameter("id");
+    		if(id!=null){
+    			puid = Long.parseLong(id);
+    		}
+    	}
     	
     	JsonSingleOjbectResult<SysUserForm> lr = new JsonSingleOjbectResult<SysUserForm>();
     	
     	try{
-    		sysUserService.deleteSysUser(uid);
+    		sysUserService.deleteSysUser(puid);
 	    	
 	    	lr.setSuccess(true);
     	}catch(Exception e){

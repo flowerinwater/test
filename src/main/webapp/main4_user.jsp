@@ -1050,7 +1050,7 @@
 
 		<!-- page specific plugin scripts -->
 		<script src="assets/js/date-time/bootstrap-datepicker.min.js"></script>
-		<script src="assets/js/jqGrid/jquery.jqGrid.min.js"></script>
+		<script src="assets/js/jqGrid/jquery.jqGrid-4.6.js"></script>
 		<script src="assets/js/jqGrid/i18n/grid.locale-en.js"></script>
 		
 		<!-- ace scripts -->
@@ -1104,6 +1104,7 @@
 					//datatype: "local",
 					
 					url:"${ctx}/jsonfindallsysuserpage",
+					contentType:'application/json;charset=UTF-8',
 					datatype: "json",
 					mtype:"post",
 					
@@ -1141,6 +1142,7 @@
 					},
 			
 					editurl: '${ctx}/jsonsavesysuser',//$path_base+"/dummy.html",//nothing is saved
+					delurl: '${ctx}/jsonremovesysuserbyid',
 					caption: "jqGrid with inline editing",
 			
 			
@@ -1187,15 +1189,19 @@
 					},
 					{
 						//edit record form
-            reloadAfterSubmit: true,
-            closeOnEscape: true,
+			            reloadAfterSubmit: true,
+			            closeOnEscape: true,
 						closeAfterEdit: true,
 						recreateForm: true,
 						datatype: 'json',
+						contentType:'application/json;charset=UTF-8',
 						serializeEditData: function(postdata) {
-								alert(12);
-		            return JSON.stringify(postdata);
-		        },
+							alert("11edit:" + JSON.stringify(postdata));
+							delete postdata.oper;
+							alert("111edit:" + JSON.stringify(postdata));
+							
+							return JSON.stringify(postdata);
+						},
 						beforeShowForm : function(e) {
 							//alert(e[0].outerHTML);
 							var form = $(e[0]);
@@ -1208,15 +1214,31 @@
 						closeAfterAdd: true,
 						recreateForm: true,
 						viewPagerButtons: false,
+						serializeEditData: function(postdata) {
+							//alert("11add:" + JSON.stringify(postdata));
+							delete postdata.oper;
+							delete postdata.id;
+							//alert("111add:" + JSON.stringify(postdata));
+							
+							return JSON.stringify(postdata);
+						},
 						beforeShowForm : function(e) {
 							var form = $(e[0]);
 							form.closest('.ui-jqdialog').find('.ui-jqdialog-titlebar').wrapInner('<div class="widget-header" />')
 							style_edit_form(form);
 						}
+
 					},
 					{
 						//delete record form
 						recreateForm: true,
+						serializeDelData: function(postdata) {
+							//alert("11del:" + JSON.stringify(postdata));
+							delete postdata.oper;
+							//alert("111del:" + JSON.stringify(postdata));
+							
+							return JSON.stringify(postdata);
+						},
 						beforeShowForm : function(e) {
 							var form = $(e[0]);
 							if(form.data('styled')) return false;
@@ -1227,7 +1249,7 @@
 							form.data('styled', true);
 						},
 						onClick : function(e) {
-							
+							alert(11);
 						}
 					},
 					{
@@ -1268,7 +1290,7 @@
 			*/
 					form.find('input[name=createDate]').datepicker({format:'yyyy-mm-dd' , autoclose:true})
 						.end();
-					form.attr('type','application/json;charset=UTF-8');
+					form.attr('contentType','application/json;charset=UTF-8');
 			
 			
 					//update buttons classes
