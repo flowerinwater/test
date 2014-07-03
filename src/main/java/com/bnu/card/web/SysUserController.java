@@ -1,5 +1,6 @@
 package com.bnu.card.web;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -11,7 +12,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -206,6 +209,29 @@ public class SysUserController {
 
     	return lr;
     }
+	
+	@RequestMapping("/listuser")
+	@ResponseBody
+	public ViewPage<SysUserForm> listUser(Pageable page) {
+		Page<SysUser> as = sysUserService.findAllSysUser(page);
+		List<SysUserForm> bis = new ArrayList<SysUserForm>();
+		for (Iterator<SysUser> iterator = as.getContent().iterator(); iterator.hasNext();) {
+			SysUser sysUser = (SysUser) iterator.next();
+			SysUserForm bi = new SysUserForm();
+			try {
+				BeanUtilEx.copyProperties(bi, sysUser);
+			} catch (InvocationTargetException e) {
+				e.printStackTrace();
+			} catch (IllegalAccessException e) {
+				e.printStackTrace();
+			}
+			bi.setStatus(bnuCodeService.getCodeName(DefaultValue.USER_STATUS,bi.getStatus()));
+			bis.add(bi);
+		}
+		return new ViewPage<SysUserForm>(new PageImpl(bis));
+//		return new ViewPage<SysUserForm>(bookDao.findAll(page));
+	}
+    
     
     @RequestMapping("/jsonfindallsysuserpage")
     @ResponseBody

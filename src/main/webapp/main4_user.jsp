@@ -1103,7 +1103,9 @@
 					//data: grid_data,
 					//datatype: "local",
 					
-					url:"${ctx}/jsonfindallsysuserpage",
+					
+					//url:"${ctx}/jsonfindallsysuserpage",
+					url:"${ctx}/listuser",
 					contentType:'application/json;charset=UTF-8',
 					datatype: "json",
 					mtype:"post",
