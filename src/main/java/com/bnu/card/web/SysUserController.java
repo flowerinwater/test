@@ -8,6 +8,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.beanutils.BeanUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -232,7 +233,53 @@ public class SysUserController {
 //		return new ViewPage<SysUserForm>(bookDao.findAll(page));
 	}
     
-    
+	@RequestMapping("/listuser2")
+	@ResponseBody
+	public ViewPage<SysUserForm> listUser2(
+			@RequestParam(defaultValue="1",value="page") String page,  
+            @RequestParam(defaultValue="20",value="rows") String rows,  
+            @RequestParam("sidx") String sidx,  
+            @RequestParam("sord") String sord,  
+            @RequestParam("_search") boolean search,  
+            @RequestParam(required=false,value="searchField") String searchField,  
+            @RequestParam(required=false,value="searchOper") String searchOper,  
+            @RequestParam(required=false,value="searchString") String searchString,  
+            @RequestParam(required=false,value="filters") String filters  ) {
+
+		DataRequest request = new DataRequest();  
+        request.setPage(StringUtils.isEmpty(page) ? 1 : Integer.valueOf(page));  
+        request.setRows(StringUtils.isEmpty(rows) ? 20 : Integer.valueOf(rows));  
+        request.setSidx(sidx);  
+        request.setSord(sord);  
+        request.setSearch(search);  
+        request.setSearchField(searchField);  
+        request.setSearchOper(searchOper);  
+        request.setSearchString(searchString);  
+		
+		
+		return null;
+	}
+	
+	@RequestMapping("/listuser3")
+	@ResponseBody
+	public ViewPage<SysUserForm> listUser3(@RequestBody JQGridQueryForm jqFrom
+			) {
+		
+		DataRequest request = new DataRequest();  
+        request.setPage(StringUtils.isEmpty(jqFrom.page) ? 1 : Integer.valueOf(jqFrom.page));  
+        request.setRows(StringUtils.isEmpty(jqFrom.rows) ? 20 : Integer.valueOf(jqFrom.rows));  
+        request.setSidx(jqFrom._sidx);  
+        request.setSord(jqFrom._sord);  
+        request.setSearch(jqFrom._search);  
+        request.setSearchField(jqFrom.searchField);  
+        request.setSearchOper(jqFrom.searchOper);  
+        request.setSearchString(jqFrom.searchString);  
+		
+		
+        
+		return null;
+	}
+	
     @RequestMapping("/jsonfindallsysuserpage")
     @ResponseBody
 	public JsonPageResult<SysUserForm> jsonFindAllSysUserPage(@RequestParam(value="rows",required=false) int rows,@RequestParam(value="page",required=false) int page,HttpServletRequest r){

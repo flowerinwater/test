@@ -15,9 +15,18 @@
 	<mvc:annotation-driven>
 		<mvc:argument-resolvers>
 			<bean class="org.springframework.data.web.PageableArgumentResolver"></bean>
-			<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
-    			<!--<property name="maxUploadSize" value="10485760"></property>-->
-			</bean>
+			<bean id="multipartResolver"  
+			    class="org.springframework.web.multipart.commons.CommonsMultipartResolver">  
+			    <property name="defaultEncoding">  
+			        <value>UTF-8</value>  
+			    </property>  
+			    <property name="maxUploadSize">  
+			        <value>32505856</value><!-- 上传文件大小限制为31M，31*1024*1024 -->  
+			    </property>  
+			    <property name="maxInMemorySize">  
+			        <value>4096</value>  
+			    </property>  
+			</bean> 	
 		</mvc:argument-resolvers>
 	</mvc:annotation-driven>
 		
@@ -34,16 +43,5 @@
 	<mvc:view-controller path="/" view-name="redirect:/main3.jsp"/>
 	
 	
-	<bean id="multipartResolver"  
-	    class="org.springframework.web.multipart.commons.CommonsMultipartResolver">  
-	    <property name="defaultEncoding">  
-	        <value>UTF-8</value>  
-	    </property>  
-	    <property name="maxUploadSize">  
-	        <value>32505856</value><!-- 上传文件大小限制为31M，31*1024*1024 -->  
-	    </property>  
-	    <property name="maxInMemorySize">  
-	        <value>4096</value>  
-	    </property>  
-	</bean> 	
+	
 </beans>
