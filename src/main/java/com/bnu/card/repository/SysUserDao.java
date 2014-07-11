@@ -8,7 +8,7 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 
 import com.bnu.card.entity.SysUser;
 
-public interface SysUserDao extends PagingAndSortingRepository<SysUser, Long>,JpaSpecificationExecutor<SysUser>{
+public interface SysUserDao extends PagingAndSortingRepository<SysUser, Long>,JpaSpecificationExecutor<SysUser>,DynaHql{
 	@Override
 	public Iterable<SysUser> findAll();
 	
