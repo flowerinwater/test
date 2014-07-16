@@ -17,6 +17,7 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -262,23 +263,65 @@ public class SysUserController {
 	
 	@RequestMapping("/listuser3")
 	@ResponseBody
-	public ViewPage<SysUserForm> listUser3(@RequestBody JQGridQueryForm jqFrom
+	public DataResponse<SysUserForm> listUser3(@RequestBody JQGridQueryForm jqFrom
 			) {
 		
 		DataRequest request = new DataRequest();  
         request.setPage(StringUtils.isEmpty(jqFrom.page) ? 1 : Integer.valueOf(jqFrom.page));  
         request.setRows(StringUtils.isEmpty(jqFrom.rows) ? 20 : Integer.valueOf(jqFrom.rows));  
-        request.setSidx(jqFrom._sidx);  
-        request.setSord(jqFrom._sord);  
+        request.setSidx(jqFrom.sidx);  
+        request.setSord(jqFrom.sord);  
         request.setSearch(jqFrom._search);  
         request.setSearchField(jqFrom.searchField);  
         request.setSearchOper(jqFrom.searchOper);  
         request.setSearchString(jqFrom.searchString);  
 		
-		
         
-		return null;
+        DataResponse<SysUserForm> lr = new DataResponse<SysUserForm>();
+        
+        try{
+    		
+    		SysUserSearchForm cisf = new SysUserSearchForm();
+    		Pageable pagerequset = buildPageRequest(request.getPage(), request.getRows(), request.getSord(),request.getSidx());
+    		Page<SysUser> as = sysUserService.findAllSysUser(cisf,pagerequset);
+    		List<SysUserForm> bis = new ArrayList<SysUserForm>();
+    		for (Iterator<SysUser> iterator = as.getContent().iterator(); iterator.hasNext();) {
+				SysUser sysUser = (SysUser) iterator.next();
+				SysUserForm bi = new SysUserForm();
+				BeanUtilEx.copyProperties(bi, sysUser);
+				bi.setStatus(bnuCodeService.getCodeName(DefaultValue.USER_STATUS,bi.getStatus()));
+				bis.add(bi);
+			}
+    		
+    		if(as!=null){
+    			lr.setRows(bis);
+//    			lr.setTotal(as.getTotalElements());
+    			
+    			lr.setTotal(as.getTotalPages());
+    			lr.setPage(as.getNumber());
+    			lr.setRecords(Integer.valueOf(""+as.getTotalElements()));
+    		}
+    		
+    	}catch(Exception e){
+    		e.printStackTrace();
+    	}
+
+        
+		return lr;
 	}
+	
+	private Pageable buildPageRequest(int page, int rows,String sortType,String sidx) {
+        
+		Sort sort = null;
+		if (Direction.DESC.equals(sortType.toUpperCase())) {
+			sort = new Sort(Direction.DESC, sidx.equals("")?"id":sidx);
+		} else if (Direction.ASC.equals(sortType.toUpperCase())) {
+			sort = new Sort(Direction.ASC, sidx.equals("")?"id":sidx);
+		}
+        
+		return new PageRequest(page - 1, rows, sort);
+	}
+
 	
     @RequestMapping("/jsonfindallsysuserpage")
     @ResponseBody

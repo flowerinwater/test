@@ -4,15 +4,22 @@ public class JQGridQueryForm {
 
 	String page;  
     String rows;  
-    String _sidx;  
-    String _sord;  
+    String sidx;  
+    String sord;  
     boolean _search;  
+    String nd;
     String searchField;  
     String searchOper;  
     String searchString;  
     String filter;
     
     
+	public String getNd() {
+		return nd;
+	}
+	public void setNd(String nd) {
+		this.nd = nd;
+	}
 	public String getPage() {
 		return page;
 	}
@@ -25,17 +32,17 @@ public class JQGridQueryForm {
 	public void setRows(String rows) {
 		this.rows = rows;
 	}
-	public String get_sidx() {
-		return _sidx;
+	public String getSidx() {
+		return sidx;
 	}
-	public void set_sidx(String _sidx) {
-		this._sidx = _sidx;
+	public void setSidx(String sidx) {
+		this.sidx = sidx;
 	}
-	public String get_sord() {
-		return _sord;
+	public String getSord() {
+		return sord;
 	}
-	public void set_sord(String _sord) {
-		this._sord = _sord;
+	public void setSord(String sord) {
+		this.sord = sord;
 	}
 	public boolean is_search() {
 		return _search;

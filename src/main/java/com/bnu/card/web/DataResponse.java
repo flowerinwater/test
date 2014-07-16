@@ -15,7 +15,7 @@ public class DataResponse <T> {
 	private int records;
 	
 	//可显示的页数
-	private int total;
+	private long total;
 	
 	//自定义数据
 	private Map<String, Object> userdata;
@@ -44,11 +44,11 @@ public class DataResponse <T> {
 		this.records = records;
 	}
 
-	public int getTotal() {
+	public long getTotal() {
 		return total;
 	}
 
-	public void setTotal(int total) {
+	public void setTotal(long total) {
 		this.total = total;
 	}
 
