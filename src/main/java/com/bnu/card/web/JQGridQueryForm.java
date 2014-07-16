@@ -11,7 +11,7 @@ public class JQGridQueryForm {
     String searchField;  
     String searchOper;  
     String searchString;  
-    String filter;
+    Filter filters;
     
     
 	public String getNd() {
@@ -68,10 +68,12 @@ public class JQGridQueryForm {
 	public void setSearchString(String searchString) {
 		this.searchString = searchString;
 	}
-	public String getFilter() {
-		return filter;
+	public Filter getFilters() {
+		return filters;
 	}
-	public void setFilter(String filter) {
-		this.filter = filter;
-	}  
+	public void setFilters(Filter filters) {
+		this.filters = filters;
+	}
+	
+	
 }
