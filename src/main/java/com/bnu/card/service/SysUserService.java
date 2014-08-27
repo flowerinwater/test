@@ -32,6 +32,9 @@ import com.bnu.card.entity.SysUser;
 import com.bnu.card.repository.SysUserDao;
 import com.bnu.card.util.BeanUtilEx;
 import com.bnu.card.util.DefaultValue;
+import com.bnu.card.web.Filter;
+import com.bnu.card.web.JQGridQueryForm;
+import com.bnu.card.web.Rule;
 import com.bnu.card.web.form.SysUserSearchForm;
 //import com.bnu.card.web.account.SysUserInfo;
 import com.test.entity.User;
@@ -186,6 +189,77 @@ public class SysUserService {
 
 		return sysUserDao.findAll(ps,pb);
 	}
+	
+	
+	public Page<SysUser> findAllSysUser(final JQGridQueryForm jqForm,Pageable pb) {
+		Specification<SysUser> ps = new Specification<SysUser>(){
+
+			@Override
+			public Predicate toPredicate(Root<SysUser> root,
+					CriteriaQuery<?> query, CriteriaBuilder cb) {
+
+				Predicate p = null;
+				
+				
+				Filter f = jqForm.getFilters();
+				
+				
+				List<Rule> rules = f.getRules();
+				
+				
+				Path<String> nameExp = root.get("name"); 
+                if(cisf.getS_name() != null){
+                	if(p!=null)
+                		p = cb.and(cb.like(nameExp, "%" + cisf.getS_name() + "%"),p);
+                	else
+                		p = cb.like(nameExp, "%" + cisf.getS_name() + "%");
+                }
+                
+                Path<String> loginNameExp = root.get("loginName"); 
+                if(cisf.getS_loginName() != null){
+                	if(p!=null)
+                		p = cb.and(cb.like(loginNameExp, "%" + cisf.getS_loginName() + "%"),p);
+                	else
+                		p = cb.like(loginNameExp, "%" + cisf.getS_loginName() + "%");
+                }
+                
+                Path<Date> createDateExp = root.<Date>get("createDate"); 
+                if(cisf.getS_createDate_low()!=null){
+					try {
+						SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+						Date cdl = sdf.parse(cisf.getS_createDate_low());
+						Expression<Date> createDateStart = cb.literal(cdl);
+	                	if(p!=null)
+	                		p = cb.and(cb.greaterThanOrEqualTo(createDateExp, createDateStart),p);
+	                	else
+	                		p = cb.greaterThanOrEqualTo(createDateExp, createDateStart);
+					} catch (ParseException e) {
+						e.printStackTrace();
+					}
+                }
+                
+                if(cisf.getS_createDate_top()!=null){
+                	try {
+						SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+						Date cdt = sdf.parse(cisf.getS_createDate_top());
+						Expression<Date> createDateStart = cb.literal(cdt);
+	                	if(p!=null)
+	                		p = cb.and(cb.lessThan(createDateExp, createDateStart),p);
+	                	else
+	                		p = cb.lessThan(createDateExp, createDateStart);
+					} catch (ParseException e) {
+						e.printStackTrace();
+					}
+                }
+				
+				return p; 
+			}
+			
+		};
+
+		return sysUserDao.findAll(ps,pb);
+	}
+
 
 	public SysUser getSysUser(Long id) {
 		return sysUserDao.findOne(id);

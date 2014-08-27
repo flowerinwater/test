@@ -31,10 +31,24 @@ public class Filter {
 	}
 	
 	public Filter(String s){
+		System.out.println(111);
 		Map map = new HashMap();
 		map.put("rules", Rule.class);
-		JSONObject jsonObj = JSONObject.fromObject(s);
-		Filter jxbm = (Filter) JSONObject.toBean(jsonObj, Filter.class, map); //
+		
+		try{
+			JSONObject jsonObj = JSONObject.fromObject(s);
+			Filter f = (Filter) JSONObject.toBean(jsonObj, Filter.class, map); //
+			this.groupOp = f.groupOp;
+			this.rules = f.rules;
+			System.out.println(122);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		
+	}
+	
+	public Filter(){
+		
 	}
 	
 }

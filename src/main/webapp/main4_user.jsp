@@ -1105,7 +1105,7 @@
 					
 					
 					//url:"${ctx}/jsonfindallsysuserpage",
-					url:"${ctx}/listuser",
+					url:"${ctx}/listuser3",
 					contentType:'application/json;charset=UTF-8',
 					datatype: "json",
 					mtype:"post",

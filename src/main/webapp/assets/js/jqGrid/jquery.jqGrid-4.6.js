@@ -1800,6 +1800,7 @@ $.fn.jqGrid = function( pin ) {
 					}
 				}
 			}
+
 			var queryResults = query.select(),
 			recordsperpage = parseInt(ts.p.rowNum,10),
 			total = queryResults.length,
@@ -2005,11 +2006,17 @@ $.fn.jqGrid = function( pin ) {
 				case "jsonp":
 				case "xml":
 				case "script":
+					alert(201)
+					//alert(ts.p.mtype)
+					//delete ts.p.postData._search;
+					//delete ts.p.postData.nd;
+					alert(JSON.stringify(ts.p.postData))
 					$.ajax($.extend({
 						url:ts.p.url,
 						type:ts.p.mtype,
 						dataType: dt ,
-						data: $.isFunction(ts.p.serializeGridData)? ts.p.serializeGridData.call(ts,ts.p.postData) : ts.p.postData,
+						contentType:'application/json;charset=UTF-8',
+						data: JSON.stringify($.isFunction(ts.p.serializeGridData)? ts.p.serializeGridData.call(ts,ts.p.postData) : ts.p.postData),
 						success:function(data,st, xhr) {
 							if ($.isFunction(ts.p.beforeProcessing)) {
 								if (ts.p.beforeProcessing.call(ts, data, st, xhr) === false) {
@@ -2766,6 +2773,7 @@ $.fn.jqGrid = function( pin ) {
 				if(ts.p.multiselect) {ts.p.selarrrow =[];setHeadCheckBox(false);}
 				ts.p.savedRow = [];
 			}
+			
 			if(ts.p.scroll) {emptyRows.call(ts, true, false);}
 			if (opts && opts.page) {
 				var page = opts.page;
@@ -4124,6 +4132,7 @@ $.jgrid.extend({
 				} else {
 					$.extend($t.p.postData,sdata);
 				}
+
 				var saveurl;
 				if($t.p.searchurl) {
 					saveurl = $t.p.url;
@@ -4201,6 +4210,7 @@ $.jgrid.extend({
 				} else {
 					$.extend($t.p.postData,sdata);
 				}
+
 				var saveurl;
 				if($t.p.searchurl) {
 					saveurl = $t.p.url;
@@ -7444,7 +7454,10 @@ $.jgrid.extend({
 						}
 					}
 					$t.p.search = true;
+
+alert(JSON.stringify(sdata));
 					$.extend($t.p.postData,sdata);
+
 					mustReload = $($t).triggerHandler("jqGridFilterSearch");
 					if( mustReload === undefined) {
 						mustReload = true;
@@ -7452,12 +7465,15 @@ $.jgrid.extend({
 					if(mustReload && $.isFunction(p.onSearch) ) {
 						mustReload = p.onSearch.call($t, $t.p.filters);
 					}
+					alert(1);
 					if (mustReload !== false) {
 						$($t).trigger("reloadGrid",[{page:1}]);
 					}
+					alert(11);
 					if(p.closeAfterSearch) {
 						$.jgrid.hideModal("#"+$.jgrid.jqID(IDs.themodal),{gb:"#gbox_"+$.jgrid.jqID($t.p.id),jqm:p.jqModal,onClose: p.onClose});
 					}
+
 					return false;
 				});
 				$("#"+fid+"_reset").bind('click', function(){
@@ -8034,7 +8050,7 @@ $.jgrid.extend({
 							}
 						} else {
 							//ajaxOptions.contentType='application/json;charset=UTF-8';
-							//alert(":" + JSON.stringify(ajaxOptions))
+							alert(":" + JSON.stringify(ajaxOptions))
 							$.ajax(ajaxOptions); 
 						}
 					}
