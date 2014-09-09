@@ -196,6 +196,9 @@
     <dependent-module archiveName="commons-fileupload-1.2.2.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/var/M2_REPO/commons-fileupload/commons-fileupload/1.2.2/commons-fileupload-1.2.2.jar">
       <dependency-type>uses</dependency-type>
     </dependent-module>
+    <dependent-module archiveName="json-lib-2.3-jdk15.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/lib/json-lib-2.3-jdk15.jar">
+      <dependency-type>uses</dependency-type>
+    </dependent-module>
     <dependent-module archiveName="tomcat-coyote.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/lib/tomcat-coyote.jar">
       <dependency-type>uses</dependency-type>
     </dependent-module>

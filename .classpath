@@ -122,6 +122,7 @@
   <classpathentry kind="var" path="M2_REPO/org/codehaus/jackson/jackson-core-lgpl/1.8.1/jackson-core-lgpl-1.8.1.jar" sourcepath="M2_REPO/org/codehaus/jackson/jackson-core-lgpl/1.8.1/jackson-core-lgpl-1.8.1-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/codehaus/jackson/jackson-mapper-lgpl/1.8.1/jackson-mapper-lgpl-1.8.1.jar" sourcepath="M2_REPO/org/codehaus/jackson/jackson-mapper-lgpl/1.8.1/jackson-mapper-lgpl-1.8.1-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/commons-fileupload/commons-fileupload/1.2.2/commons-fileupload-1.2.2.jar" sourcepath="M2_REPO/commons-fileupload/commons-fileupload/1.2.2/commons-fileupload-1.2.2-sources.jar"/>
+  <classpathentry kind="lib" path="lib/json-lib-2.3-jdk15.jar"/>
   <classpathentry kind="lib" path="lib/tomcat-coyote.jar"/>
   <classpathentry kind="lib" path="lib/catalina.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/hibernate/hibernate-search/4.1.0.Final/hibernate-search-4.1.0.Final.jar"/>
