@@ -283,7 +283,7 @@ public class SysUserController {
     		
     		SysUserSearchForm cisf = new SysUserSearchForm();
     		Pageable pagerequset = buildPageRequest(request.getPage(), request.getRows(), request.getSord(),request.getSidx());
-    		Page<SysUser> as = sysUserService.findAllSysUser(jqForm,pagerequset);
+    		Page<SysUser> as = sysUserService.findAllSysUser(jqFrom,pagerequset);
     		List<SysUserForm> bis = new ArrayList<SysUserForm>();
     		for (Iterator<SysUser> iterator = as.getContent().iterator(); iterator.hasNext();) {
 				SysUser sysUser = (SysUser) iterator.next();

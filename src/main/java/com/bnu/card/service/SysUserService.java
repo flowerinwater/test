@@ -203,54 +203,65 @@ public class SysUserService {
 				
 				Filter f = jqForm.getFilters();
 				
-				
-				List<Rule> rules = f.getRules();
-				
-				
-				Path<String> nameExp = root.get("name"); 
-                if(cisf.getS_name() != null){
-                	if(p!=null)
-                		p = cb.and(cb.like(nameExp, "%" + cisf.getS_name() + "%"),p);
-                	else
-                		p = cb.like(nameExp, "%" + cisf.getS_name() + "%");
-                }
-                
-                Path<String> loginNameExp = root.get("loginName"); 
-                if(cisf.getS_loginName() != null){
-                	if(p!=null)
-                		p = cb.and(cb.like(loginNameExp, "%" + cisf.getS_loginName() + "%"),p);
-                	else
-                		p = cb.like(loginNameExp, "%" + cisf.getS_loginName() + "%");
-                }
-                
-                Path<Date> createDateExp = root.<Date>get("createDate"); 
-                if(cisf.getS_createDate_low()!=null){
-					try {
-						SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-						Date cdl = sdf.parse(cisf.getS_createDate_low());
-						Expression<Date> createDateStart = cb.literal(cdl);
-	                	if(p!=null)
-	                		p = cb.and(cb.greaterThanOrEqualTo(createDateExp, createDateStart),p);
-	                	else
-	                		p = cb.greaterThanOrEqualTo(createDateExp, createDateStart);
-					} catch (ParseException e) {
-						e.printStackTrace();
+				if(f!=null){
+					List<Rule> rules = f.getRules();
+					
+					for (Iterator iterator = rules.iterator(); iterator.hasNext();) {
+						Rule rule = (Rule) iterator.next();
+						Path<String> exp = root.get(rule.getField());
+						if(rule.getData() != null){
+		                	if(p!=null)
+		                		p = cb.and(cb.like(exp, "%" + rule.getData() + "%"),p);
+		                	else
+		                		p = cb.like(exp, "%" + rule.getData() + "%");
+		                }
 					}
-                }
-                
-                if(cisf.getS_createDate_top()!=null){
-                	try {
-						SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-						Date cdt = sdf.parse(cisf.getS_createDate_top());
-						Expression<Date> createDateStart = cb.literal(cdt);
-	                	if(p!=null)
-	                		p = cb.and(cb.lessThan(createDateExp, createDateStart),p);
-	                	else
-	                		p = cb.lessThan(createDateExp, createDateStart);
-					} catch (ParseException e) {
-						e.printStackTrace();
-					}
-                }
+				}
+				
+//				Path<String> nameExp = root.get("name"); 
+//                if(cisf.getS_name() != null){
+//                	if(p!=null)
+//                		p = cb.and(cb.like(nameExp, "%" + cisf.getS_name() + "%"),p);
+//                	else
+//                		p = cb.like(nameExp, "%" + cisf.getS_name() + "%");
+//                }
+//                
+//                Path<String> loginNameExp = root.get("loginName"); 
+//                if(cisf.getS_loginName() != null){
+//                	if(p!=null)
+//                		p = cb.and(cb.like(loginNameExp, "%" + cisf.getS_loginName() + "%"),p);
+//                	else
+//                		p = cb.like(loginNameExp, "%" + cisf.getS_loginName() + "%");
+//                }
+//                
+//                Path<Date> createDateExp = root.<Date>get("createDate"); 
+//                if(cisf.getS_createDate_low()!=null){
+//					try {
+//						SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+//						Date cdl = sdf.parse(cisf.getS_createDate_low());
+//						Expression<Date> createDateStart = cb.literal(cdl);
+//	                	if(p!=null)
+//	                		p = cb.and(cb.greaterThanOrEqualTo(createDateExp, createDateStart),p);
+//	                	else
+//	                		p = cb.greaterThanOrEqualTo(createDateExp, createDateStart);
+//					} catch (ParseException e) {
+//						e.printStackTrace();
+//					}
+//                }
+//                
+//                if(cisf.getS_createDate_top()!=null){
+//                	try {
+//						SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+//						Date cdt = sdf.parse(cisf.getS_createDate_top());
+//						Expression<Date> createDateStart = cb.literal(cdt);
+//	                	if(p!=null)
+//	                		p = cb.and(cb.lessThan(createDateExp, createDateStart),p);
+//	                	else
+//	                		p = cb.lessThan(createDateExp, createDateStart);
+//					} catch (ParseException e) {
+//						e.printStackTrace();
+//					}
+//                }
 				
 				return p; 
 			}

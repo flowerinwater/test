@@ -31,7 +31,7 @@ public class Filter {
 	}
 	
 	public Filter(String s){
-		System.out.println(111);
+		System.out.println(111 + ":" + s);
 		Map map = new HashMap();
 		map.put("rules", Rule.class);
 		
