@@ -43,7 +43,6 @@ import com.test.entity.User;
 @Component
 @Transactional(readOnly = true)
 public class SysUserService {
-
 	private static Logger log = LoggerFactory.getLogger(SysUserService.class);
 
 	@Autowired
@@ -210,11 +209,25 @@ public class SysUserService {
 						Rule rule = (Rule) iterator.next();
 						Path<String> exp = root.get(rule.getField());
 						if(rule.getData() != null){
-		                	if(p!=null)
-		                		p = cb.and(cb.like(exp, "%" + rule.getData() + "%"),p);
-		                	else
-		                		p = cb.like(exp, "%" + rule.getData() + "%");
-		                }
+							
+							if(rule.getField().equalsIgnoreCase("id")){
+								if(p!=null)
+			                		p = cb.and(cb.equal(exp, rule.getData()),p);
+			                	else
+			                		p = cb.equal(exp, rule.getData());
+							}else if(rule.getField().equalsIgnoreCase("createDate")){
+			                	if(p!=null)
+			                		p = cb.and(cb.equal(exp, new Date(rule.getData())),p);
+			                	else
+			                		p = cb.equal(exp, new Date(rule.getData()));
+							}else{
+								if(p!=null)
+			                		p = cb.and(cb.like(exp, "%" + rule.getData() + "%"),p);
+			                	else
+			                		p = cb.like(exp, "%" + rule.getData() + "%");
+							}
+
+						}
 					}
 				}
 				
