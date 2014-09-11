@@ -919,28 +919,9 @@
 								<!-- PAGE CONTENT BEGINS -->
 <!----------------------------------->
 
-								<div class="page-header">
-									<h1>
-										jqGrid
-										<small>
-											<i class="icon-double-angle-right"></i>
-											Dynamic tables and grids using jqGrid plugin
-										</small>
-									</h1>
-								</div><!-- /.page-header -->
-		
 								<div class="row">
 									<div class="col-xs-12">
 										<!-- PAGE CONTENT BEGINS -->
-		
-										<div class="alert alert-info">
-											<i class="icon-hand-right"></i>
-		
-											Please note that demo server is not configured to save the changes, therefore you may get an error message.
-											<button class="close" data-dismiss="alert">
-												<i class="icon-remove"></i>
-											</button>
-										</div>
 		
 										<table id="grid-table"></table>
 		
@@ -1051,7 +1032,7 @@
 		<!-- page specific plugin scripts -->
 		<script src="assets/js/date-time/bootstrap-datepicker.min.js"></script>
 		<script src="assets/js/jqGrid/jquery.jqGrid-4.6.js"></script>
-		<script src="assets/js/jqGrid/i18n/grid.locale-en.js"></script>
+		<script src="assets/js/jqGrid/i18n/grid.locale-cn.js"></script>
 		
 		<!-- ace scripts -->
 
@@ -1145,7 +1126,7 @@
 			
 					editurl: '${ctx}/jsonsavesysuser',//$path_base+"/dummy.html",//nothing is saved
 					delurl: '${ctx}/jsonremovesysuserbyid',
-					caption: "jqGrid with inline editing",
+					caption: "用户信息",
 			
 			
 					autowidth: true
@@ -1271,6 +1252,7 @@
 						multipleGroup:true,
 						showQuery: true
 						*/
+						
 					},
 					{
 						//view record form

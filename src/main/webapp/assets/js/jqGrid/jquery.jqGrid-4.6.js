@@ -1709,7 +1709,7 @@ $.fn.jqGrid = function( pin ) {
 				'gt':function(queryObj) {return queryObj.greater;},
 				'ge':function(queryObj) {return queryObj.greaterOrEquals;},
 				'cn':function(queryObj) {return queryObj.contains;},
-				'nc':function(queryObj,op) {return op === "OR" ? queryObj.orNot().contains : queryObj.andNot().contains;},
+				/*'nc':function(queryObj,op) {return op === "OR" ? queryObj.orNot().contains : queryObj.andNot().contains;},
 				'bw':function(queryObj) {return queryObj.startsWith;},
 				'bn':function(queryObj,op) {return op === "OR" ? queryObj.orNot().startsWith : queryObj.andNot().startsWith;},
 				'en':function(queryObj,op) {return op === "OR" ? queryObj.orNot().endsWith : queryObj.andNot().endsWith;},
@@ -1718,7 +1718,7 @@ $.fn.jqGrid = function( pin ) {
 				'in':function(queryObj) {return queryObj.equals;},
 				'nu':function(queryObj) {return queryObj.isNull;},
 				'nn':function(queryObj,op) {return op === "OR" ? queryObj.orNot().isNull : queryObj.andNot().isNull;}
-
+*/
 			},
 			query = $.jgrid.from(ts.p.data);
 			if (ts.p.ignoreCase) { query = query.ignoreCase(); }
@@ -2006,11 +2006,11 @@ $.fn.jqGrid = function( pin ) {
 				case "jsonp":
 				case "xml":
 				case "script":
-					alert(201)
+					//alert(201)
 					//alert(ts.p.mtype)
 					//delete ts.p.postData._search;
 					//delete ts.p.postData.nd;
-					alert(JSON.stringify(ts.p.postData))
+					//alert(JSON.stringify(ts.p.postData))
 					$.ajax($.extend({
 						url:ts.p.url,
 						type:ts.p.mtype,
@@ -6535,10 +6535,14 @@ $.fn.jqFilter = function( arg ) {
 		sopt : null,
 		ops : [],
 		operands : null,
-		numopts : ['eq','ne', 'lt', 'le', 'gt', 'ge', 'nu', 'nn', 'in', 'ni'],
-		stropts : ['eq', 'ne', 'bw', 'bn', 'ew', 'en', 'cn', 'nc', 'nu', 'nn', 'in', 'ni'],
+		//numopts : ['eq','ne', 'lt', 'le', 'gt', 'ge', 'nu', 'nn', 'in', 'ni'],
+		//stropts : ['eq', 'ne', 'bw', 'bn', 'ew', 'en', 'cn', 'nc', 'nu', 'nn', 'in', 'ni'],
+		numopts : ['eq','ne', 'lt', 'le', 'gt', 'ge'],
+		stropts : ['eq', 'ne','cn', 'nc'],
+		
 		strarr : ['text', 'string', 'blob'],
-		groupOps : [{ op: "AND", text: "AND" },	{ op: "OR",  text: "OR" }],
+		//groupOps : [{ op: "AND", text: "AND" },	{ op: "OR",  text: "OR" }],
+		groupOps : [{ op: "AND", text: "AND" }],
 		groupButton : true,
 		ruleButtons : true,
 		direction : "ltr"
@@ -7455,7 +7459,7 @@ $.jgrid.extend({
 					}
 					$t.p.search = true;
 
-alert(JSON.stringify(sdata));
+//alert(JSON.stringify(sdata));
 					$.extend($t.p.postData,sdata);
 
 					mustReload = $($t).triggerHandler("jqGridFilterSearch");
@@ -7465,11 +7469,11 @@ alert(JSON.stringify(sdata));
 					if(mustReload && $.isFunction(p.onSearch) ) {
 						mustReload = p.onSearch.call($t, $t.p.filters);
 					}
-					alert(1);
+					//alert(1);
 					if (mustReload !== false) {
 						$($t).trigger("reloadGrid",[{page:1}]);
 					}
-					alert(11);
+					//alert(11);
 					if(p.closeAfterSearch) {
 						$.jgrid.hideModal("#"+$.jgrid.jqID(IDs.themodal),{gb:"#gbox_"+$.jgrid.jqID($t.p.id),jqm:p.jqModal,onClose: p.onClose});
 					}

@@ -5,7 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import net.sf.json.JSONObject;
+//import net.sf.json.JSONObject;
+import org.codehaus.jackson.map.ObjectMapper;  
 
 
 public class Filter {
@@ -36,8 +37,12 @@ public class Filter {
 		map.put("rules", Rule.class);
 		
 		try{
-			JSONObject jsonObj = JSONObject.fromObject(s);
-			Filter f = (Filter) JSONObject.toBean(jsonObj, Filter.class, map); //
+//			JSONObject jsonObj = JSONObject.fromObject(s);
+//			Filter f = (Filter) JSONObject.toBean(jsonObj, Filter.class, map); //
+			
+			ObjectMapper om = new ObjectMapper();  
+			Filter f = om.readValue(s, Filter.class);
+			
 			this.groupOp = f.groupOp;
 			this.rules = f.rules;
 			System.out.println(122);
