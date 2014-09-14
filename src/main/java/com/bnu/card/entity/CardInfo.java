@@ -115,7 +115,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 				query=" select academe groupname, " + 
 						" sum((case when gender='1' THEN 1 ELSE 0 END)) summale,  sum((case when gender='2' THEN 1 ELSE 0 END)) sumfemale ,sum((case when gender='1' THEN 1 ELSE 0 END)+(case when gender='2' THEN 1 ELSE 0 END)) sumall"+
 						" from bnu_card.card_info " +
-						"  where job in ('5','4') and (DATE_FORMAT(SYSDATE(),'%Y')-DATE_FORMAT(birth_day,'%Y')> :ageLow )  " + 
+						"  where job in ('5','4') and (DATE_FORMAT(SYSDATE(),'%Y')-DATE_FORMAT(birth_day,'%Y')>= :ageLow )  " + 
 						" group by academe",
 				resultSetMapping="findByCardTypeGroupMap"),
 		
@@ -126,7 +126,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 						" sum((case when gender='1' THEN 1 ELSE 0 END)) summale,  sum((case when gender='2' THEN 1 ELSE 0 END)) sumfemale ,sum((case when gender='1' THEN 1 ELSE 0 END)+(case when gender='2' THEN 1 ELSE 0 END)) sumall"+
 						" from bnu_card.card_info " +
 						"  where job in ('5','4') and (DATE_FORMAT(SYSDATE(),'%Y')-DATE_FORMAT(birth_day,'%Y')< :ageTop )  " + 
-						" and (DATE_FORMAT(SYSDATE(),'%Y')-DATE_FORMAT(birth_day,'%Y')> :ageLow )  " + 
+						" and (DATE_FORMAT(SYSDATE(),'%Y')-DATE_FORMAT(birth_day,'%Y')>= :ageLow )  " + 
 						" group by academe",
 				resultSetMapping="findByCardTypeGroupMap"),
 				

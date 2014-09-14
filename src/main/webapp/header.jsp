@@ -294,7 +294,7 @@
 								</li>
 								
 								<li class="">
-									<a href="index.html">
+									<a href="main4_report_t_academe_nation_age.jsp">
 										<i class="icon-dashboard"></i>
 										<span class="menu-text"> 教工年龄（？） </span>
 									</a>

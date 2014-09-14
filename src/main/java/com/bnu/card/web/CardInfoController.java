@@ -562,12 +562,15 @@ public class CardInfoController {
 			Pageable pagerequset = buildPageRequest(request.getPage(), request.getRows(), request.getSord(),request.getSidx());
     		Page<CardInfo> as = cardInfoService.findAllCardInfo(jqFrom,pagerequset);
     		List<CardInfoForm> bis = new ArrayList<CardInfoForm>();
-    		for (Iterator<CardInfo> iterator = as.getContent().iterator(); iterator.hasNext();) {
-    			CardInfo cardInfo = (CardInfo) iterator.next();
-				CardInfoForm bi = new CardInfoForm();
-				BeanUtilEx.copyProperties(bi, cardInfo);
-				bis.add(bi);
-			}
+    		
+    		getAllCardInfo(bis,as.getContent());
+    		
+//    		for (Iterator<CardInfo> iterator = as.getContent().iterator(); iterator.hasNext();) {
+//    			CardInfo cardInfo = (CardInfo) iterator.next();
+//				CardInfoForm bi = new CardInfoForm();
+//				BeanUtilEx.copyProperties(bi, cardInfo);
+//				bis.add(bi);
+//			}
     		
     		if(as!=null){
     			lr.setRows(bis);
