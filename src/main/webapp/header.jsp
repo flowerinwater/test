@@ -49,6 +49,14 @@
 		}catch(Exception e){
 		}
 	}
+	
+	String p2 = request.getParameter("p2");
+	if(p2==null)
+		p2="";
+		
+	String p3 = request.getParameter("p3");
+	if(p3==null)
+		p3="";
 
 	System.out.println("---------------------:" + role);
 %>
@@ -197,36 +205,36 @@
 					</div><!-- #sidebar-shortcuts -->
 
 					<ul class="nav nav-list">
-						<li class="active">
-							<a href="main4.jsp">
+						<li class="<%=p3.equals("main") ? "active" : "" %>">
+							<a href="main4.jsp?p3=main">
 								<i class="icon-dashboard"></i>
 								<span class="menu-text"> 我的首页 </span>
 							</a>
 						</li>
 					<%if(role.equals("L1")){%>	
-						<li class="">
-							<a href="index.html" class="dropdown-toggle">
+						<li class="<%=(p3.equals("cardinfo") || p3.equals("history") || p3.equals("alert")) ? "active" : "" %>">
+							<a href="" class="dropdown-toggle">
 								<i class="icon-dashboard"></i>
 								<span class="menu-text"> 信息登记 </span>
 								<b class="arrow icon-angle-down"></b>
 							</a>
 							<ul class="submenu">
-								<li class="">
-									<a href="index.html">
+								<li class="<%=p3.equals("cardinfo") ? "active" : "" %>">
+									<a href="main4_cardinfo.jsp?p3=cardinfo">
 										<i class="icon-dashboard"></i>
 										<span class="menu-text"> 卡信息登记 </span>
 									</a>
 								</li>
 								
-								<li class="">
-									<a href="index.html">
+								<li class="<%=p3.equals("history") ? "active" : "" %>">
+									<a href="main4_history.jsp?p3=history">
 										<i class="icon-dashboard"></i>
 										<span class="menu-text"> 历史查询 </span>
 									</a>
 								</li>
 								
-								<li class="">
-									<a href="index.html">
+								<li class="<%=p3.equals("alert") ? "active" : "" %>">
+									<a href="main4_alert.jsp?p3=alert">
 										<i class="icon-dashboard"></i>
 										<span class="menu-text"> 预警信息 </span>
 									</a>
@@ -235,8 +243,8 @@
 						</li>
 					<%}%>
 						
-					<%if(role.equals("L1")||role.equals("L2")){%>			
-						<li class="">
+					<%if(role.equals("L1")||role.equals("L2")){%>		
+						<li class="<%=p2.equals("tjcx") ? "active" : "" %>">
 							<a href="#" class="dropdown-toggle">
 								<i class="icon-dashboard"></i>
 								<span class="menu-text"> 统计查询 </span>
@@ -244,63 +252,62 @@
 							</a>
 						
 							<ul class="submenu">
-								<li class="">
-									<a href="main4_report_s_nation.jsp">
+								<li class="<%=p3.equals("report_s_nation") ? "active" : "" %>">
+									<a href="main4_report_s_nation.jsp?p2=tjcx&p3=report_s_nation">
 										<i class="icon-dashboard"></i>
 										<span class="menu-text"> 民族性别 </span>
 									</a>
 								</li>
 								
-								<li class="">
-									<a href="main4_report_s_detained.jsp">
+								<li class="<%=p3.equals("report_s_detained") ? "active" : "" %>">
+									<a href="main4_report_s_detained.jsp?p2=tjcx&p3=report_s_detained">
 										<i class="icon-dashboard"></i>
 										<span class="menu-text"> 滞留情况 </span>
 									</a>
 								</li>
 								
-								<li class="">
-									<a href="main4_report_s_grade.jsp">
+								<li class="<%=p3.equals("report_s_grade") ? "active" : "" %>">
+									<a href="main4_report_s_grade.jsp?p2=tjcx&p3=report_s_grade">
 										<i class="icon-dashboard"></i>
 										<span class="menu-text"> 年级分布 </span>
 									</a>
 								</li>
 								
-								<li class="">
-									<a href="main4_report_s_origin.jsp">
+								<li class="<%=p3.equals("report_s_origin") ? "active" : "" %>">
+									<a href="main4_report_s_origin.jsp?p2=tjcx&p3=report_s_origin">
 										<i class="icon-dashboard"></i>
 										<span class="menu-text"> 生源地 </span>
 									</a>
 								</li>
 								
-								<li class="">
-									<a href="main4_report_s_cardinfo.jsp">
+								<li class="<%=p3.equals("report_s_cardinfo") ? "active" : "" %>">
+									<a href="main4_report_s_cardinfo.jsp?p2=tjcx&p3=report_s_cardinfo">
 										<i class="icon-dashboard"></i>
 										<span class="menu-text"> 明细信息（？） </span>
 									</a>
 								</li>
 								
-								<li class="">
-									<a href="main4_report_t_academe.jsp">
+								<li class="<%=p3.equals("report_t_academe") ? "active" : "" %>">
+									<a href="main4_report_t_academe.jsp?p2=tjcx&p3=report_t_academe">
 										<i class="icon-dashboard"></i>
 										<span class="menu-text"> 院系教职工儿童 </span>
 									</a>
 								</li>
-								
-								<li class="">
-									<a href="main4_report_t_family.jsp">
+								<li class="<%=p3.equals("report_t_family") ? "active" : "" %>">
+									<a href="main4_report_t_family.jsp?p2=tjcx&p3=report_t_family">
 										<i class="icon-dashboard"></i>
 										<span class="menu-text"> 校系教职工儿童 </span>
 									</a>
 								</li>
 								
-								<li class="">
-									<a href="main4_report_t_academe_nation_age.jsp">
+								<li class="<%=p3.equals("report_t_academe_nation_age") ? "active" : "" %>">
+									<a href="main4_report_t_academe_nation_age.jsp?p2=tjcx&p3=report_t_academe_nation_age">
 										<i class="icon-dashboard"></i>
 										<span class="menu-text"> 教工年龄（？） </span>
 									</a>
 								</li>
-								<li class="">
-									<a href="main4_report_t_return_lend.jsp">
+								<li class="<%=p3.equals("report_t_return_lend") ? "active" : "" %>">
+									<a href="main4_report_t_return_lend.jsp?p2=tjcx&p3=report_t_return_lend">
 										<i class="icon-dashboard"></i>
 										<span class="menu-text"> 借出归还情况 </span>
 									</a>
@@ -310,7 +317,7 @@
 					<%}%>
 					
 						
-						<li class="">
+						<li class="<%=p2.equals("sys") ? "active" : "" %>">
 							<a href="#" class="dropdown-toggle">
 								<i class="icon-dashboard"></i>
 								<span class="menu-text"> 系统管理 </span>
@@ -319,8 +326,8 @@
 							
 							<ul class="submenu">
 							<%if(role.equals("AD")){%>
-								<li class="">
-									<a href="main4_user.jsp">
+								<li class="<%=p3.equals("user") ? "active" : "" %>">
+									<a href="main4_user.jsp?p2=sys&p3=user">
 										<i class="icon-dashboard"></i>
 										<span class="menu-text"> 用户管理 </span>
 									</a>
@@ -344,8 +351,8 @@
 									</a>
 								</li>
 							<%}%>
-								<li class="">
-									<a href="main4_changepass.jsp">
+								<li class="<%=p3.equals("changepass") ? "active" : "" %>">
+									<a href="main4_changepass.jsp?p2=sys&p3=changepass">
 										<i class="icon-dashboard"></i>
 										<span class="menu-text"> 修改密码 </span>
 									</a>

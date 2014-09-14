@@ -5,6 +5,7 @@
 <%
 String path1 = "统计查询";
 String path2 = "学校教职工家属儿童情况统计";
+
 %>
 <%@ include  file="header.jsp"%>
 
