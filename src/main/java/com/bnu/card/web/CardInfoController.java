@@ -26,12 +26,16 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.beanutils.ConvertUtils;
 import org.apache.commons.beanutils.converters.LongConverter;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -59,6 +63,8 @@ import com.bnu.card.web.form.CardInfoForm;
 import com.bnu.card.web.form.CardInfoSearchForm;
 import com.bnu.card.web.form.CardInfoXlsVo;
 import com.bnu.card.web.form.StudentReportForm;
+import com.bnu.card.web.form.SysUserForm;
+import com.bnu.card.web.form.SysUserSearchForm;
 import com.bnu.card.web.form.TeacherAgeReportForm;
 import com.test.service.account.CodeService;
 
@@ -251,7 +257,346 @@ public class CardInfoController {
 
 		return lr;
 	}
+	
+	
+	
+	
+	
+	@RequestMapping("/jsonlendreturn4")
+	@ResponseBody
+	public DataResponse<Map<String,Object>> jsonLendReturnReport4(HttpServletRequest req
+			) {
+		log.info("jsonlendreturn4");
+        
+        DataResponse<Map<String,Object>> lr = new DataResponse<Map<String,Object>>();
+        
+        try{
+        	List<Map<String,Object>> v = new ArrayList<Map<String,Object>>();
+        	List lendAs = cardInfoService.jsonLendReport();
+        	List returnAs = cardInfoService.jsonReturnReport();
+        	for (Iterator iterator = lendAs.iterator(); iterator.hasNext();) {
+        		Object[] object = (Object[]) iterator.next();
+        		
+        		Map<String,Object> m = new HashMap<String,Object>();
+        		m.put("year",object[0]);
+        		m.put("lend",object[1]);
+        		
+        		for (Iterator iterator1 = returnAs.iterator(); iterator1.hasNext();) {
+        			Object[] object1 = (Object[]) iterator1.next();
+        			
+        			if(object1[0].toString().equals(object[0].toString())){
+        				m.put("return",object1[1]);
+        				break;
+        			}
+        		}
+        		v.add(m);
+        	}
+        	lr.setRows(v);
 
+			lr.setTotal(v.size());
+    	}catch(Exception e){
+    		e.printStackTrace();
+    	}
+        
+		return lr;
+	}
+	
+	
+	@RequestMapping("/jsoncardtyperp4")
+	@ResponseBody
+	public DataResponse<StudentReportForm> jsonCardTypeReport4(HttpServletRequest req
+			) {
+		log.info("jsoncardtyperp4");
+        
+        DataResponse<StudentReportForm> lr = new DataResponse<StudentReportForm>();
+        
+        try{
+			List as = cardInfoService.jsonCardTypeReport();
+			List<StudentReportForm> v = new ArrayList<StudentReportForm>();
+			Iterator it = as.iterator();
+			while (it.hasNext()) {
+				Object[] r = (Object[]) it.next();
+				StudentReportForm f = new StudentReportForm();
+				f.setGroupName((String) r[0]);
+				f.setSummale((BigDecimal) r[1]);
+				f.setSumfemale((BigDecimal) r[2]);
+				f.setSumall((BigDecimal) r[3]);
+
+				v.add(f);
+			}
+    		
+    		
+    		if(as!=null){
+    			lr.setRows(v);
+//    			lr.setTotal(as.getTotalElements());
+    			
+    			lr.setTotal(1);
+    			lr.setPage(1);
+    			lr.setRecords(v.size());
+    		}
+    		
+    	}catch(Exception e){
+    		e.printStackTrace();
+    	}
+
+        
+		return lr;
+	}
+	
+	@RequestMapping("/jsonccademerp4")
+	@ResponseBody
+	public DataResponse<StudentReportForm> jsonAcademeReport4(HttpServletRequest req
+			) {
+		log.info("jsonccademerp4");
+        
+        DataResponse<StudentReportForm> lr = new DataResponse<StudentReportForm>();
+        
+        try{
+        	
+			List as = cardInfoService.jsonAcademeReport();
+			List<StudentReportForm> v = new ArrayList<StudentReportForm>();
+			getList(v, as);
+    		
+//    		Page<SysUser> as = cardInfoService.findAllSysUser(jqFrom,pagerequset);
+    		
+//    		Page<SysUser> as = new PageImpl(as, pagerequset, as.size());
+    		
+    		
+    		if(as!=null){
+    			lr.setRows(v);
+//    			lr.setTotal(as.getTotalElements());
+    			
+    			lr.setTotal(1);
+    			lr.setPage(1);
+    			lr.setRecords(v.size());
+    		}
+    		
+    	}catch(Exception e){
+    		e.printStackTrace();
+    	}
+
+        
+		return lr;
+	}
+	
+	@RequestMapping("/jsonoriginrp4")
+	@ResponseBody
+	public DataResponse<StudentReportForm> jsonOriginReport4(HttpServletRequest req
+			) {
+		log.info("jsonoriginrp4");
+        
+        DataResponse<StudentReportForm> lr = new DataResponse<StudentReportForm>();
+        
+        try{
+        	
+    		String academe = req.getParameter("academa");
+			if (academe == null)
+				academe = "%";
+
+			List as = cardInfoService.jsonOriginReport(academe);
+			List<StudentReportForm> v = new ArrayList<StudentReportForm>();
+			getList(v, as);
+    		
+//    		Page<SysUser> as = cardInfoService.findAllSysUser(jqFrom,pagerequset);
+    		
+//    		Page<SysUser> as = new PageImpl(as, pagerequset, as.size());
+    		
+    		
+    		if(as!=null){
+    			lr.setRows(v);
+//    			lr.setTotal(as.getTotalElements());
+    			
+    			lr.setTotal(1);
+    			lr.setPage(1);
+    			lr.setRecords(v.size());
+    		}
+    		
+    	}catch(Exception e){
+    		e.printStackTrace();
+    	}
+
+        
+		return lr;
+	}
+	
+	
+	@RequestMapping("/jsongraderp4")
+	@ResponseBody
+	public DataResponse<StudentReportForm> jsonGradeReport4(HttpServletRequest req
+			) {
+		log.info("jsongraderp4");
+        
+        DataResponse<StudentReportForm> lr = new DataResponse<StudentReportForm>();
+        
+        try{
+        	
+    		String academe = req.getParameter("academa");
+			if (academe == null)
+				academe = "%";
+
+			List as = cardInfoService.jsonGradeReport(academe);
+			List<StudentReportForm> v = new ArrayList<StudentReportForm>();
+			getList(v, as);
+    		
+//    		Page<SysUser> as = cardInfoService.findAllSysUser(jqFrom,pagerequset);
+    		
+//    		Page<SysUser> as = new PageImpl(as, pagerequset, as.size());
+    		
+    		
+    		if(as!=null){
+    			lr.setRows(v);
+//    			lr.setTotal(as.getTotalElements());
+    			
+    			lr.setTotal(1);
+    			lr.setPage(1);
+    			lr.setRecords(v.size());
+    		}
+    		
+    	}catch(Exception e){
+    		e.printStackTrace();
+    	}
+
+        
+		return lr;
+	}
+	
+	@RequestMapping("/jsondetainedrp4")
+	@ResponseBody
+	public DataResponse<StudentReportForm> jsonDetainedReport4(HttpServletRequest req
+			) {
+		log.info("jsondetainedrp4");
+        
+        DataResponse<StudentReportForm> lr = new DataResponse<StudentReportForm>();
+        
+        try{
+        	
+    		String academe = req.getParameter("academa");
+			if (academe == null)
+				academe = "%";
+
+			List as = cardInfoService.jsonDetainedReport(academe);
+			List<StudentReportForm> v = new ArrayList<StudentReportForm>();
+			getList(v, as);
+    		
+//    		Page<SysUser> as = cardInfoService.findAllSysUser(jqFrom,pagerequset);
+    		
+//    		Page<SysUser> as = new PageImpl(as, pagerequset, as.size());
+    		
+    		
+    		if(as!=null){
+    			lr.setRows(v);
+//    			lr.setTotal(as.getTotalElements());
+    			
+    			lr.setTotal(1);
+    			lr.setPage(1);
+    			lr.setRecords(v.size());
+    		}
+    		
+    	}catch(Exception e){
+    		e.printStackTrace();
+    	}
+
+        
+		return lr;
+	}
+	
+	
+	@RequestMapping("/jsongendernationrp4")
+	@ResponseBody
+	public DataResponse<StudentReportForm> jsonGenderNationReport4(HttpServletRequest req
+			) {
+		log.info("jsongendernationrp4");
+        
+        DataResponse<StudentReportForm> lr = new DataResponse<StudentReportForm>();
+        
+        try{
+    		String academe = req.getParameter("academa");
+			if (academe == null)
+				academe = "%";
+			List<StudentReportForm> v = new ArrayList<StudentReportForm>();
+			List as = cardInfoService.jsonGenderNationReport(academe);
+			getList(v, as);
+    		
+//    		Page<SysUser> as = cardInfoService.findAllSysUser(jqFrom,pagerequset);
+    		
+//    		Page<SysUser> as = new PageImpl(as, pagerequset, as.size());
+    		
+    		
+    		if(as!=null){
+    			lr.setRows(v);
+//    			lr.setTotal(as.getTotalElements());
+    			
+    			lr.setTotal(1);
+    			lr.setPage(1);
+    			lr.setRecords(v.size());
+    		}
+    		
+    	}catch(Exception e){
+    		e.printStackTrace();
+    	}
+
+        
+		return lr;
+	}
+	
+	@RequestMapping("/jsonfindallcardInfopage4")
+	@ResponseBody
+	public DataResponse<CardInfoForm> jsonFindAllCardInfoPage4(@RequestBody JQGridQueryForm jqFrom) {
+		log.info("jsonfindallcardInfopage4");
+
+		
+		DataRequest request = new DataRequest();  
+        request.setPage(StringUtils.isEmpty(jqFrom.page) ? 1 : Integer.valueOf(jqFrom.page));  
+        request.setRows(StringUtils.isEmpty(jqFrom.rows) ? 20 : Integer.valueOf(jqFrom.rows));  
+        request.setSidx(jqFrom.sidx);  
+        request.setSord(jqFrom.sord);  
+        request.setSearch(jqFrom._search);  
+        request.setSearchField(jqFrom.searchField);  
+        request.setSearchOper(jqFrom.searchOper);  
+        request.setSearchString(jqFrom.searchString);  
+		
+        
+        DataResponse<CardInfoForm> lr = new DataResponse<CardInfoForm>();
+        
+		try {
+			Pageable pagerequset = buildPageRequest(request.getPage(), request.getRows(), request.getSord(),request.getSidx());
+    		Page<CardInfo> as = cardInfoService.findAllCardInfo(jqFrom,pagerequset);
+    		List<CardInfoForm> bis = new ArrayList<CardInfoForm>();
+    		for (Iterator<CardInfo> iterator = as.getContent().iterator(); iterator.hasNext();) {
+    			CardInfo cardInfo = (CardInfo) iterator.next();
+				CardInfoForm bi = new CardInfoForm();
+				BeanUtilEx.copyProperties(bi, cardInfo);
+				bis.add(bi);
+			}
+    		
+    		if(as!=null){
+    			lr.setRows(bis);
+//    			lr.setTotal(as.getTotalElements());
+    			
+    			lr.setTotal(as.getTotalPages());
+    			lr.setPage(as.getNumber());
+    			lr.setRecords(Integer.valueOf(""+as.getTotalElements()));
+    		}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return lr;
+	}
+	
+	
+	private Pageable buildPageRequest(int page, int rows,String sortType,String sidx) {
+        
+		Sort sort = null;
+		if (Direction.DESC.equals(sortType.toUpperCase())) {
+			sort = new Sort(Direction.DESC, sidx.equals("")?"id":sidx);
+		} else if (Direction.ASC.equals(sortType.toUpperCase())) {
+			sort = new Sort(Direction.ASC, sidx.equals("")?"id":sidx);
+		}
+        
+		return new PageRequest(page - 1, rows, sort);
+	}
+	
 	// 民族
 	@RequestMapping("/jsongendernationrp")
 	@ResponseBody

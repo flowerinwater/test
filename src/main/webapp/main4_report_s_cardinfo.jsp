@@ -4,7 +4,7 @@
 
 <%
 String path1 = "系统管理";
-String path2 = "用户管理";
+String path2 = "学生情况查询";
 %>
 <%@ include  file="header.jsp"%>
 
@@ -26,6 +26,15 @@ String path2 = "用户管理";
 									 <%=path2%>
  								</small>
 							</h1>
+							<div class="nav-search" id="nav-search">
+							<script>
+								function exportxls(){
+									var url = "${ctx}/exportExcel?type=StuList";
+									window.open(url);   
+								}
+							</script>
+							<button class="btn btn-info" onClick="exportxls()">导出</button>
+						</div><!-- #nav-search -->
 						</div><!-- /.page-header -->
 
 						<div class="row">
@@ -154,20 +163,25 @@ String path2 = "用户管理";
 					
 					
 					//url:"${ctx}/jsonfindallsysuserpage",
-					url:"${ctx}/listuser4",
+					url:"${ctx}/jsonfindallcardInfopage4",
 					contentType:'application/json;charset=UTF-8',
 					datatype: "json",
 					mtype:"post",
 					
 					height: 350,
-					colNames:['id', '登录名','名称','创建日期', '状态', '备注'],
+					colNames:['id', '状态','名称','性别', '民族', '籍贯','身份证','住址','出生地','生源地','备注'],
 					colModel:[
 						{name:'id',index:'id',width:100, sorttype:"int", editable: false},  
-			      {name:'loginName',index:'loginName',width:100,editable: true,editoptions:{size:"20",maxlength:"30"}},  
-			      {index:'name',name:'name',width:100,editable: true,editoptions:{size:"20",maxlength:"30"}},  
-			      {index:'createDate',name:'createDate',width:150,editable:true, sorttype:"date",unformat: pickDate},  
-			      {index:'status',name:'status',width:100, editable: true,edittype:"select",editoptions:{value:"0:无效;1:有效;2:删除;3:滞留"}},
-						{index:'memo',name:'memo',width:400,sortable:false,editable: true,edittype:"textarea", editoptions:{rows:"2",cols:"10"}} 
+			      {name:'status',index:'status',width:100,editable:false},  
+			      {name:'name',index:'name',width:100,editable:false},  
+			      {name:'gender',index:'gender',width:100,editable:false},  
+			      {name:'nation',index:'nation',width:100,editable:false},  
+			      {name:'native_place',index:'native_place',width:100,editable:false},  
+			      {name:'identityCard',index:'identityCard',width:100,editable:false},  
+			      {name:'address',index:'address',width:100,editable:false},  
+			      {name:'birthPlace',index:'birthPlace',width:100,editable:false},  
+			      {name:'originStudent',index:'originStudent',width:100,editable:false},  
+			      {name:'memo',index:'memo',width:100,editable:false},  			      
 					], 
 			
 					viewrecords : true,
@@ -192,9 +206,7 @@ String path2 = "用户管理";
 						}, 0);
 					},
 			
-					editurl: '${ctx}/jsonsavesysuser',//$path_base+"/dummy.html",//nothing is saved
-					delurl: '${ctx}/jsonremovesysuserbyid',
-					caption: "用户信息",
+					caption: "学生情况查询",
 			
 			
 					autowidth: true
@@ -225,18 +237,18 @@ String path2 = "用户管理";
 				//navButtons
 				jQuery(grid_selector).jqGrid('navGrid',pager_selector,
 					{ 	//navbar options
-						edit: true,
+						edit: false,
 						editicon : 'icon-pencil blue',
-						add: true,
+						add: false,
 						addicon : 'icon-plus-sign purple',
-						del: true,
+						del: false,
 						delicon : 'icon-trash red',
 						search: true,
 						searchicon : 'icon-search orange',
 						refresh: true,
 						refreshicon : 'icon-refresh green',
-						view: true,
-						viewicon : 'icon-zoom-in grey',
+						//view: true,
+						//viewicon : 'icon-zoom-in grey',
 					},
 					{
 						//edit record form

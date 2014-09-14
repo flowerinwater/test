@@ -27,12 +27,16 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.bnu.card.entity.CardInfo;
 import com.bnu.card.entity.History;
+import com.bnu.card.entity.SysUser;
 import com.bnu.card.repository.CardInfoDao;
 import com.bnu.card.repository.CardInfoNsqlDao;
 import com.bnu.card.repository.HistoryDao;
 import com.bnu.card.repository.SysUserDao;
 import com.bnu.card.util.BeanUtilEx;
 import com.bnu.card.util.DefaultValue;
+import com.bnu.card.web.Filter;
+import com.bnu.card.web.JQGridQueryForm;
+import com.bnu.card.web.Rule;
 import com.bnu.card.web.form.CardInfoSearchForm;
 //import com.bnu.card.web.account.CardInfoInfo;
 import com.bnu.card.web.form.StudentReportForm;
@@ -333,5 +337,176 @@ public class CardInfoService {
 //		r.add(cardInfoDao.findByIdentityCard(identityCard));
 		
 		return r;
+	}
+
+	public Page<CardInfo> findAllCardInfo(final JQGridQueryForm jqForm,
+			Pageable pb) {
+		Specification<CardInfo> ps = new Specification<CardInfo>(){
+
+			@Override
+			public Predicate toPredicate(Root<CardInfo> root,
+					CriteriaQuery<?> query, CriteriaBuilder cb) {
+
+				Predicate p = null;
+				
+				
+				Filter f = jqForm.getFilters();
+				
+				if(f!=null){
+					List<Rule> rules = f.getRules();
+					
+					for (Iterator iterator = rules.iterator(); iterator.hasNext();) {
+						Rule rule = (Rule) iterator.next();
+						Path<String> exp = root.get(rule.getField());
+						if(rule.getData() != null){
+							
+							if(rule.getField().equalsIgnoreCase("id")){
+								if(rule.getOp().equalsIgnoreCase("eq")){
+									if(p!=null)
+				                		p = cb.and(cb.equal(exp, rule.getData()),p);
+				                	else
+				                		p = cb.equal(exp, rule.getData());
+								}
+								
+								if(rule.getOp().equalsIgnoreCase("ne")){
+									if(p!=null)
+				                		p = cb.and(cb.notEqual(exp, rule.getData()),p);
+				                	else
+				                		p = cb.notEqual(exp, rule.getData());
+								}
+								
+								if(rule.getOp().equalsIgnoreCase("lt")){
+									if(p!=null)
+				                		p = cb.and(cb.lessThan(exp, rule.getData()),p);
+				                	else
+				                		p = cb.lessThan(exp, rule.getData());
+								}
+								
+								if(rule.getOp().equalsIgnoreCase("le")){
+									if(p!=null)
+				                		p = cb.and(cb.lessThanOrEqualTo(exp, rule.getData()),p);
+				                	else
+				                		p = cb.lessThanOrEqualTo(exp, rule.getData());
+								}
+								
+								if(rule.getOp().equalsIgnoreCase("gt")){
+									if(p!=null)
+				                		p = cb.and(cb.greaterThan(exp, rule.getData()),p);
+				                	else
+				                		p = cb.greaterThan(exp, rule.getData());
+								}
+								if(rule.getOp().equalsIgnoreCase("ge")){
+									if(p!=null)
+				                		p = cb.and(cb.greaterThanOrEqualTo(exp, rule.getData()),p);
+				                	else
+				                		p = cb.greaterThanOrEqualTo(exp, rule.getData());
+								}
+//								if(rule.getOp().equalsIgnoreCase("nc")){
+//									if(p!=null)
+//				                		p = cb.and(cb.notLike(exp, rule.getData()),p);
+//				                	else
+//				                		p = cb.notLike(exp, rule.getData());
+//								}
+//								if(rule.getOp().equalsIgnoreCase("bw")){
+//									if(p!=null)
+//				                		p = cb.and(cb.between(exp, rule.getData()),p);
+//				                	else
+//				                		p = cb.lessThan(exp, rule.getData());
+//								}
+							}else if(rule.getField().equalsIgnoreCase("birthDay")){
+								Path<Date> exp1 = root.get(rule.getField());
+								
+								SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+								try {
+									Date dt = sdf.parse(rule.getData());
+									
+									if(rule.getOp().equalsIgnoreCase("eq")){
+										if(p!=null)
+					                		p = cb.and(cb.equal(exp1, dt),p);
+					                	else
+					                		p = cb.equal(exp1, dt);
+									}
+									
+									if(rule.getOp().equalsIgnoreCase("ne")){
+										if(p!=null)
+					                		p = cb.and(cb.notEqual(exp1, dt),p);
+					                	else
+					                		p = cb.notEqual(exp1, dt);
+									}
+									
+									if(rule.getOp().equalsIgnoreCase("lt")){
+										if(p!=null)
+					                		p = cb.and(cb.lessThan(exp1, dt),p);
+					                	else
+					                		p = cb.lessThan(exp1, dt);
+									}
+									
+									if(rule.getOp().equalsIgnoreCase("le")){
+										if(p!=null)
+					                		p = cb.and(cb.lessThanOrEqualTo(exp1, dt),p);
+					                	else
+					                		p = cb.lessThanOrEqualTo(exp1, dt);
+									}
+									
+									if(rule.getOp().equalsIgnoreCase("gt")){
+										if(p!=null)
+					                		p = cb.and(cb.greaterThan(exp1, dt),p);
+					                	else
+					                		p = cb.greaterThan(exp1, dt);
+									}
+									if(rule.getOp().equalsIgnoreCase("ge")){
+										if(p!=null)
+					                		p = cb.and(cb.greaterThanOrEqualTo(exp1, dt),p);
+					                	else
+					                		p = cb.greaterThanOrEqualTo(exp1, dt);
+									}
+								} catch (ParseException e) {
+									e.printStackTrace();
+								}
+								
+			                	
+							}else{
+								if(rule.getOp().equalsIgnoreCase("eq")){
+									if(p!=null)
+				                		p = cb.and(cb.equal(exp, rule.getData()),p);
+				                	else
+				                		p = cb.equal(exp, rule.getData());
+								}
+								
+								if(rule.getOp().equalsIgnoreCase("ne")){
+									if(p!=null)
+				                		p = cb.and(cb.notEqual(exp, rule.getData()),p);
+				                	else
+				                		p = cb.notEqual(exp, rule.getData());
+								}
+								
+								
+								if(rule.getOp().equalsIgnoreCase("cn")){
+									if(p!=null)
+				                		p = cb.and(cb.like(exp, "%" + rule.getData() + "%"),p);
+				                	else
+				                		p = cb.like(exp, "%" + rule.getData() + "%");
+								}
+								
+								if(rule.getOp().equalsIgnoreCase("nc")){
+									if(p!=null)
+				                		p = cb.and(cb.notLike(exp, "%" + rule.getData() + "%"),p);
+				                	else
+				                		p = cb.notLike(exp, "%" + rule.getData() + "%");
+								}
+								
+							}
+
+						}
+					}
+				}
+				
+				return p; 
+			}
+			
+		};
+
+		return cardInfoDao.findAll(ps,pb);
+	
 	}
 }

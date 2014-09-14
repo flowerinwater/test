@@ -261,9 +261,9 @@ public class SysUserController {
 		return null;
 	}
 	
-	@RequestMapping("/listuser3")
+	@RequestMapping("/listuser4")
 	@ResponseBody
-	public DataResponse<SysUserForm> listUser3(@RequestBody JQGridQueryForm jqFrom
+	public DataResponse<SysUserForm> listUser4(@RequestBody JQGridQueryForm jqFrom
 			) {
 		
 		DataRequest request = new DataRequest();  
@@ -281,7 +281,6 @@ public class SysUserController {
         
         try{
     		
-    		SysUserSearchForm cisf = new SysUserSearchForm();
     		Pageable pagerequset = buildPageRequest(request.getPage(), request.getRows(), request.getSord(),request.getSidx());
     		Page<SysUser> as = sysUserService.findAllSysUser(jqFrom,pagerequset);
     		List<SysUserForm> bis = new ArrayList<SysUserForm>();
