@@ -8,12 +8,15 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.beanutils.BeanUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.bnu.card.entity.CardInfo;
+import com.bnu.card.entity.History;
 import com.bnu.card.entity.LendCard;
 import com.bnu.card.entity.SysUser;
 import com.bnu.card.service.BnuCodeService;
@@ -35,6 +39,7 @@ import com.bnu.card.util.JsonSimpleResult;
 import com.bnu.card.util.JsonSingleOjbectResult;
 import com.bnu.card.web.form.CardInfoForm;
 import com.bnu.card.web.form.CardInfoSearchForm;
+import com.bnu.card.web.form.HistoryForm;
 import com.bnu.card.web.form.LendCardForm;
 
 
@@ -196,6 +201,79 @@ public class LendCardController {
 //
 //    	return lr;
 //    }
+    
+    
+    @RequestMapping("/jsonalertlendcard4")
+	@ResponseBody
+	public DataResponse<LendCardForm> jsonFindAllCardInfoPage4(@RequestParam(value="expiredays",required=false) int expiredays,@RequestBody JQGridQueryForm jqFrom
+			) {
+		log.info("jsonalertlendcard4");
+		DataRequest request = new DataRequest();  
+        request.setPage(StringUtils.isEmpty(jqFrom.page) ? 1 : Integer.valueOf(jqFrom.page));  
+        request.setRows(StringUtils.isEmpty(jqFrom.rows) ? 20 : Integer.valueOf(jqFrom.rows));  
+        request.setSidx(jqFrom.sidx);  
+        request.setSord(jqFrom.sord);  
+        request.setSearch(jqFrom._search);  
+        request.setSearchField(jqFrom.searchField);  
+        request.setSearchOper(jqFrom.searchOper);  
+        request.setSearchString(jqFrom.searchString);  
+        
+        DataResponse<LendCardForm> lr = new DataResponse<LendCardForm>();
+        
+        try{
+    		Pageable pagerequset = buildPageRequest(request.getPage(), request.getRows(), request.getSord(),request.getSidx());
+    		
+    		Page<LendCard> as = lendCardService.getLendCardExpireAlert(jqFrom,pagerequset);
+//    		List<LendCard> as = lendCardService.getLendCardExpireAlert(expiredays);
+    		
+    		List<LendCardForm> bis = new ArrayList<LendCardForm>();
+    		for (Iterator<LendCard> iterator = as.getContent().iterator(); iterator.hasNext();) {
+    			LendCard cardInfo = (LendCard) iterator.next();
+    			LendCardForm bi = new LendCardForm();
+				BeanUtilEx.copyProperties(bi, cardInfo);
+				
+				
+				
+				try{
+				CardInfo ci = cardInfoService.getCardInfo(cardInfo.getCardId());
+				bi.setName(ci.getName());
+				}catch(Exception e){
+					
+				}
+				bi.setPurpose(bnuCodeService.getCodeName(DefaultValue.PURPOSE,bi.getPurpose()));
+//				bi.setGender(DefaultValue.transGenderType(bi.getGender()));
+//				bi.setStatus(DefaultValue.transStatus(bi.getStatus()));
+//				
+				bis.add(bi);
+			}
+    		
+    		if(as!=null){
+    			lr.setRows(bis);
+//    			lr.setTotal(as.getTotalElements());
+    			
+    			lr.setTotal(as.getTotalPages());
+    			lr.setPage(as.getNumber());
+    			lr.setRecords(Integer.valueOf(""+as.getTotalElements()));
+    		}
+    		
+    	}catch(Exception e){
+    		e.printStackTrace();
+    	}
+
+        
+		return lr;
+	}
+    private Pageable buildPageRequest(int page, int rows,String sortType,String sidx) {
+        
+		Sort sort = null;
+		if (Direction.DESC.equals(sortType.toUpperCase())) {
+			sort = new Sort(Direction.DESC, sidx.equals("")?"id":sidx);
+		} else if (Direction.ASC.equals(sortType.toUpperCase())) {
+			sort = new Sort(Direction.ASC, sidx.equals("")?"id":sidx);
+		}
+        
+		return new PageRequest(page - 1, rows, sort);
+	}
     
     @RequestMapping("/jsonalertlendcard")
     @ResponseBody

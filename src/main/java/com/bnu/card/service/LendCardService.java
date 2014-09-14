@@ -1,15 +1,26 @@
 package com.bnu.card.service;
 
 import java.lang.reflect.InvocationTargetException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Path;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
+
 import org.apache.commons.beanutils.BeanUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,6 +32,9 @@ import com.bnu.card.repository.HistoryDao;
 import com.bnu.card.repository.LendCardDao;
 import com.bnu.card.util.BeanUtilEx;
 import com.bnu.card.util.DefaultValue;
+import com.bnu.card.web.Filter;
+import com.bnu.card.web.JQGridQueryForm;
+import com.bnu.card.web.Rule;
 
 // Spring Service Bean的标识.
 @Component
@@ -148,5 +162,161 @@ public class LendCardService {
 	@Transactional(readOnly = false)
 	public void deleteLendCard(Long id) {
 		lendCardDao.delete(id);
+	}
+
+	public Page<LendCard> getLendCardExpireAlert(final JQGridQueryForm jqForm,
+			Pageable pb) {
+		Specification<LendCard> ps = new Specification<LendCard>(){
+
+			@Override
+			public Predicate toPredicate(Root<LendCard> root,
+					CriteriaQuery<?> query, CriteriaBuilder cb) {
+
+				Predicate p = null;
+				
+				
+				Filter f = jqForm.getFilters();
+				
+				if(f!=null){
+					List<Rule> rules = f.getRules();
+					
+					for (Iterator iterator = rules.iterator(); iterator.hasNext();) {
+						Rule rule = (Rule) iterator.next();
+						Path<String> exp = root.get(rule.getField());
+						if(rule.getData() != null){
+							
+							if(rule.getField().equalsIgnoreCase("id")){
+								if(rule.getOp().equalsIgnoreCase("eq")){
+									if(p!=null)
+				                		p = cb.and(cb.equal(exp, rule.getData()),p);
+				                	else
+				                		p = cb.equal(exp, rule.getData());
+								}
+								
+								if(rule.getOp().equalsIgnoreCase("ne")){
+									if(p!=null)
+				                		p = cb.and(cb.notEqual(exp, rule.getData()),p);
+				                	else
+				                		p = cb.notEqual(exp, rule.getData());
+								}
+								
+								if(rule.getOp().equalsIgnoreCase("lt")){
+									if(p!=null)
+				                		p = cb.and(cb.lessThan(exp, rule.getData()),p);
+				                	else
+				                		p = cb.lessThan(exp, rule.getData());
+								}
+								
+								if(rule.getOp().equalsIgnoreCase("le")){
+									if(p!=null)
+				                		p = cb.and(cb.lessThanOrEqualTo(exp, rule.getData()),p);
+				                	else
+				                		p = cb.lessThanOrEqualTo(exp, rule.getData());
+								}
+								
+								if(rule.getOp().equalsIgnoreCase("gt")){
+									if(p!=null)
+				                		p = cb.and(cb.greaterThan(exp, rule.getData()),p);
+				                	else
+				                		p = cb.greaterThan(exp, rule.getData());
+								}
+								if(rule.getOp().equalsIgnoreCase("ge")){
+									if(p!=null)
+				                		p = cb.and(cb.greaterThanOrEqualTo(exp, rule.getData()),p);
+				                	else
+				                		p = cb.greaterThanOrEqualTo(exp, rule.getData());
+								}
+							}else if(rule.getField().equalsIgnoreCase("lendDate") || rule.getField().equalsIgnoreCase("toReturnDate")){
+								Path<Date> exp1 = root.get(rule.getField());
+								
+								SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+								try {
+									Date dt = sdf.parse(rule.getData());
+									
+									if(rule.getOp().equalsIgnoreCase("eq")){
+										if(p!=null)
+					                		p = cb.and(cb.equal(exp1, dt),p);
+					                	else
+					                		p = cb.equal(exp1, dt);
+									}
+									
+									if(rule.getOp().equalsIgnoreCase("ne")){
+										if(p!=null)
+					                		p = cb.and(cb.notEqual(exp1, dt),p);
+					                	else
+					                		p = cb.notEqual(exp1, dt);
+									}
+									
+									if(rule.getOp().equalsIgnoreCase("lt")){
+										if(p!=null)
+					                		p = cb.and(cb.lessThan(exp1, dt),p);
+					                	else
+					                		p = cb.lessThan(exp1, dt);
+									}
+									
+									if(rule.getOp().equalsIgnoreCase("le")){
+										if(p!=null)
+					                		p = cb.and(cb.lessThanOrEqualTo(exp1, dt),p);
+					                	else
+					                		p = cb.lessThanOrEqualTo(exp1, dt);
+									}
+									
+									if(rule.getOp().equalsIgnoreCase("gt")){
+										if(p!=null)
+					                		p = cb.and(cb.greaterThan(exp1, dt),p);
+					                	else
+					                		p = cb.greaterThan(exp1, dt);
+									}
+									if(rule.getOp().equalsIgnoreCase("ge")){
+										if(p!=null)
+					                		p = cb.and(cb.greaterThanOrEqualTo(exp1, dt),p);
+					                	else
+					                		p = cb.greaterThanOrEqualTo(exp1, dt);
+									}
+								} catch (ParseException e) {
+									e.printStackTrace();
+								}
+							}else{
+								if(rule.getOp().equalsIgnoreCase("eq")){
+									if(p!=null)
+				                		p = cb.and(cb.equal(exp, rule.getData()),p);
+				                	else
+				                		p = cb.equal(exp, rule.getData());
+								}
+								
+								if(rule.getOp().equalsIgnoreCase("ne")){
+									if(p!=null)
+				                		p = cb.and(cb.notEqual(exp, rule.getData()),p);
+				                	else
+				                		p = cb.notEqual(exp, rule.getData());
+								}
+								
+								
+								if(rule.getOp().equalsIgnoreCase("cn")){
+									if(p!=null)
+				                		p = cb.and(cb.like(exp, "%" + rule.getData() + "%"),p);
+				                	else
+				                		p = cb.like(exp, "%" + rule.getData() + "%");
+								}
+								
+								if(rule.getOp().equalsIgnoreCase("nc")){
+									if(p!=null)
+				                		p = cb.and(cb.notLike(exp, "%" + rule.getData() + "%"),p);
+				                	else
+				                		p = cb.notLike(exp, "%" + rule.getData() + "%");
+								}
+								
+							}
+
+						}
+					}
+				}
+				
+				return p; 
+			}
+			
+		};
+
+		return lendCardDao.findAll(ps,pb);
 	}
 }

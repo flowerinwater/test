@@ -283,7 +283,7 @@
 								<li class="<%=p3.equals("report_s_cardinfo") ? "active" : "" %>">
 									<a href="main4_report_s_cardinfo.jsp?p2=tjcx&p3=report_s_cardinfo">
 										<i class="icon-dashboard"></i>
-										<span class="menu-text"> 明细信息（？） </span>
+										<span class="menu-text"> 明细信息 </span>
 									</a>
 								</li>
 								

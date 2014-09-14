@@ -8,12 +8,15 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.beanutils.BeanUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.bnu.card.entity.History;
+import com.bnu.card.entity.SysUser;
 import com.bnu.card.service.BnuCodeService;
 import com.bnu.card.service.HistoryService;
 import com.bnu.card.util.BeanUtilEx;
@@ -31,6 +35,7 @@ import com.bnu.card.util.JsonSimpleResult;
 import com.bnu.card.util.JsonSingleOjbectResult;
 import com.bnu.card.web.form.HistoryForm;
 import com.bnu.card.web.form.HistorySearchForm;
+import com.bnu.card.web.form.SysUserForm;
 
 
 @Controller
@@ -97,6 +102,69 @@ public class HistoryController {
     	return lr;
     }
     
+    @RequestMapping("/jsonfindallhistorypage4")
+	@ResponseBody
+	public DataResponse<HistoryForm> jsonFindAllHistoryPage4(@RequestBody JQGridQueryForm jqFrom
+			) {
+		log.info("jsonfindallhistorypage4");
+		DataRequest request = new DataRequest();  
+        request.setPage(StringUtils.isEmpty(jqFrom.page) ? 1 : Integer.valueOf(jqFrom.page));  
+        request.setRows(StringUtils.isEmpty(jqFrom.rows) ? 20 : Integer.valueOf(jqFrom.rows));  
+        request.setSidx(jqFrom.sidx);  
+        request.setSord(jqFrom.sord);  
+        request.setSearch(jqFrom._search);  
+        request.setSearchField(jqFrom.searchField);  
+        request.setSearchOper(jqFrom.searchOper);  
+        request.setSearchString(jqFrom.searchString);  
+        
+        DataResponse<HistoryForm> lr = new DataResponse<HistoryForm>();
+        
+        try{
+    		Pageable pagerequset = buildPageRequest(request.getPage(), request.getRows(), request.getSord(),request.getSidx());
+    		
+    		Page<History> as = historyService.findAllHistory(jqFrom,pagerequset);
+    		
+    		List<HistoryForm> bis = new ArrayList<HistoryForm>();
+    		for (Iterator<History> iterator = as.getContent().iterator(); iterator.hasNext();) {
+				History history = (History) iterator.next();
+				HistoryForm bi = new HistoryForm();
+				BeanUtilEx.copyProperties(bi, history);
+				
+				bi.setOperateType(bnuCodeService.getCodeName(DefaultValue.OPERATE_TYPE,bi.getOperateType()));
+				bi.setCardType(bnuCodeService.getCodeName(DefaultValue.CARD_TYPE4HISTORY,bi.getCardType()));
+				 
+				bis.add(bi);
+			}
+    		
+    		if(as!=null){
+    			lr.setRows(bis);
+//    			lr.setTotal(as.getTotalElements());
+    			
+    			lr.setTotal(as.getTotalPages());
+    			lr.setPage(as.getNumber());
+    			lr.setRecords(Integer.valueOf(""+as.getTotalElements()));
+    		}
+    		
+    	}catch(Exception e){
+    		e.printStackTrace();
+    	}
+
+        
+		return lr;
+	}
+    
+    private Pageable buildPageRequest(int page, int rows,String sortType,String sidx) {
+        
+		Sort sort = null;
+		if (Direction.DESC.equals(sortType.toUpperCase())) {
+			sort = new Sort(Direction.DESC, sidx.equals("")?"id":sidx);
+		} else if (Direction.ASC.equals(sortType.toUpperCase())) {
+			sort = new Sort(Direction.ASC, sidx.equals("")?"id":sidx);
+		}
+        
+		return new PageRequest(page - 1, rows, sort);
+	}
+
     @RequestMapping("/jsonfindallhistorypage")
     @ResponseBody
 	public JsonPageResult<HistoryForm> jsonFindAllHistoryPage(@RequestParam(value="rows",required=false) int rows,@RequestParam(value="page",required=false) int page,HttpServletRequest r){
