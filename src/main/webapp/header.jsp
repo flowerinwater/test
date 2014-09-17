@@ -4,6 +4,7 @@
 <%@ page import="javax.servlet.ServletContext"%>
 <%@ page import="java.util.List"%>
 <%@ page import="com.bnu.card.service.LendCardService"%>
+<%@ page import="com.bnu.card.service.CardInfoService"%>
 <%@ page import="com.bnu.card.service.SysUserService"%>
 <%@ page import="com.bnu.card.entity.SysUser"%>
 <%@ page import="com.bnu.card.service.ShiroDbRealm.ShiroUser"%>
@@ -21,6 +22,8 @@
 	LendCardService lendCardService = (LendCardService)ac1.getBean("lendCardService");
 	List l = lendCardService.getLendCardExpireAlert(10);
 	boolean hasAlert = l.size()>0;	
+	
+	CardInfoService cardInfoService = (CardInfoService)ac1.getBean("cardInfoService");
 	
 	Subject subject = SecurityUtils.getSubject();
 	ShiroUser user = (ShiroUser)subject.getPrincipal();

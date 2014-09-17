@@ -55,6 +55,44 @@ public class CardInfoService {
 	@Autowired
 	private SysUserDao sysUserDao;
 
+	public int getCountAll() {
+		return (int)cardInfoDao.count();
+	}
+	
+	public int getCountCardInfoByJob(final String job) {
+		return (int)cardInfoDao.count(new Specification<CardInfo>(){
+
+			@Override
+			public Predicate toPredicate(Root<CardInfo> root,
+					CriteriaQuery<?> q, CriteriaBuilder cb) {
+				Predicate p = null;
+				
+				Path<String> nameExp = root.get("job"); 
+				p = cb.equal(nameExp, job);
+				
+				return p;
+			}
+			
+		});
+	}
+	
+	public int getCountCardInfoByStatus(final String status) {
+		return (int)cardInfoDao.count(new Specification<CardInfo>(){
+
+			@Override
+			public Predicate toPredicate(Root<CardInfo> root,
+					CriteriaQuery<?> q, CriteriaBuilder cb) {
+				Predicate p = null;
+				
+				Path<String> nameExp = root.get("status"); 
+				p = cb.equal(nameExp, status);
+				
+				return p;
+			}
+			
+		});
+	}
+	
 	public List<CardInfo> getAllCardInfo() {
 		List<CardInfo> cts = new ArrayList<CardInfo>();
 		
