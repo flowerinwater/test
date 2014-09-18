@@ -259,7 +259,71 @@ public class CardInfoController {
 	}
 	
 	
+//	@RequestMapping("/jsonFindByDetainedGradeGroup14")
+//	@ResponseBody
+//	public DataResponse<Map<String,Object>> jsonFindByDetainedGradeGroup14(HttpServletRequest req
+//			) {
+//		log.info("jsonFindByDetainedGradeGroup14");
+//		
+//		String academe = req.getParameter("academa");
+//		if (academe == null)
+//			academe = "%";
+//        
+//        DataResponse<Map<String,Object>> lr = new DataResponse<Map<String,Object>>();
+//        
+//        try{
+//        	List<Map<String,Object>> v = new ArrayList<Map<String,Object>>();
+//        	List lendAs = cardInfoService.findByDetainedGradeGroup1(academe);
+//        	for (Iterator iterator = lendAs.iterator(); iterator.hasNext();) {
+//        		Object[] object = (Object[]) iterator.next();
+//        		
+//        		Map<String,Object> m = new HashMap<String,Object>();
+//        		m.put("groupname",object[0]);
+//        		m.put("count1",object[1]);
+//        		
+//        		v.add(m);
+//        	}
+//        	lr.setRows(v);
+//
+//			lr.setTotal(v.size());
+//    	}catch(Exception e){
+//    		e.printStackTrace();
+//    	}
+//        
+//		return lr;
+//	}
 	
+//	@RequestMapping("/jsonfindByLendExpireGradeGroup4")
+//	@ResponseBody
+//	public DataResponse<Map<String,Object>> jsonFindByLendExpireGradeGroup4(HttpServletRequest req
+//			) {
+//		log.info("jsonfindByLendExpireGradeGroup4");
+//		
+//		int expiredays = 10;
+//        
+//        DataResponse<Map<String,Object>> lr = new DataResponse<Map<String,Object>>();
+//        
+//        try{
+//        	List<Map<String,Object>> v = new ArrayList<Map<String,Object>>();
+//        	List lendAs = cardInfoService.findByLendExpireGradeGroup(expiredays);
+//        	for (Iterator iterator = lendAs.iterator(); iterator.hasNext();) {
+//        		Object[] object = (Object[]) iterator.next();
+//        		
+//        		Map<String,Object> m = new HashMap<String,Object>();
+//        		m.put("year",object[0]);
+//        		m.put("count1",object[1]);
+//        		
+//        		v.add(m);
+//        	}
+//        	lr.setRows(v);
+//
+//			lr.setTotal(v.size());
+//    	}catch(Exception e){
+//    		e.printStackTrace();
+//    	}
+//        
+//		return lr;
+//	}
 	
 	
 	@RequestMapping("/jsonlendreturn4")
