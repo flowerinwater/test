@@ -46,19 +46,19 @@ String path2 = "";
 									<div class="col-sm-6 infobox-container">
 										<div class="infobox infobox-green  ">
 											<div class="infobox-icon">
-												<i class="icon-comments"></i>
+												<i class=""><img src="assets/images/people_vista_011.png"/></i>
 											</div>
 
 											<div class="infobox-data">
 												<span class="infobox-data-number"><%=cardInfoService.getCountCardInfoByJob("1") + cardInfoService.getCountCardInfoByJob("2") + cardInfoService.getCountCardInfoByJob("3")%></span>
 												<div class="infobox-content">学生</div>
 											</div>
-											<div class="badge badge-success"><%=(cardInfoService.getCountCardInfoByJob("1")+cardInfoService.getCountCardInfoByJob("2")+cardInfoService.getCountCardInfoByJob("3"))/cardInfoService.getCountAll()%></div>
+											<div class="badge badge-success"><%=(double)(cardInfoService.getCountCardInfoByJob("1")+cardInfoService.getCountCardInfoByJob("2")+cardInfoService.getCountCardInfoByJob("3"))/(double)(cardInfoService.getCountAll())*100%>%</div>
 										</div>
 
 										<div class="infobox infobox-blue  ">
 											<div class="infobox-icon">
-												<i class="icon-twitter"></i>
+												<i class=""><img src="assets/images/people_vista_014.png"/></i>
 											</div>
 
 											<div class="infobox-data">
@@ -67,32 +67,32 @@ String path2 = "";
 											</div>
 
 											<div class="badge badge-success">
-												<%=cardInfoService.getCountCardInfoByJob("4")/(cardInfoService.getCountAll())%>
+												<%=(double)(cardInfoService.getCountCardInfoByJob("4"))/(double)(cardInfoService.getCountAll())*100%>%
 											</div>
 										</div>
 
 										<div class="infobox infobox-pink  ">
 											<div class="infobox-icon">
-												<i class="icon-shopping-cart"></i>
+												<i class=""><img src="assets/images/people_vista_008.png"/></i>
 											</div>
 
 											<div class="infobox-data">
 												<span class="infobox-data-number"><%=cardInfoService.getCountCardInfoByJob("5")%></span>
 												<div class="infobox-content">家属</div>
 											</div>
-											<div class="badge badge-success"><%=cardInfoService.getCountCardInfoByJob("5")/(cardInfoService.getCountAll())%></div>
+											<div class="badge badge-success"><%=(double)(cardInfoService.getCountCardInfoByJob("5"))/(double)(cardInfoService.getCountAll())*100%>%</div>
 										</div>
 										
 										<div class="infobox infobox-pink  ">
 											<div class="infobox-icon">
-												<i class="icon-shopping-cart"></i>
+												<i class=""><img src="assets/images/people_vista_012.png"/></i>
 											</div>
 
 											<div class="infobox-data">
 												<span class="infobox-data-number"><%=cardInfoService.getCountCardInfoByJob("6")%></span>
 												<div class="infobox-content">其他</div>
 											</div>
-											<div class="badge badge-success"><%=cardInfoService.getCountCardInfoByJob("6")/(cardInfoService.getCountAll())%></div>
+											<div class="badge badge-success"><%=(double)cardInfoService.getCountCardInfoByJob("6")/(double)(cardInfoService.getCountAll())*100%>%</div>
 										</div>
 
 										<div class="infobox infobox-red  ">
@@ -104,7 +104,7 @@ String path2 = "";
 												<span class="infobox-data-number"><%=cardInfoService.getCountCardInfoByStatus(com.bnu.card.util.DefaultValue.DETAINED)%></span>
 												<div class="infobox-content">滞留</div>
 											</div>
-											<div class="badge badge-success"><%=cardInfoService.getCountCardInfoByStatus(com.bnu.card.util.DefaultValue.DETAINED)/(cardInfoService.getCountAll())%></div>
+											<div class="badge badge-success"><%=(double)(cardInfoService.getCountCardInfoByStatus(com.bnu.card.util.DefaultValue.DETAINED))/(double)(cardInfoService.getCountAll())*100%>%</div>
 										</div>
 
 										<div class="infobox infobox-orange2  ">
@@ -116,7 +116,7 @@ String path2 = "";
 												<div class="infobox-content">借出</div>
 											</div>
 
-											<div class="badge badge-success"><%=cardInfoService.getCountCardInfoByStatus(com.bnu.card.util.DefaultValue.LEND)/(cardInfoService.getCountAll())%></div>
+											<div class="badge badge-success"><%=(double)(cardInfoService.getCountCardInfoByStatus(com.bnu.card.util.DefaultValue.LEND))/(double)(cardInfoService.getCountAll())*100%>%</div>
 										</div>
 
 									</div>
@@ -145,7 +145,7 @@ String path2 = "";
 													<div class="clearfix">
 														<div class="grid3">
 															<span class="grey">
-																<i class="icon-facebook-sign icon-2x blue"></i>
+																<i class="icon-2x blue"><img src="assets/images/master.png"/></i>
 																&nbsp; 本科生
 															</span>
 															<h4 class="bigger pull-right"><%=cardInfoService.getCountCardInfoByJob("1")%></h4>
@@ -153,7 +153,7 @@ String path2 = "";
 
 														<div class="grid3">
 															<span class="grey">
-																<i class="icon-twitter-sign icon-2x purple"></i>
+																<i class="icon-2x purple"><img src="assets/images/bachelor.png"></i>
 																&nbsp; 研究生
 															</span>
 															<h4 class="bigger pull-right"><%=cardInfoService.getCountCardInfoByJob("2")%></h4>
@@ -161,7 +161,7 @@ String path2 = "";
 
 														<div class="grid3">
 															<span class="grey">
-																<i class="icon-pinterest-sign icon-2x red"></i>
+																<i class="icon-2x red"><img src="assets/images/doctor.png"></i>
 																&nbsp; 博士生
 															</span>
 															<h4 class="bigger pull-right"><%=cardInfoService.getCountCardInfoByJob("3")%></h4>
