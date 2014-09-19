@@ -13,6 +13,7 @@ import javax.persistence.Table;
 import javax.persistence.ColumnResult;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.springframework.data.jpa.repository.Query;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 @NamedNativeQueries({
@@ -63,6 +64,26 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 						" where job in ('1','2','3') and status='3' and academe like :academa" +
 						" group by grade",
 				resultSetMapping="findByNationGroupMap"),
+				
+		@NamedNativeQuery(
+				name="CardInfo.findByDetainedGradeGroup1",
+				query=" select grade year, " + 
+						" count(*) count1"+
+						" from bnu_card.card_info " +
+						" where job in ('1','2','3') and status='3' and academe like :academa" +
+						" group by grade",
+				resultSetMapping="findLendReturnReport"),	
+				
+		@NamedNativeQuery(
+				name="CardInfo.findByLendExpireGradeGroup",
+				query=" select grade year, " + 
+						" count(*) count1"+
+						" from bnu_card.card_info c,bnu_card.lend_card_info lc" +
+						//" where job in ('1','2','3') and status='3' and academe like :academa" +
+						" where lc.card_id = c.id and c.status='4' and DATEDIFF(sysdate() , lc.to_return_date) > :expiredays" + 
+						" group by grade",
+				resultSetMapping="findLendReturnReport"),				
+						
 				
 		@NamedNativeQuery(
 				name="CardInfo.findByAcademeGroup",

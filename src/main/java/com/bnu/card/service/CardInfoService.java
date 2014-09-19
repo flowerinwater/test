@@ -347,6 +347,14 @@ public class CardInfoService {
 		return cardInfoDao.findLendReport();
 	}
 	
+	public List findByDetainedGradeGroup1(String academa) {
+		return cardInfoDao.findByDetainedGradeGroup1(academa);
+	}
+	
+	public List findByLendExpireGradeGroup( int expiredays) {
+		return cardInfoDao.findByLendExpireGradeGroup(expiredays);
+	}
+	
 	public List jsonReturnReport() {
 		return cardInfoDao.findReturnReport();
 	}

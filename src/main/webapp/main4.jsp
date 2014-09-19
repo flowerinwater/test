@@ -235,53 +235,6 @@ String path2 = "";
 					</div><!-- /.page-content -->
 				</div><!-- /.main-content -->
 
-				<div class="ace-settings-container" id="ace-settings-container">
-					<div class="btn btn-app btn-xs btn-warning ace-settings-btn" id="ace-settings-btn">
-						<i class="icon-cog bigger-150"></i>
-					</div>
-
-					<div class="ace-settings-box" id="ace-settings-box">
-						<div>
-							<div class="pull-left">
-								<select id="skin-colorpicker" class="hide">
-									<option data-skin="default" value="#438EB9">#438EB9</option>
-									<option data-skin="skin-1" value="#222A2D">#222A2D</option>
-									<option data-skin="skin-2" value="#C6487E">#C6487E</option>
-									<option data-skin="skin-3" value="#D0D0D0">#D0D0D0</option>
-								</select>
-							</div>
-							<span>&nbsp; 选择皮肤</span>
-						</div>
-
-						<div>
-							<input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-navbar" />
-							<label class="lbl" for="ace-settings-navbar"> 固定导航条</label>
-						</div>
-
-						<div>
-							<input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-sidebar" />
-							<label class="lbl" for="ace-settings-sidebar"> 固定滑动条</label>
-						</div>
-
-						<div>
-							<input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-breadcrumbs" />
-							<label class="lbl" for="ace-settings-breadcrumbs">固定面包屑</label>
-						</div>
-
-						<div>
-							<input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-rtl" />
-							<label class="lbl" for="ace-settings-rtl">切换到左边</label>
-						</div>
-
-						<div>
-							<input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-add-container" />
-							<label class="lbl" for="ace-settings-add-container">
-								切换窄屏
-								<b></b>
-							</label>
-						</div>
-					</div>
-				</div><!-- /#ace-settings-container -->
 			</div><!-- /.main-container-inner -->
 
 			<a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
@@ -439,26 +392,32 @@ String path2 = "";
 			 ///////////////////////////////////////////////
 			 //-------------------------------------------
 
-				var d11 = [1,2,3,4,5];
-				var d12 = [2,3,4,5,6];
-				var d13 = [5,6,7,8,9];
-				for (var i = 1; i < 6; i++) {
-					d11.push([i, 100]);
-					d12.push([i, 200]);
-					d13.push([i, 50]);
+				var d11 = [];
+				var ticks1 = [];
+				<%
+				System.out.println(11);
+				int max = 5;
+				List<Object[]> r = cardInfoService.findByLendExpireGradeGroup(10);
+				for(int i=0;i<r.size();i++){
+					out.println("d11.push([" + r.get(i)[0] + "," + r.get(i)[1] + "]);");
+					out.println("ticks1.push(" + r.get(i)[0] + ");");
+					
+					java.math.BigInteger x = (java.math.BigInteger)(r.get(i)[1]);
+					int v = x.intValue();
+					if(v > max)
+						max = v;
 				}
+				%>
 				var linechart = $('#linechart-placeholder1').css({'width':'100%' , 'height':'220px'});
 				$.plot("#linechart-placeholder1", [
-					{ label: "本科生", data: d11 },
-					{ label: "研究生", data: d12 },
-					{ label: "硕士生", data: d13 }
+					{ label: "借出未归还", data: d11 },
 				], {
 					//hoverable: true,
 					multiplebars:true,
 					shadowSize: 0,
 					series: {
 						lines: { show: true },
-						//points: { show: true },
+						points: { show: true },
 						/*bars: { show: true ,
 							 	align: "center",
 								horizontal: false,
@@ -470,16 +429,15 @@ String path2 = "";
 						}*/
 					},
 					xaxis: {
-						
+						ticks:ticks1,
 						tickLength: 5,
-						min:0,
-						max:5
+						tickDecimals: 0,
 					},
 					yaxis: {
 						min: 0,
-						max: 4000,
-						tickDecimals: 1,
-						tickSize:300,
+						max: <%=max%>,
+						tickDecimals: 0,
+						tickSize:5,
 
 					},
 					grid: {
@@ -490,31 +448,37 @@ String path2 = "";
 				});
 			 ///////////////////////////////////////////////
 			
-			
+		//	12121212
 			
 			///////////////////////////////////////////////
 			 //-------------------------------------------
-
-				var d11 = [1,2,3,4,5];
-				var d12 = [2,3,4,5,6];
-				var d13 = [5,6,7,8,9];
-				for (var i = 1; i < 6; i++) {
-					d11.push([i, 100]);
-					d12.push([i, 200]);
-					d13.push([i, 50]);
+				var d11 = [];
+				var ticks1 = [];
+				<%
+				max = 5;
+				r = cardInfoService.findByDetainedGradeGroup1("%");
+				System.out.println("----------------" + r.size());
+				
+				for(int i=0;i<r.size();i++){
+					out.println("d11.push([" + r.get(i)[0] + "," + r.get(i)[1] + "]);");
+					out.println("ticks1.push(" + r.get(i)[0] + ");");
+					
+					java.math.BigInteger x = (java.math.BigInteger)(r.get(i)[1]);
+					int v = x.intValue();
+					if(v > max)
+						max = v;
 				}
+				%>
 				var linechart2 = $('#linechart-placeholder2').css({'width':'100%' , 'height':'220px'});
 				$.plot("#linechart-placeholder2", [
-					{ label: "本科生", data: d11 },
-					{ label: "研究生", data: d12 },
-					{ label: "硕士生", data: d13 }
+					{ label: "滞留学生", data: d11 },
 				], {
 					//hoverable: true,
 					multiplebars:true,
 					shadowSize: 0,
 					series: {
 						lines: { show: true },
-						//points: { show: true },
+						points: { show: true },
 						/*bars: { show: true ,
 							 	align: "center",
 								horizontal: false,
@@ -526,16 +490,15 @@ String path2 = "";
 						}*/
 					},
 					xaxis: {
-						
+						ticks:ticks1,
 						tickLength: 5,
-						min:0,
-						max:5
+						tickDecimals: 0,
 					},
 					yaxis: {
 						min: 0,
-						max: 4000,
-						tickDecimals: 1,
-						tickSize:300,
+						max: <%=max%>,
+						tickDecimals: 0,
+						tickSize:5,
 
 					},
 					grid: {
@@ -546,52 +509,7 @@ String path2 = "";
 				});
 			 ///////////////////////////////////////////////
 			 
-			
-				var d1 = [];
-				for (var i = 0; i < Math.PI * 2; i += 0.5) {
-					d1.push([i, Math.sin(i)]);
-				}
-			
-				var d2 = [];
-				for (var i = 0; i < Math.PI * 2; i += 0.5) {
-					d2.push([i, Math.cos(i)]);
-				}
-			
-				var d3 = [];
-				for (var i = 0; i < Math.PI * 2; i += 0.2) {
-					d3.push([i, Math.tan(i)]);
-				}
-				
-			
-				var sales_charts = $('#sales-charts').css({'width':'100%' , 'height':'220px'});
-				$.plot("#sales-charts", [
-					{ label: "Domains", data: d1 },
-					{ label: "Hosting", data: d2 },
-					{ label: "Services", data: d3 }
-				], {
-					hoverable: true,
-					shadowSize: 0,
-					series: {
-						lines: { show: true },
-						points: { show: true }
-					},
-					xaxis: {
-						tickLength: 0
-					},
-					yaxis: {
-						ticks: 10,
-						min: -2,
-						max: 2,
-						tickDecimals: 3
-					},
-					grid: {
-						backgroundColor: { colors: [ "#fff", "#fff" ] },
-						borderWidth: 1,
-						borderColor:'#555'
-					}
-				});
-			
-			
+					
 				$('#recent-box [data-rel="tooltip"]').tooltip({placement: tooltip_placement});
 				function tooltip_placement(context, source) {
 					var $source = $(source);

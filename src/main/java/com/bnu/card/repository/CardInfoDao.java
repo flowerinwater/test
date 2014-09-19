@@ -42,6 +42,10 @@ public interface CardInfoDao extends PagingAndSortingRepository<CardInfo, Long>,
 	
 	public List findByDetainedGradeGroup(@Param("academa") String academe);
 	
+	public List findByDetainedGradeGroup1(@Param("academa") String academe);
+	
+	public List findByLendExpireGradeGroup(@Param("expiredays") int expiredays);
+	
 	///////////////
 	public List findByCardTypeGroup();
 	
