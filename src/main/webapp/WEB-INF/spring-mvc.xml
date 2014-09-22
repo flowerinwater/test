@@ -28,7 +28,7 @@
 	</bean>
 	
 	<!-- 定义无Controller的path<->view直接映射 -->
-	<mvc:view-controller path="/" view-name="redirect:/main3.jsp"/>
+	<mvc:view-controller path="/" view-name="redirect:/main4.jsp"/>
 	
 	
 	<bean id="multipartResolver"  
