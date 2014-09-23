@@ -85,18 +85,18 @@ public class CardInfoForm  extends BaseOperationForm {
 	public Date getBirthDay() {
 		return birthDay;
 	}
-	public void setBirthDay(String birthDay) {
-//		Calendar.getInstance() ;
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		Date bd = null;
-		try {
-			bd = sdf.parse(birthDay);
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		this.birthDay = bd;
-	}
+//	public void setBirthDay(String birthDay) {
+////		Calendar.getInstance() ;
+//		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+//		Date bd = null;
+//		try {
+//			bd = sdf.parse(birthDay);
+//		} catch (ParseException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		this.birthDay = bd;
+//	}
 	
 	public void setBirthDay(Date birthDay) {
 		this.birthDay = birthDay;

@@ -64,7 +64,7 @@ public class LendCardController {
 	@ResponseBody
 	public JsonSimpleResult jsonSaveCardInfoxx(@RequestBody CardInfoForm1 ci) {
 		log.info("jsonSaveCardInfoxx");
-		JsonSingleOjbectResult<CardInfoForm> lr = new JsonSingleOjbectResult<CardInfoForm>();
+		JsonSingleOjbectResult<CardInfoForm1> lr = new JsonSingleOjbectResult<CardInfoForm1>();
 
 		try {
 			CardInfo bi = new CardInfo();
@@ -79,7 +79,18 @@ public class LendCardController {
 				currUserId = cu.getId();
 			Date currDate = new Date();
 
+			if (ci.getId() != null && ci.getId().longValue() != 0l) {
+				bi.setUpdaterDate(currDate);
+				bi.setUpdaterId(currUserId);
+				bi.setUpdaterName(currUserName);
+			} else {
+				bi.setCreateDate(currDate);
+				bi.setCreatorId(currUserId);
+				bi.setCreatorName(currUserName);
+			}
+			ci.setId(cardInfoService.saveCardInfo(bi).getId());
 
+			lr.setObj(ci);
 			lr.setSuccess(true);
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -39,12 +39,13 @@ public class Filter {
 		try{
 //			JSONObject jsonObj = JSONObject.fromObject(s);
 //			Filter f = (Filter) JSONObject.toBean(jsonObj, Filter.class, map); //
-			
-			ObjectMapper om = new ObjectMapper();  
-			Filter f = om.readValue(s, Filter.class);
-			
-			this.groupOp = f.groupOp;
-			this.rules = f.rules;
+			if(s!=null && !s.equals("")){
+				ObjectMapper om = new ObjectMapper();  
+				Filter f = om.readValue(s, Filter.class);
+				
+				this.groupOp = f.groupOp;
+				this.rules = f.rules;
+			}
 			System.out.println(122);
 		}catch(Exception e){
 			e.printStackTrace();
