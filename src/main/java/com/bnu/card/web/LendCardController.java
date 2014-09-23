@@ -38,6 +38,7 @@ import com.bnu.card.util.JsonPageResult;
 import com.bnu.card.util.JsonSimpleResult;
 import com.bnu.card.util.JsonSingleOjbectResult;
 import com.bnu.card.web.form.CardInfoForm;
+import com.bnu.card.web.form.CardInfoForm1;
 import com.bnu.card.web.form.CardInfoSearchForm;
 import com.bnu.card.web.form.HistoryForm;
 import com.bnu.card.web.form.LendCardForm;
@@ -55,6 +56,41 @@ public class LendCardController {
 	private SysUserService sysUserService;
 	@Autowired
 	private BnuCodeService bnuCodeService;
+	
+	
+	
+	
+	@RequestMapping("/jsonSaveCardInfoxx1")
+	@ResponseBody
+	public JsonSimpleResult jsonSaveCardInfoxx(@RequestBody CardInfoForm1 ci) {
+		log.info("jsonSaveCardInfoxx");
+		JsonSingleOjbectResult<CardInfoForm> lr = new JsonSingleOjbectResult<CardInfoForm>();
+
+		try {
+			CardInfo bi = new CardInfo();
+			BeanUtilEx.copyProperties(bi, ci);
+
+			String currUserName = DefaultValue.getCurrentUserName();
+			System.out.println("currUserName:" + currUserName);
+			Long currUserId = -1l;
+			;
+			SysUser cu = sysUserService.findOneSysUserByLoginName(currUserName);
+			if (cu != null)
+				currUserId = cu.getId();
+			Date currDate = new Date();
+
+
+			lr.setSuccess(true);
+		} catch (Exception e) {
+			e.printStackTrace();
+			lr.setSuccess(false);
+			lr.setMsg(e.getMessage());
+		}
+
+		return lr;
+	}
+	
+	
 	
     @RequestMapping("/jsonsavelendCard")
     @ResponseBody

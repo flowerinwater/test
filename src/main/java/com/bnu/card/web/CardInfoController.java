@@ -78,11 +78,54 @@ public class CardInfoController {
 	private SysUserService sysUserService;
 	@Autowired
 	private BnuCodeService bnuCodeService;
+	
+	
+	@RequestMapping("/jsonSaveCardInfoxx")
+	@ResponseBody
+	public JsonSimpleResult jsonSaveCardInfoxx(@RequestBody CardInfoForm ci) {
+		log.info("jsonSaveCardInfoxx");
+		JsonSingleOjbectResult<CardInfoForm> lr = new JsonSingleOjbectResult<CardInfoForm>();
 
-	@RequestMapping("/jsonsavecardInfo")
+		try {
+			CardInfo bi = new CardInfo();
+			BeanUtilEx.copyProperties(bi, ci);
+
+			String currUserName = DefaultValue.getCurrentUserName();
+			System.out.println("currUserName:" + currUserName);
+			Long currUserId = -1l;
+			;
+			SysUser cu = sysUserService.findOneSysUserByLoginName(currUserName);
+			if (cu != null)
+				currUserId = cu.getId();
+			Date currDate = new Date();
+
+			if (ci.getId() != null && ci.getId().longValue() != 0l) {
+				bi.setUpdaterDate(currDate);
+				bi.setUpdaterId(currUserId);
+				bi.setUpdaterName(currUserName);
+			} else {
+				bi.setCreateDate(currDate);
+				bi.setCreatorId(currUserId);
+				bi.setCreatorName(currUserName);
+			}
+			ci.setId(cardInfoService.saveCardInfo(bi).getId());
+
+			lr.setObj(ci);
+			lr.setSuccess(true);
+		} catch (Exception e) {
+			e.printStackTrace();
+			lr.setSuccess(false);
+			lr.setMsg(e.getMessage());
+		}
+
+		return lr;
+	}
+	
+
+	@RequestMapping(value="/jsonsavecardInfo", method = RequestMethod.POST ,consumes="application/json")
 	@ResponseBody
 	public JsonSimpleResult jsonSaveCardInfo(@RequestBody CardInfoForm ci) {
-		log.info("jsonsavecardInfo");
+		log.info("jsonsavecardInfo1");
 		JsonSingleOjbectResult<CardInfoForm> lr = new JsonSingleOjbectResult<CardInfoForm>();
 
 		try {

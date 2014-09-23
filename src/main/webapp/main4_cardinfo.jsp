@@ -49,7 +49,7 @@ String path2 = "卡信息登记";
 																</div>
 
 																<div class="form-group">
-																	<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="name">名称:</label>
+																	<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="name">名称*:</label>
 
 																	<div class="col-xs-12 col-sm-9">
 																		<div class="clearfix">
@@ -58,19 +58,63 @@ String path2 = "卡信息登记";
 																	</div>
 																</div>
 
+																<div class="space-2"></div>
+
+																<div class="form-group">
+																	<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="gender">性别*:</label>
+
+																	<div class="col-xs-12 col-sm-9">
+																		<div class="clearfix">
+																			<input type="text" name="gender" id="gender" class="col-xs-12 col-sm-4" />
+																		</div>
+																	</div>
+																</div>
+																<div class="form-group">
+																	<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="identityCard">身份证*:</label>
+
+																	<div class="col-xs-12 col-sm-9">
+																		<div class="clearfix">
+																			<input type="text" name="identityCard" id="identityCard" class="col-xs-12 col-sm-4" />
+																		</div>
+																	</div>
+																</div>
+																<div class="form-group">
+																	<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="academe">服务处所(院系所)*:</label>
+
+																	<div class="col-xs-12 col-sm-9">
+																		<div class="clearfix">
+																			<input type="text" name="academe" id="academe" class="col-xs-12 col-sm-4" />
+																		</div>
+																	</div>
+																</div>
+																<div class="form-group">
+																	<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="job">职业(卡类型)*:</label>
+
+																	<div class="col-xs-12 col-sm-9">
+																		<div class="clearfix">
+																			<input type="text" name="job" id="job" class="col-xs-12 col-sm-4" />
+																		</div>
+																	</div>
+																</div>
+																<div class="form-group">
+																	<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="address">本市(县)其他住址*:</label>
+
+																	<div class="col-xs-12 col-sm-9">
+																		<div class="clearfix">
+																			<input type="text" name="address" id="address" class="col-xs-12 col-sm-4" />
+																		</div>
+																	</div>
+																</div>
+																<div class="space-2"></div>
 																<div class="form-group">
 																	<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="cardOwner">户主或与户主关系:</label>
 
 																	<div class="col-xs-12 col-sm-9">
 																		<div class="clearfix">
-																			<input type="text" name="cardOwner" id="cardOwner"  readOnly class="col-xs-12 col-sm-4" />
+																			<input type="text" name="cardOwner" id="cardOwner" class="col-xs-12 col-sm-4" />
 																		</div>
 																	</div>
 																</div>
-
-																
-																<div class="space-2"></div>
-
 																<div class="form-group">
 																	<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="oldName">曾用名:</label>
 
@@ -81,18 +125,7 @@ String path2 = "卡信息登记";
 																	</div>
 																</div>
 
-																<div class="space-2"></div>
 
-																<div class="form-group">
-																	<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="gender">性别:</label>
-
-																	<div class="col-xs-12 col-sm-9">
-																		<div class="clearfix">
-																			<input type="text" name="gender" id="gender" class="col-xs-12 col-sm-4" />
-																		</div>
-																	</div>
-																</div>
-																
 																<div class="space-2"></div>
 
 																<div class="form-group">
@@ -135,15 +168,6 @@ String path2 = "卡信息登记";
 																	</div>
 																</div>
 																
-																<div class="form-group">
-																	<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="address">本市(县)其他住址:</label>
-
-																	<div class="col-xs-12 col-sm-9">
-																		<div class="clearfix">
-																			<input type="text" name="address" id="address" class="col-xs-12 col-sm-4" />
-																		</div>
-																	</div>
-																</div>
 																
 																<div class="form-group">
 																	<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="belief">宗教信仰:</label>
@@ -155,15 +179,6 @@ String path2 = "卡信息登记";
 																	</div>
 																</div>
 																
-																<div class="form-group">
-																	<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="identityCard">身份证:</label>
-
-																	<div class="col-xs-12 col-sm-9">
-																		<div class="clearfix">
-																			<input type="text" name="identityCard" id="identityCard" class="col-xs-12 col-sm-4" />
-																		</div>
-																	</div>
-																</div>
 																
 																<div class="form-group">
 																	<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="height">身高:</label>
@@ -215,24 +230,7 @@ String path2 = "卡信息登记";
 																	</div>
 																</div>
 																
-																<div class="form-group">
-																	<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="academe">服务处所(院系所):</label>
-
-																	<div class="col-xs-12 col-sm-9">
-																		<div class="clearfix">
-																			<input type="text" name="academe" id="academe" class="col-xs-12 col-sm-4" />
-																		</div>
-																	</div>
-																</div>
-																<div class="form-group">
-																	<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="job">职业(卡类型):</label>
-
-																	<div class="col-xs-12 col-sm-9">
-																		<div class="clearfix">
-																			<input type="text" name="job" id="job" class="col-xs-12 col-sm-4" />
-																		</div>
-																	</div>
-																</div>
+																
 																<div class="form-group">
 																	<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="originStudent">生源地:</label>
 
@@ -296,7 +294,7 @@ String path2 = "卡信息登记";
 
 																	<div class="col-xs-12 col-sm-9">
 																		<div class="clearfix">
-																			<input type="text" readonly="" name="updaterDate" id="updaterDate" class="col-xs-12 col-sm-4" value="1"/>
+																			<input type="text" readonly="" name="updaterDate" id="updaterDate" class="col-xs-12 col-sm-4"/>
 																		</div>
 																	</div>
 																</div>
@@ -466,7 +464,7 @@ String path2 = "卡信息登记";
 //					frmDataObj.militarySituation  = $('#militarySituation').combobox('getValue');
 //					frmDataObj.job = $('#job').combobox('getValue');
 			
-					var urlcardInfo = '${ctx}/jsonsavecardInfo';  
+					var urlcardInfo = '${ctx}/jsonSaveCardInfoxx1';  
 					var frmDataStr = JSON.stringify(frmDataObj);
 					$.ajax({
 						type:'POST',
@@ -476,7 +474,7 @@ String path2 = "卡信息登记";
 						dataType: 'json',
 						contentType : 'application/json',
 						success: function(result){  
-							//alert(result);
+							alert(result);
 							//var result = eval('('+result+')');  
 							if (!result.success){  
 								$.messager.show({  
