@@ -4,7 +4,7 @@
 
 <%
 String path1 = "系统管理";
-String path2 = "学生情况查询";
+String path2 = "学生户籍卡信息登记";
 %>
 <%@ include  file="header.jsp"%>
 
@@ -206,7 +206,7 @@ String path2 = "学生情况查询";
 
 															<div class="col-xs-12 col-sm-9">
 																<div class="clearfix">
-																	<input type="text" name="birthDay" id="birthDay" class="col-xs-12 col-sm-9" />
+																	<input type="text" name="birthDay" id="birthDay" class="col-xs-12 col-sm-9"/><span class="label label-warning">YYYY-MM-DD</span>
 																</div>
 															</div>
 														</div>
@@ -340,7 +340,7 @@ String path2 = "学生情况查询";
 
 															<div class="col-xs-12 col-sm-9">
 																<div class="clearfix">
-																	<input type="text"  readonly="" name="createDate" id="createDate" class="col-xs-12 col-sm-9" />
+																	<input type="text"  readonly="" name="createDate" id="createDate" class="col-xs-12 col-sm-9" /><span class="label label-warning">YYYY-MM-DD</span>
 																</div>
 															</div>
 														</div>
@@ -354,9 +354,139 @@ String path2 = "学生情况查询";
 																</div>
 															</div>
 														</div>
+														<div class="form-group">
+															<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="updaterName">最后修改日期:</label>
+
+															<div class="col-xs-12 col-sm-9">
+																<div class="clearfix">
+																	<input type="text"  readonly="" name="updaterDate" id="updaterDate" class="col-xs-12 col-sm-9" />
+																</div>
+															</div>
+														</div>
 														
 														
 														
+														<div class="space-2"></div>
+														<div class="form-group">
+															<div class="col-xs-12 col-sm-12">
+																<center>
+																<button class="btn btn-info" type="submit">
+																	<i class="icon-ok bigger-110"></i>
+																	确定
+																</button>
+					
+																&nbsp; &nbsp; &nbsp;
+																<button class="btn" type="reset">
+																	<i class="icon-undo bigger-110"></i>
+																	重置
+																</button>
+																</center>
+															</div>
+														</div>
+
+														
+														<div class="space-2"></div>
+														<div class="form-group">
+															<div class=" col-xs-12 col-sm-12">
+																<div class="alert alert-info">
+																	<button type="button" class="close" data-dismiss="alert">
+																		<i class="icon-remove"></i>
+																	</button>
+																	<strong>提交成功</strong>
+																	<span>
+																	This alert needs your attention, but it's not super important.
+																	</span>
+																	<br />
+																</div>
+																
+																<div class="alert alert-danger">
+																	<button type="button" class="close" data-dismiss="alert">
+																		<i class="icon-remove"></i>
+																	</button>
+						
+																	<strong>
+																		<i class="icon-remove"></i>
+																		注意！
+																	</strong>
+																	<span>
+																	输入信息有误，请调整后提交。
+																	</span>
+																	<br />
+																</div>
+															</div>
+														</div>
+													</form>
+									</div>
+									
+									
+								</div></div>
+							</div>
+								
+					<!------------------------------------>			
+					
+					<div id="dlgMigrate" class="modal fade in">
+								<div class="modal-dialog"><div class="modal-content">
+
+
+								
+									<div class="modal-header">
+									<a class="close" data-dismiss="modal">×</a>
+									<h3>迁出信息</h3>
+									</div>
+									
+									<div class="modal-body">
+												<form class="form-horizontal" id="fmMigrate"  method="post" contentType="application/json">
+														<div class="form-group">
+															<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="id">ID</label>
+
+															<div class="col-xs-12 col-sm-9">
+																<div class="clearfix">
+																	<input type="text" name="id" id="id" readOnly class="col-xs-12 col-sm-9" />
+																	<input id="cardId" name="cardId" type="hidden"> 
+																</div>
+															</div>
+														</div>
+
+														<div class="form-group">
+															<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="name">名称*:</label>
+
+															<div class="col-xs-12 col-sm-9">
+																<div class="clearfix">
+																	<input type="text" name="name" id="name" class="col-xs-12 col-sm-9" />
+																</div>
+															</div>
+														</div>
+														
+														<div class="form-group">
+															<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="name">迁出日期*:</label>
+
+															<div class="col-xs-12 col-sm-9">
+																<div class="clearfix">
+																	<input type="text" name="migrateDate" id="migrateDate" class="col-xs-12 col-sm-9" /><span class="label label-warning">YYYY-MM-DD</span>
+																</div>
+															</div>
+														</div>
+														
+														<div class="form-group">
+															<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="name">迁移目的地*:</label>
+
+															<div class="col-xs-12 col-sm-9">
+																<div class="clearfix">
+																	<input type="text" name="migratePlace" id="migratePlace" class="col-xs-12 col-sm-9" />
+																</div>
+															</div>
+														</div>
+														
+														<div class="form-group">
+															<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="name">备注*:</label>
+
+															<div class="col-xs-12 col-sm-9">
+																<div class="clearfix">
+																	<input type="text" name="memo" id="memo" class="col-xs-12 col-sm-9" />
+																</div>
+															</div>
+														</div>
+
 														<div class="space-2"></div>
 														<div class="form-group">
 															<div class="col-xs-12 col-sm-12">
@@ -383,7 +513,211 @@ String path2 = "学生情况查询";
 								</div></div>
 							</div>
 								
-					<!------------------------------------>			
+					<!------------------------------------>		
+					
+					<div id="dlgReturn" class="modal fade in">
+								<div class="modal-dialog"><div class="modal-content">
+									<div class="modal-header">
+									<a class="close" data-dismiss="modal">×</a>
+									<h3>归还信息</h3>
+									</div>
+									
+									<div class="modal-body">
+												<form class="form-horizontal" id="fmReturn"  method="post" contentType="application/json">
+														<div class="form-group">
+															<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="id">ID</label>
+
+															<div class="col-xs-12 col-sm-9">
+																<div class="clearfix">
+																	<input type="text" name="id" id="id" readOnly class="col-xs-12 col-sm-9" />
+																	<input id="cardId" name="cardId" type="hidden"> 
+																</div>
+															</div>
+														</div>
+
+														<div class="form-group">
+															<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="name">名称*:</label>
+
+															<div class="col-xs-12 col-sm-9">
+																<div class="clearfix">
+																	<input type="text" name="name" id="name" class="col-xs-12 col-sm-9" />
+																</div>
+															</div>
+														</div>
+														
+														<!--
+														<div class="form-group">
+															<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="name">借出日期*:</label>
+
+															<div class="col-xs-12 col-sm-9">
+																<div class="clearfix">
+																	<input type="text" name="lendDate" id="lendDate" class="col-xs-12 col-sm-9" /><span class="label label-warning">YYYY-MM-DD</span>
+																</div>
+															</div>
+														</div>
+														
+														<div class="form-group">
+															<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="name">预计归还日期*:</label>
+
+															<div class="col-xs-12 col-sm-9">
+																<div class="clearfix">
+																	<input type="text" name="toReturnDate" id="toReturnDate" class="col-xs-12 col-sm-9" /><span class="label label-warning">YYYY-MM-DD</span>
+																</div>
+															</div>
+														</div>
+														-->
+														<div class="form-group">
+															<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="name">实际归还日期*:</label>
+
+															<div class="col-xs-12 col-sm-9">
+																<div class="clearfix">
+																	<input type="text" name="returnDate" id="returnDate" class="col-xs-12 col-sm-9" /><span class="label label-warning">YYYY-MM-DD</span>
+																</div>
+															</div>
+														</div>
+														
+														<div class="form-group">
+															<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="name">备注*:</label>
+
+															<div class="col-xs-12 col-sm-9">
+																<div class="clearfix">
+																	<input type="text" name="memo" id="memo" class="col-xs-12 col-sm-9" />
+																</div>
+															</div>
+														</div>
+
+														<div class="space-2"></div>
+														<div class="form-group">
+															<div class="col-xs-12 col-sm-12">
+																<center>
+																<button class="btn btn-info" type="submit">
+																	<i class="icon-ok bigger-110"></i>
+																	确定
+																</button>
+					
+																&nbsp; &nbsp; &nbsp;
+																<button class="btn" type="reset">
+																	<i class="icon-undo bigger-110"></i>
+																	重置
+																</button>
+																</center>
+															</div>
+														</div>
+
+														
+													</form>
+									</div>
+									
+									
+								</div></div>
+							</div>
+								
+					<!------------------------------------>		
+						<div id="dlgLend" class="modal fade in">
+								<div class="modal-dialog"><div class="modal-content">
+									<div class="modal-header">
+									<a class="close" data-dismiss="modal">×</a>
+									<h3>借出信息</h3>
+									</div>
+									
+									<div class="modal-body">
+												<form class="form-horizontal" id="fmLend"  method="post" contentType="application/json">
+														<div class="form-group">
+															<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="id">ID</label>
+
+															<div class="col-xs-12 col-sm-9">
+																<div class="clearfix">
+																	<input type="text" name="id" id="id" readOnly class="col-xs-12 col-sm-9" />
+																	<input id="cardId" name="cardId" type="hidden"> 
+																</div>
+															</div>
+														</div>
+
+														<div class="form-group">
+															<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="name">名称*:</label>
+
+															<div class="col-xs-12 col-sm-9">
+																<div class="clearfix">
+																	<input type="text" name="name" id="name" class="col-xs-12 col-sm-9" />
+																</div>
+															</div>
+														</div>
+														
+														<div class="form-group">
+															<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="name">借出日期*:</label>
+
+															<div class="col-xs-12 col-sm-9">
+																<div class="clearfix">
+																	<input type="text" name="lendDate" id="lendDate" class="col-xs-12 col-sm-9" /><span class="label label-warning">YYYY-MM-DD</span>
+																</div>
+															</div>
+														</div>
+														
+														<div class="form-group">
+															<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="name">预计归还日期*:</label>
+
+															<div class="col-xs-12 col-sm-9">
+																<div class="clearfix">
+																	<input type="text" name="toReturnDate" id="toReturnDate" class="col-xs-12 col-sm-9" /><span class="label label-warning">YYYY-MM-DD</span>
+																</div>
+															</div>
+														</div>
+														<div class="form-group">
+															<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="name">移动电话*:</label>
+
+															<div class="col-xs-12 col-sm-9">
+																<div class="clearfix">
+																	<input type="text" name="mobile" id="mobile" class="col-xs-12 col-sm-9" />
+																</div>
+															</div>
+														</div>
+														<div class="form-group">
+															<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="name">住宅电话*:</label>
+
+															<div class="col-xs-12 col-sm-9">
+																<div class="clearfix">
+																	<input type="text" name="tel" id="tel" class="col-xs-12 col-sm-9" />
+																</div>
+															</div>
+														</div>
+														
+														<div class="form-group">
+															<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="name">备注*:</label>
+
+															<div class="col-xs-12 col-sm-9">
+																<div class="clearfix">
+																	<input type="text" name="memo" id="memo" class="col-xs-12 col-sm-9" />
+																</div>
+															</div>
+														</div>
+
+														<div class="space-2"></div>
+														<div class="form-group">
+															<div class="col-xs-12 col-sm-12">
+																<center>
+																<button class="btn btn-info" type="submit">
+																	<i class="icon-ok bigger-110"></i>
+																	确定
+																</button>
+					
+																&nbsp; &nbsp; &nbsp;
+																<button class="btn" type="reset">
+																	<i class="icon-undo bigger-110"></i>
+																	重置
+																</button>
+																</center>
+															</div>
+														</div>
+
+														
+													</form>
+									</div>
+									
+									
+								</div></div>
+							</div>
+								
+					<!------------------------------------>		
 
 					<div class="page-content">
 						<div class="page-header">
@@ -488,20 +822,21 @@ String path2 = "学生情况查询";
 		<script src="${ctx}/assets/js/ace-elements.min.js"></script>
 		<script src="${ctx}/assets/js/ace.min.js"></script>
 		<script src="${ctx}/assets/js/select2.min.js"></script>
-		<script src="assets/js/jquery.validate.min.js"></script>
-		<script src="assets/js/bootbox.min.js"></script>
+		<script src="${ctx}/assets/js/jquery.validate.min.js"></script>
+		<script src="${ctx}/assets/js/bootbox.min.js"></script>
+		<script src="${ctx}/assets/js/date-time/bootstrap-datepicker.min.js"></script>
 
 		<!-- inline scripts related to this page -->
 
 		
 		<script type="text/javascript">
-			function fillForm(obj){
+			function fillForm(frmId,obj){
 				for(var attr in obj){
             
           if(typeof(obj[attr])=='function'){                    
             continue;
           }
-          var $input = $("#fmCardInfo    :input[name='"+attr+"']");
+          var $input = $("#" + frmId + "    :input[name='"+attr+"']");
           var type = $input.attr("type");                
           if(type=="checkbox" ||type=="radio"){
                 
@@ -542,8 +877,45 @@ String path2 = "学生情况查询";
 				 
 				 
 				 
-				$("#name").val('');
+				//$("#fmCardInfo #name").val('');
 				$("#addDlg").modal();
+			}
+			
+			function removeCardInfo(id){
+				$.ajax({
+					type:'POST',
+					async:false,
+					url:'${ctx}/jsonremovecardInfobyid?id='+id,
+					dataType: 'json',
+					contentType : 'application/json',
+					success: function(result){  
+						//alert(result.success);
+						//var result = eval('('+result+')');  
+						if (!result.success){  
+								bootbox.dialog({
+									message: "删除失败：" + result.msg, 
+									buttons: {
+										"success" : {
+											"label" : "OK",
+											"className" : "btn-sm btn-primary"
+										}
+									}
+								});
+						} else {       
+							bootbox.dialog({
+									message: "删除成功!", 
+									buttons: {
+										"success" : {
+											"label" : "OK",
+											"className" : "btn-sm btn-primary"
+										}
+									}
+								});
+								           
+							jQuery("#grid-table").jqGrid().trigger("reloadGrid");   
+						}
+					}  
+				});		
 			}
 
 			function editDlgShow(id){
@@ -589,10 +961,10 @@ String path2 = "学生情况查询";
 		
 								if (row){
 									//$('#fmCardInfo').form('load',row);
-									fillForm(row);
+									fillForm("fmCardInfo",row);
 									$("#addDlg").modal();
 									//jQuery("#grid-table").jqGrid("setGridParam",jQuery("#grid-table").jqGrid("getGridParam","url")).trigger("reloadGrid");
-									jQuery("#grid-table").jqGrid().trigger("reloadGrid");
+									//jQuery("#grid-table").jqGrid().trigger("reloadGrid");
 								}else{
 									bootbox.dialog({
 										message: "请选择一行记录", 
@@ -608,6 +980,207 @@ String path2 = "学生情况查询";
 						}  
 					});
 			}
+			
+			
+			function addMigrageCard(id){ 
+					$("#fmMigrate").find(':input').each(  
+	            function(){  
+	                switch(this.type){ 
+	                    case 'passsword':  
+	                    case 'select-multiple':  
+	                    case 'select-one':  
+	                    case 'text':  
+	                    case 'textarea':  
+	                        $(this).val('');  
+	                        break;  
+	                    case 'checkbox':  
+	                    case 'radio':  
+	                        this.checked = false;  
+	                }  
+	            }     
+	        ); 
+				
+					$.ajax({
+						type:'POST',
+						async:false,
+						url:'${ctx}/jsonfindcardInfobyid?id='+id,
+						data:'',
+						dataType: 'json',
+						contentType : 'application/json',
+						success: function(result){  
+							//alert(result);
+							//var result = eval('('+result+')');  
+							if (!result.success){  
+								bootbox.dialog({
+										message: "获取数据失败【" + id + "】：" + result.msg , 
+										buttons: {
+											"success" : {
+												"label" : "OK",
+												"className" : "btn-sm btn-primary"
+											}
+										}
+									});
+							} else {  
+								var row= result.obj;
+		
+								if (row){
+									fillForm("fmMigrate",row);
+									$('#fmMigrate #id').val("");
+									$('#fmMigrate #cardId').val(row.id);
+									$('#fmMigrate #memo').val("");
+									$("#dlgMigrate").modal();
+									//jQuery("#grid-table").jqGrid("setGridParam",jQuery("#grid-table").jqGrid("getGridParam","url")).trigger("reloadGrid");
+									//jQuery("#grid-table").jqGrid().trigger("reloadGrid");
+								}else{
+									bootbox.dialog({
+										message: "请选择一行记录", 
+										buttons: {
+											"success" : {
+												"label" : "OK",
+												"className" : "btn-sm btn-primary"
+											}
+										}
+									});
+								} 
+							}
+						}  
+					}); 
+			} 
+			
+			function addReturnCard(id){ 
+					$("#fmReturn").find(':input').each(  
+	            function(){  
+	                switch(this.type){ 
+	                    case 'passsword':  
+	                    case 'select-multiple':  
+	                    case 'select-one':  
+	                    case 'text':  
+	                    case 'textarea':  
+	                        $(this).val('');  
+	                        break;  
+	                    case 'checkbox':  
+	                    case 'radio':  
+	                        this.checked = false;  
+	                }  
+	            }     
+	        ); 
+	        
+				  	
+					$.ajax({
+						type:'POST',
+						async:false,
+						url:'${ctx}/jsonfindcardInfobyid?id='+id,
+						data:'',
+						dataType: 'json',
+						contentType : 'application/json',
+						success: function(result){  
+							//alert(result);
+							//var result = eval('('+result+')');  
+							if (!result.success){  
+								bootbox.dialog({
+										message: "获取数据失败【" + id + "】：" + result.msg , 
+										buttons: {
+											"success" : {
+												"label" : "OK",
+												"className" : "btn-sm btn-primary"
+											}
+										}
+									});
+							} else {  
+								var row= result.obj;
+		
+								if (row){
+									fillForm("fmReturn",row);
+									$('#fmReturn #id').val("");
+									$('#fmReturn #cardId').val(row.id);
+									$('#fmReturn #memo').val("");
+									
+									$("#dlgReturn").modal();
+									//jQuery("#grid-table").jqGrid("setGridParam",jQuery("#grid-table").jqGrid("getGridParam","url")).trigger("reloadGrid");
+									//jQuery("#grid-table").jqGrid().trigger("reloadGrid");
+								}else{
+									bootbox.dialog({
+										message: "请选择一行记录", 
+										buttons: {
+											"success" : {
+												"label" : "OK",
+												"className" : "btn-sm btn-primary"
+											}
+										}
+									});
+								} 
+							}
+						}  
+					}); 
+				} 
+				
+				function addLendCard(id){ 
+					$("#fmLend").find(':input').each(  
+	            function(){  
+	                switch(this.type){ 
+	                    case 'passsword':  
+	                    case 'select-multiple':  
+	                    case 'select-one':  
+	                    case 'text':  
+	                    case 'textarea':  
+	                        $(this).val('');  
+	                        break;  
+	                    case 'checkbox':  
+	                    case 'radio':  
+	                        this.checked = false;  
+	                }  
+	            }     
+	        ); 
+	        
+				  	
+					$.ajax({
+						type:'POST',
+						async:false,
+						url:'${ctx}/jsonfindcardInfobyid?id='+id,
+						data:'',
+						dataType: 'json',
+						contentType : 'application/json',
+						success: function(result){  
+							//alert(result);
+							//var result = eval('('+result+')');  
+							if (!result.success){  
+								bootbox.dialog({
+										message: "获取数据失败【" + id + "】：" + result.msg , 
+										buttons: {
+											"success" : {
+												"label" : "OK",
+												"className" : "btn-sm btn-primary"
+											}
+										}
+									});
+							} else {  
+								var row= result.obj;
+		
+								if (row){
+									fillForm("fmLend",row);
+									$('#fmLend #id').val("");
+									$('#fmLend #cardId').val(row.id);
+									$('#fmLend #memo').val("");
+									
+									$("#dlgLend").modal();
+								}else{
+									bootbox.dialog({
+										message: "请选择一行记录", 
+										buttons: {
+											"success" : {
+												"label" : "OK",
+												"className" : "btn-sm btn-primary"
+											}
+										}
+									});
+								} 
+							}
+						}  
+					}); 
+				} 
+					
+					
+					/////////////////////////////////////////////////
 			
 			jQuery(function($) {
 				function saveCardInfo(){
@@ -643,9 +1216,9 @@ String path2 = "学生情况查询";
 							//var result = eval('('+result+')');  
 							if (!result.success){
 								//alert(1)  
-								$('.alert-danger span').val(result.msg);
+								$('#fmCardInfo .alert-danger span').val(result.msg);
 								//alert(2)
-								$('.alert-danger').show();
+								$('#fmCardInfo .alert-danger').show();
 								/*
 								$.messager.show({  
 									title: 'Error',  
@@ -654,18 +1227,135 @@ String path2 = "学生情况查询";
 							} else {
 								$("#addDlg").modal("hide");   
 								bootbox.dialog({
-										message: "卡片【" + $("#name").val() + "】保存成功。", 
+										message: "卡片【" + $("#fmCardInfo #name").val() + "】保存成功。", 
 										buttons: {
 											"success" : {
 												"label" : "OK",
 												"className" : "btn-sm btn-primary"
 											}
 										}
-									});									                 
+									});			
+									jQuery("#grid-table").jqGrid().trigger("reloadGrid");						                 
 							}
 						}  
 					});		    
 				}  
+				
+				
+					function saveMigrateCard(){
+						var frmDataObj = $('#fmMigrate').serializeObject();
+						//frmDataObj.status = $('#status').combobox('getValue');
+						var frmDataStr = JSON.stringify(frmDataObj);
+						$.ajax({
+							type:'POST',
+							async:false,
+							url:'${ctx}/jsonsavemigrateCard',
+							data:frmDataStr,
+							dataType: 'json',
+							contentType : 'application/json',
+							success: function(result){  
+								//alert(result);
+								//var result = eval('('+result+')');  
+								if (!result.success){
+									//alert(result.msg)  
+									$('#fmMigrate .alert-danger span').val(result.msg);
+									//alert(2)
+									$('#fmMigrate .alert-danger').show();
+									/*
+									$.messager.show({  
+										title: 'Error',  
+										msg: result.msg  
+									});*/  
+								} else {
+									$("#dlgMigrate").modal("hide");   
+									bootbox.dialog({
+											message: "卡片【" + $("#fmMigrate #name").val() + "】保存成功。", 
+											buttons: {
+												"success" : {
+													"label" : "OK",
+													"className" : "btn-sm btn-primary"
+												}
+											}
+										});								
+										jQuery("#grid-table").jqGrid().trigger("reloadGrid");	                 
+								}
+							}  
+						});		    
+					}
+					
+				function saveReturnCard(){
+					var frmDataObj = $('#fmReturn').serializeObject();
+					//frmDataObj.status = $('#status').combobox('getValue');
+					var frmDataStr = JSON.stringify(frmDataObj);
+					$.ajax({
+						type:'POST',
+						async:false,
+						url:'${ctx}/jsonsavereturnCard',
+						data:frmDataStr,
+						dataType: 'json',
+						contentType : 'application/json',
+						success: function(result){  
+								//alert(result);
+								//var result = eval('('+result+')');  
+								if (!result.success){
+									//alert(result.msg)  
+									$('#fmReturn .alert-danger span').val(result.msg);
+									//alert(2)
+									$('#fmReturn .alert-danger').show();
+									
+								} else {
+									$("#dlgReturn").modal("hide");   
+									bootbox.dialog({
+											message: "卡片【" + $("#fmReturn #name").val() + "】保存成功。", 
+											buttons: {
+												"success" : {
+													"label" : "OK",
+													"className" : "btn-sm btn-primary"
+												}
+											}
+										});								
+										jQuery("#grid-table").jqGrid().trigger("reloadGrid");	                 
+								}
+							}  
+					});		    
+				}
+				
+				function saveLendCard(){
+					var frmDataObj = $('#fmLend').serializeObject();
+					//frmDataObj.status = $('#status').combobox('getValue');
+					var frmDataStr = JSON.stringify(frmDataObj);
+					$.ajax({
+						type:'POST',
+						async:false,
+						url:'${ctx}/jsonsavelendCard',
+						data:frmDataStr,
+						dataType: 'json',
+						contentType : 'application/json',
+						success: function(result){  
+								//alert(result);
+								//var result = eval('('+result+')');  
+								if (!result.success){
+									//alert(result.msg)  
+									$('#fmLend .alert-danger span').val(result.msg);
+									//alert(2)
+									$('#fmLend .alert-danger').show();
+									
+								} else {
+									$("#dlgLend").modal("hide");   
+									bootbox.dialog({
+											message: "卡片【" + $("#fmLend #name").val() + "】保存成功。", 
+											buttons: {
+												"success" : {
+													"label" : "OK",
+													"className" : "btn-sm btn-primary"
+												}
+											}
+										});								
+										jQuery("#grid-table").jqGrid().trigger("reloadGrid");	                 
+								}
+							}  
+					});		    
+				}
 			
 				$.fn.serializeObject = function() {
 					var o = {};
@@ -686,6 +1376,8 @@ String path2 = "学生情况查询";
 				
 				$('.alert-danger').hide();
 				$('.alert-info').hide();
+				
+				
 				$('#fmCardInfo').validate({
 					errorElement: 'div',
 					errorClass: 'help-block',
@@ -733,7 +1425,7 @@ String path2 = "学生情况查询";
 					},
 			
 					invalidHandler: function (event, validator) { //display error alert on form submit   
-						$('.alert-danger', $('.login-form')).show();
+						$('#fmCardInfo .alert-danger', $('.login-form')).show();
 					},
 			
 					highlight: function (e) {
@@ -767,7 +1459,231 @@ String path2 = "学生情况查询";
 					invalidHandler: function (form) {
 					}
 				});
+				
+				$('#fmMigrate').validate({
+					errorElement: 'div',
+					errorClass: 'help-block',
+					focusInvalid: false,
+					rules:{ 
+						name: {
+							required: true,
+						},
+						migrateDate: {
+							required: true,
+						},
+						migratePlace: {
+							required: true,
+						},
+						memo: {
+							required: true,
+						},
+					},
 			
+					messages: {
+						name: {
+							required: "请输入名称.",
+						},
+						migrateDate: {
+							required: "请输入迁出日期.",
+						},
+						migratePlace: {
+							required: "请输入迁移目的地.",
+						},
+						memo: {
+							required: "请输入备注.",
+						},
+					},
+			
+					invalidHandler: function (event, validator) { //display error alert on form submit   
+						$('.alert-danger', $('.login-form')).show();
+					},
+			
+					highlight: function (e) {
+						$(e).closest('.form-group').removeClass('has-info').addClass('has-error');
+					},
+			
+					success: function (e) {
+						$(e).closest('.form-group').removeClass('has-error').addClass('has-info');
+						$(e).remove();
+					},
+			
+					errorPlacement: function (error, element) {
+						if(element.is(':checkbox') || element.is(':radio')) {
+							var controls = element.closest('div[class*="col-"]');
+							if(controls.find(':checkbox,:radio').length > 1) controls.append(error);
+							else error.insertAfter(element.nextAll('.lbl:eq(0)').eq(0));
+						}
+						else if(element.is('.select2')) {
+							error.insertAfter(element.siblings('[class*="select2-container"]:eq(0)'));
+						}
+						else if(element.is('.chosen-select')) {
+							error.insertAfter(element.siblings('[class*="chosen-container"]:eq(0)'));
+						}
+						else error.insertAfter(element.parent());
+					},
+			
+					submitHandler: function (form) {
+					 	event.preventDefault() ;
+						saveMigrateCard();
+					},
+					invalidHandler: function (form) {
+					}
+				});
+				/////////////////////////////////////
+				$('#fmReturn').validate({
+					errorElement: 'div',
+					errorClass: 'help-block',
+					focusInvalid: false,
+					rules:{ 
+						name: {
+							required: true,
+						},
+						returnDate: {
+							required: true,
+						},
+						memo: {
+							required: true,
+						},
+					},
+			
+					messages: {
+						name: {
+							required: "请输入名称.",
+						},
+						returnDate: {
+							required: "请输入归还日期.",
+						},
+						memo: {
+							required: "请输入备注.",
+						},
+					},
+			
+					invalidHandler: function (event, validator) { //display error alert on form submit   
+						$('#fmReturn .alert-danger', $('.login-form')).show();
+					},
+			
+					highlight: function (e) {
+						$(e).closest('.form-group').removeClass('has-info').addClass('has-error');
+					},
+			
+					success: function (e) {
+						$(e).closest('.form-group').removeClass('has-error').addClass('has-info');
+						$(e).remove();
+					},
+			
+					errorPlacement: function (error, element) {
+						if(element.is(':checkbox') || element.is(':radio')) {
+							var controls = element.closest('div[class*="col-"]');
+							if(controls.find(':checkbox,:radio').length > 1) controls.append(error);
+							else error.insertAfter(element.nextAll('.lbl:eq(0)').eq(0));
+						}
+						else if(element.is('.select2')) {
+							error.insertAfter(element.siblings('[class*="select2-container"]:eq(0)'));
+						}
+						else if(element.is('.chosen-select')) {
+							error.insertAfter(element.siblings('[class*="chosen-container"]:eq(0)'));
+						}
+						else error.insertAfter(element.parent());
+					},
+			
+					submitHandler: function (form) {
+					 	event.preventDefault() ;
+						saveReturnCard();
+					},
+					invalidHandler: function (form) {
+					}
+				});	
+				/////////////////////////////////////
+				$('#fmLend').validate({
+					errorElement: 'div',
+					errorClass: 'help-block',
+					focusInvalid: false,
+					rules:{ 
+						name: {
+							required: true,
+						},
+						lendDate: {
+							required: true,
+						},
+						toReturnDate: {
+							required: true,
+						},
+						mobile: {
+							required: true,
+						},
+						tel: {
+							required: true,
+						},
+						purpose: {
+							required: true,
+						},
+						memo: {
+							required: true,
+						},
+					},
+			
+					messages: {
+						name: {
+							required: "请输入名称.",
+						},
+						lendDate: {
+							required: "请输入借出日期.",
+						},
+						toReturnDate: {
+							required: "请输入预计归还日期.",
+						},
+						mobile: {
+							required: "请输入移动电话.",
+						},
+						tel: {
+							required: "请输入住宅电话.",
+						},
+						purpose: {
+							required: "请输入用途.",
+						},
+						memo: {
+							required: "请输入备注.",
+						},
+					},
+			
+					invalidHandler: function (event, validator) { //display error alert on form submit   
+						$('#fmLend .alert-danger', $('.login-form')).show();
+					},
+			
+					highlight: function (e) {
+						$(e).closest('.form-group').removeClass('has-info').addClass('has-error');
+					},
+			
+					success: function (e) {
+						$(e).closest('.form-group').removeClass('has-error').addClass('has-info');
+						$(e).remove();
+					},
+			
+					errorPlacement: function (error, element) {
+						if(element.is(':checkbox') || element.is(':radio')) {
+							var controls = element.closest('div[class*="col-"]');
+							if(controls.find(':checkbox,:radio').length > 1) controls.append(error);
+							else error.insertAfter(element.nextAll('.lbl:eq(0)').eq(0));
+						}
+						else if(element.is('.select2')) {
+							error.insertAfter(element.siblings('[class*="select2-container"]:eq(0)'));
+						}
+						else if(element.is('.chosen-select')) {
+							error.insertAfter(element.siblings('[class*="chosen-container"]:eq(0)'));
+						}
+						else error.insertAfter(element.parent());
+					},
+			
+					submitHandler: function (form) {
+					 	event.preventDefault() ;
+						saveLendCard();
+					},
+					invalidHandler: function (form) {
+					}
+				});	
+
+
+							
 				////////////////////////////////////	
 				var grid_selector = "#grid-table";
 				var pager_selector = "#grid-pager";
@@ -819,7 +1735,7 @@ String path2 = "学生情况查询";
 						}, 0);
 					},
 			
-					caption: "学生情况查询",
+					caption: "学生户籍卡信息登记",
 			
 					autowidth: true
 			
@@ -832,9 +1748,10 @@ String path2 = "学生情况查询";
 				function rowfun(cellvalue, options, rowdata){
 					return 	"<button onclick='addDlgShow(" + rowdata.id + ")'>增加</button>" + 
 									"<button onclick='editDlgShow(" + rowdata.id + ")'>修改</button>" + 
-									"<button onclick=\'alert(1)\'>迁移</button>" + 
-									"<button onclick=\'alert(1)\'>外借</button>" + 
-									"<button onclick=\'alert(1)\'>归还</button>";
+									"<button onclick='removeCardInfo(" + rowdata.id + ")'>删除</button><br/>" + 
+									"<button onclick='addMigrageCard(" + rowdata.id + ")'>迁移</button>" + 
+									"<button onclick='addLendCard(" + rowdata.id + ")'>外借</button>" + 
+									"<button onclick='addReturnCard(" + rowdata.id + ")'>归还</button>";
 									
 				}
 				

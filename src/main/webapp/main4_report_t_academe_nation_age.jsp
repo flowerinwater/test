@@ -61,22 +61,65 @@ String path2 = "教工年龄区间统计";
 	
 											<div>    
 												<!--院系 <input style="width:120px"  id="s_academe">-->
-												年龄段：<br>
-												1:<input style="width:120px"  id="s_age1_low" value="0"> to <input style="width:120px"  id="s_age1_top"  value="29"><br> 
-												2:<input style="width:120px"  id="s_age2_low" value="30"> to <input style="width:120px"  id="s_age2_top" value="39"><br>
-												3:<input style="width:120px"  id="s_age3_low" value="40"> to <input style="width:120px"  id="s_age3_top" value="49"><br>
-												4:<input style="width:120px"  id="s_age4_low" value="50"> to <input style="width:120px"  id="s_age4_top" value="59"><br>
-												5:<input style="width:120px"  id="s_age5_low" value="60"> to <input style="width:120px"  id="s_age5_top" value="100"><br>
-												6:<input style="width:120px"  id="s_age6_low" value=""> to <input style="width:120px"  id="s_age6_top" value=""><br>
-												<!--<a href="#" class="easyui-linkbutton" iconCls="icon-search" onClick="query()">查询</a>-->
-												<a href="#" class="easyui-linkbutton" iconCls="icon-search" onClick="exportxls()">导出</a>
+												<h4 class="lighter">年龄段</h4>
+												
+												
+												
+												<div class="row">
+													<div class="form-group">
+														<label class=" inline" for="s_age1_low">1</label>
+														<input type="text"   id="s_age1_low" value="0"> 
+														<label class=" inline" for="s_age1_top"> to </label> 
+														<input type="text"   id="s_age1_top"  value="29" >
+													</div>
+												</div>
+												
+												<div class="row">
+													<div class="form-group">
+														<label class=" inline" for="s_age2_low">2</label>
+														<input type="text"   id="s_age2_low" value="30">
+														<label class=" inline" for="s_age2_top"> to </label>
+														<input type="text"   id="s_age2_top" value="39">
+													</div>
+												</div>
+												
+												<div class="row">
+													<div class="form-group">
+														<label class=" inline" for="s_age3_low">3</label>
+														<input type="text"   id="s_age3_low" value="40">
+														<label class=" inline" for="s_age3_top"> to </label>
+														<input type="text"   id="s_age3_top" value="49">
+													</div>
+												</div>
+												
+												<div class="row">
+													<div class="form-group">
+														<label class=" inline" for="s_age4_low">4</label>
+														<input type="text"   id="s_age4_low" value="50">
+														<label class=" inline" for="s_age4_top"> to </label>
+														<input type="text"   id="s_age4_top" value="59">
+													</div>
+												</div>
+												
+												<div class="row">
+													<div class="form-group">
+														<label class=" inline" for="s_age5_low">5</label>
+														<input type="text"   id="s_age5_low" value="60">
+														<label class=" inline" for="s_age5_top"> to </label>
+														<input type="text"   id="s_age5_top" value="100">
+													</div>
+												</div>
+												
+												
+													<div class="col-md-offset-1 col-md-9">
+														<button class="btn btn-info" type="button"  onClick="exportxls()">
+															<i class="icon-export bigger-110"></i>
+															导出
+														</button>
+													</div>
 											</div>
-											
 										</div>
 
-
-
-		
 										<script type="text/javascript">
 											var $path_base = "/";//this will be used in gritter alerts containing images
 										</script>

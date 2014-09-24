@@ -50,7 +50,6 @@ public class Filter {
 		}catch(Exception e){
 			e.printStackTrace();
 		}
-		
 	}
 	
 	public Filter(){

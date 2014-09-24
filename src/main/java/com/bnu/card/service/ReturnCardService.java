@@ -102,8 +102,6 @@ public class ReturnCardService {
 				h.setOperatorName(c.getCreatorName());
 				
 				
-				
-				
 //				h.setCaption("借出卡[" + c.getName() + "]");
 			}
 
