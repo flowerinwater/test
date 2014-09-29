@@ -87,6 +87,7 @@
 		<link rel="stylesheet" href="${ctx}/assets/css/ace.min.css" />
 		<link rel="stylesheet" href="${ctx}/assets/css/ace-rtl.min.css" />
 		<link rel="stylesheet" href="${ctx}/assets/css/ace-skins.min.css" />
+		<link rel="stylesheet" type="text/css" href="${ctx}/static/uploadify/uploadify.css"> 
 
 		<!--[if lte IE 8]>
 		  <link rel="stylesheet" href="assets/css/ace-ie.min.css" />
@@ -306,7 +307,7 @@
 								<li class="<%=p3.equals("report_t_academe_nation_age") ? "active" : "" %>">
 									<a href="main4_report_t_academe_nation_age.jsp?p2=tjcx&p3=report_t_academe_nation_age">
 										<i class="icon-dashboard"></i>
-										<span class="menu-text"> 教工年龄（？） </span>
+										<span class="menu-text"> 教工年龄</span>
 									</a>
 								</li>
 								<li class="<%=p3.equals("report_t_return_lend") ? "active" : "" %>">
@@ -335,6 +336,7 @@
 										<span class="menu-text"> 用户管理 </span>
 									</a>
 								</li>
+							<!--  
 								<li class="">
 									<a href="index.html">
 										<i class="icon-dashboard"></i>
@@ -347,8 +349,9 @@
 										<span class="menu-text"> 角色管理 </span>
 									</a>
 								</li>
-								<li class="">
-									<a href="index.html">
+							-->
+								<li class="<%=p3.equals("import") ? "active" : "" %>">
+									<a href="main4_import.jsp?p2=sys&p3=import">
 										<i class="icon-dashboard"></i>
 										<span class="menu-text"> 导入数据 </span>
 									</a>

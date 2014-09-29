@@ -473,7 +473,7 @@ String path2 = "";
 				$.plot("#linechart-placeholder2", [
 					{ label: "滞留学生", data: d11 },
 				], {
-					//hoverable: true,
+					
 					multiplebars:true,
 					shadowSize: 0,
 					series: {
@@ -504,11 +504,33 @@ String path2 = "";
 					grid: {
 						backgroundColor: { colors: [ "#fff", "#fff" ] },
 						borderWidth: 1,
-						borderColor:'#555'
+						borderColor:'#555',
+						hoverable: true,
 					}
 				});
 			 ///////////////////////////////////////////////
-			 
+			  function showTooltip(x, y, contents) {//浮动块信息  
+		        $('<div id="tooltip">' + contents + '</div>').css( {  
+		            position: 'absolute',  
+		            display: 'none',  
+		            top: y + 5,  
+		            left: x + 5,  
+		            border: '1px solid #fdd',  
+		            padding: '2px',  
+		            'background-color': '#fee',  
+		            opacity: 0.80  
+		        }).appendTo("body").fadeIn(200);  
+		    }  
+			  
+			  
+			  $("#linechart-placeholder2").bind("plothover", function (event, pos, item) {
+			  	 if(item)
+			  	 	showTooltip(item.pageX, item.pageY,item.datapoint[1]);  
+			  });  
+				
+				
+				
+				
 					
 				$('#recent-box [data-rel="tooltip"]').tooltip({placement: tooltip_placement});
 				function tooltip_placement(context, source) {

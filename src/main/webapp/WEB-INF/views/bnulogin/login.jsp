@@ -122,8 +122,10 @@
 				<p><input type="password" id="password" name="password" class="loginInput" required="required" placeholder="请输入密码" value="" /></p>
 			</div>
 			<div class="loginBoxButtons">
+				<!--
 				<input id="remember" type="checkbox" name="remember" />
 				<label for="remember">记住登录状态</label>
+				-->
 				<input type="submit" name="Submit" value="提交" class="loginBtn"/>			
 			</div>
 			<div class="loginBoxButtons">
