@@ -299,7 +299,7 @@ public class LendCardController {
 //    			lr.setTotal(as.getTotalElements());
     			
     			lr.setTotal(as.getTotalPages());
-    			lr.setPage(as.getNumber());
+    			lr.setPage(as.getNumber()+1);
     			lr.setRecords(Integer.valueOf(""+as.getTotalElements()));
     		}
     		

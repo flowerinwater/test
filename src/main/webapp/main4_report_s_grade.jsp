@@ -173,7 +173,7 @@ String path2 = "按年级统计学生情况";
 					
 					
 					
-					colNames:['民族', '合计','男','女', '男', '女', '男', '女', '男', '女'],
+					colNames:['年级', '合计','男','女', '男', '女', '男', '女', '男', '女'],
 					colModel:[
 						{index:'groupName',name:'groupName',width:100,editable: false},
 						{index:'sumall',name:'sumall',width:100,editable: false},

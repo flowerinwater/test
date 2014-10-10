@@ -350,10 +350,16 @@
 									</a>
 								</li>
 							-->
-								<li class="<%=p3.equals("import") ? "active" : "" %>">
-									<a href="main4_import.jsp?p2=sys&p3=import">
+								<li class="<%=p3.equals("importfull") ? "active" : "" %>">
+									<a href="main4_import.jsp?p2=sys&p3=importfull">
 										<i class="icon-dashboard"></i>
-										<span class="menu-text"> 导入数据 </span>
+										<span class="menu-text"> 导入数据(全列信息) </span>
+									</a>
+								</li>
+								<li class="<%=p3.equals("importshort") ? "active" : "" %>">
+									<a href="main4_import_short.jsp?p2=sys&p3=importshort">
+										<i class="icon-dashboard"></i>
+										<span class="menu-text"> 导入数据(简表) </span>
 									</a>
 								</li>
 							<%}%>

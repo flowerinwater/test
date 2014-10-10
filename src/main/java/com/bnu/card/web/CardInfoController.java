@@ -55,6 +55,7 @@ import com.bnu.card.util.BeanUtilEx;
 import com.bnu.card.util.DefaultValue;
 import com.bnu.card.util.ExcelUtil;
 import com.bnu.card.util.Fruit;
+import com.bnu.card.util.IDCardUtil;
 import com.bnu.card.util.JsonArrayResult;
 import com.bnu.card.util.JsonPageResult;
 import com.bnu.card.util.JsonSimpleResult;
@@ -391,7 +392,7 @@ public class CardInfoController {
         		for (Iterator iterator1 = returnAs.iterator(); iterator1.hasNext();) {
         			Object[] object1 = (Object[]) iterator1.next();
         			
-        			if(object1[0].toString().equals(object[0].toString())){
+        			if(object1[0] !=null && object1[0].toString().equals(object[0].toString())){
         				m.put("return",object1[1]);
         				break;
         			}
@@ -684,7 +685,7 @@ public class CardInfoController {
 //    			lr.setTotal(as.getTotalElements());
     			
     			lr.setTotal(as.getTotalPages());
-    			lr.setPage(as.getNumber());
+    			lr.setPage(as.getNumber()+1);
     			lr.setRecords(Integer.valueOf(""+as.getTotalElements()));
     		}
 		} catch (Exception e) {
@@ -704,7 +705,7 @@ public class CardInfoController {
 			sort = new Sort(Direction.ASC, sidx.equals("")?"id":sidx);
 		}
         
-		return new PageRequest(page - 1, rows, sort);
+		return new PageRequest(page-1, rows, sort);
 	}
 	
 	// 民族
@@ -1479,10 +1480,10 @@ public class CardInfoController {
 					else
 						idset.add(c.getIdentityCard());
 
-					if(stuTeaNumberSet.contains(c.getAddress()))
-						errMsg += "文件中[身份证:" + c.getAddress() + "已存在,";
-					else
-						stuTeaNumberSet.add(c.getAddress());
+//					if(stuTeaNumberSet.contains(c.getAddress()))
+//						errMsg += "文件中[地址:" + c.getAddress() + "已存在,";
+//					else
+//						stuTeaNumberSet.add(c.getAddress());
 					
 					if(!c.getGender().equals("男") && !c.getGender().equals("女"))
 						errMsg += "性别填写错误,";
@@ -1562,5 +1563,165 @@ public class CardInfoController {
         }   
         return lr;  
     }  
+    
+    /** 
+     * 上传文件 
+     * @return 
+     * @throws IOException  
+     * @throws IllegalStateException  
+     */  
+    @RequestMapping(value = "/uploadcards4shortinfo", method = RequestMethod.POST)  
+    @ResponseBody  
+    public JsonSimpleResult upload4ShortInfo(HttpServletRequest request, HttpServletResponse response){  
+          
+    	JsonSingleOjbectResult<CardInfoForm> lr = new JsonSingleOjbectResult<CardInfoForm>();
+    	
+        MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;    
+  
+        Map<String, MultipartFile> fileMap = multipartRequest.getFileMap();    
+        // 文件保存路径  
+        String ctxPath=request.getSession().getServletContext().getRealPath("/")+File.separator+"uploadFiles";   
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMM");  
+        String ymd = sdf.format(new Date());  
+        ctxPath += File.separator + ymd + File.separator;  
+        // 创建文件夹  
+        File file = new File(ctxPath);    
+        if (!file.exists()) {    
+            file.mkdirs();    
+        }    
+        String fileName = null;    
+        for (Map.Entry<String, MultipartFile> entity : fileMap.entrySet()) {    
+            // 上传文件   
+            MultipartFile mf = entity.getValue();    
+            fileName = mf.getOriginalFilename();  
+            String fileExt = fileName.substring(fileName.lastIndexOf(".") + 1).toLowerCase();  
+            // 重命名文件  
+            SimpleDateFormat df = new SimpleDateFormat("yyyyMMddHHmmss");  
+            String newFileName = df.format(new Date()) + "_" + new Random().nextInt(1000) + "." + fileExt;  
+            File uploadFile = new File(ctxPath + newFileName);    
+            try {  
+                FileCopyUtils.copy(mf.getBytes(), uploadFile);
+                
+                String errMsgs = "";
+                
+                //导入
+                ExcelUtil eu = new ExcelUtil();
+                String tempalteCtxPath=request.getSession().getServletContext().getRealPath("/")+File.separator+"template";   
+                String xmlPath = tempalteCtxPath + File.separator + "cardtemplate_short.xml";
+                CardInfoForm cif = new CardInfoForm();
+        		List<CardInfoXlsVo> cifs = new ArrayList<CardInfoXlsVo>();
+        		Map beanMap = new HashMap();
+        		beanMap.put("card", cif);
+        		beanMap.put("cards", cifs);
+                eu.xls2Beans(xmlPath, ctxPath + newFileName, beanMap);
+                HashSet<String> idset = new HashSet<String>();
+                HashSet<String> stuTeaNumberSet = new HashSet<String>();
+                
+                for (CardInfoXlsVo c : cifs) {
+					System.out.println(c.getName());
+					//校验
+					List<CardInfo> cis = cardInfoService.findCardInfoByIdentityCard(c.getIdentityCard());
+					String errMsg = "";
+					if(cis.size()>0)
+						errMsg += "系统中[身份证:" + c.getIdentityCard() + "]已存在,";
+					
+					cis = cardInfoService.findCardInfoBystuTeaNumber(c.getAddress());
+					if(cis.size()>0)
+						errMsg += "系统中[学号工作证号:" + c.getAddress() + "]已存在,";
+					
+					if(idset.contains(c.getIdentityCard()))
+						errMsg += "文件中[身份证:" + c.getIdentityCard() + "已存在,";
+					else
+						idset.add(c.getIdentityCard());
+
+					if(stuTeaNumberSet.contains(c.getAddress()))
+						errMsg += "文件中[学号工作证号:" + c.getAddress() + "已存在,";
+					else
+						stuTeaNumberSet.add(c.getAddress());
+					
+					if(!c.getGender().equals("男") && !c.getGender().equals("女"))
+						errMsg += "性别填写错误,";
+					
+//					if(!c.getBloodType().equals("A") && !c.getBloodType().equals("B") && !c.getBloodType().equals("AB") && !c.getBloodType().equals("O"))
+//						errMsg += "血型填写错误,";
+//					
+//					if(!c.getEducationInfo().equals("研究生") && !c.getEducationInfo().equals("本科生"))
+//						errMsg += "文化程度填写错误,";
+//					
+//					if(!c.getMarriageInfo().equals("未婚") && !c.getMarriageInfo().equals("已婚") && !c.getMarriageInfo().equals("未知"))
+//						errMsg += "婚姻状况填写错误,";
+//					
+//					if(!c.getMilitarySituation().equals("未服兵役") && !c.getMilitarySituation().equals("已服兵役") && !c.getMilitarySituation().equals("未知"))
+//						errMsg += "兵役情况填写错误,";
+//					
+					if(!c.getJob().equals("本科生") && !c.getJob().equals("研究生") && !c.getJob().equals("博士生") && !c.getJob().equals("教工") && !c.getJob().equals("家属") && !c.getJob().equals("其他"))
+						errMsg += "职业填写错误,";
+//					
+					if(errMsg.length() >0)
+						errMsgs += c.getName() + ":" + errMsg + "<br>";
+				}
+                
+                if(errMsgs.length() > 0){
+                	lr.setSuccess(false);
+                	lr.setMsg("错误信息如下：<br>" + errMsgs);  
+                }else if(cifs.size()==0){
+                	lr.setSuccess(false);
+                	lr.setMsg("错误信息如下：<br>" + "文件["+fileName+"]未能解析出数据!");
+            	}else{
+                	List<CardInfo> cis = new ArrayList<CardInfo>();
+                	for (Iterator iterator = cifs.iterator(); iterator.hasNext();) {
+                		CardInfoXlsVo cif1 = (CardInfoXlsVo) iterator.next();
+                		CardInfo ci = new CardInfo();
+                		
+                		BeanUtilEx.copyProperties(ci, cif1);
+                		ci.setGender(bnuCodeService.getCodeValue(DefaultValue.GENDER_TYPE, cif1.getGender()));
+                		ci.setEducationInfo(bnuCodeService.getCodeValue(DefaultValue.EDUCATION_INFO,cif1.getEducationInfo()));
+                		ci.setMilitarySituation(bnuCodeService.getCodeValue(DefaultValue.MILITARY_SITUATION,cif1.getMilitarySituation()));
+                		ci.setJob(bnuCodeService.getCodeValue(DefaultValue.CARD_TYPE,cif1.getJob()));
+                		ci.setMarriageInfo(bnuCodeService.getCodeValue(DefaultValue.MARRIAGE_INFO,cif1.getMarriageInfo()));
+                		
+                		try{
+                		ci.setBirthDay(IDCardUtil.getBirthFromCard(ci.getIdentityCard()));
+                		}catch(Exception e){
+                			e.printStackTrace();
+                		}
+                		
+                		String currUserName = DefaultValue.getCurrentUserName();
+            			System.out.println("currUserName:" + currUserName);
+            			Long currUserId = -1l;
+            			SysUser cu = sysUserService.findOneSysUserByLoginName(currUserName);
+            			if (cu != null)
+            				currUserId = cu.getId();
+            			Date currDate = new Date();
+            			
+            			ci.setCreateDate(currDate);
+        				ci.setCreatorId(currUserId);
+        				ci.setCreatorName(currUserName);
+            			
+        				ci.setStatus(DefaultValue.VALID);
+        				
+						cis.add(ci);
+					}
+                	cardInfoService.saveCardInfos(cis);
+                	
+	                lr.setSuccess(true);
+	                lr.setMsg("上传成功");
+                }
+            } catch (IOException e) {  
+                lr.setSuccess(false);
+            	lr.setMsg("上传失败");  
+                e.printStackTrace();  
+            } catch (IllegalAccessException e) {
+            	lr.setSuccess(false);
+            	lr.setMsg("上传失败");  
+				e.printStackTrace();
+			} catch (InvocationTargetException e) {
+				lr.setSuccess(false);
+            	lr.setMsg("上传失败");  
+				e.printStackTrace();
+			}    
+        }   
+        return lr;  
+    } 
 	
 }

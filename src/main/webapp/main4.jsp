@@ -53,7 +53,7 @@ String path2 = "";
 												<span class="infobox-data-number"><%=cardInfoService.getCountCardInfoByJob("1") + cardInfoService.getCountCardInfoByJob("2") + cardInfoService.getCountCardInfoByJob("3")%></span>
 												<div class="infobox-content">学生</div>
 											</div>
-											<div class="badge badge-success"><%=(double)(cardInfoService.getCountCardInfoByJob("1")+cardInfoService.getCountCardInfoByJob("2")+cardInfoService.getCountCardInfoByJob("3"))/(double)(cardInfoService.getCountAll())*100%>%</div>
+											<div class="badge badge-success"><%=Math.round((double)(cardInfoService.getCountCardInfoByJob("1")+cardInfoService.getCountCardInfoByJob("2")+cardInfoService.getCountCardInfoByJob("3"))/(double)(cardInfoService.getCountAll())*100 )%>%</div>
 										</div>
 
 										<div class="infobox infobox-blue  ">
@@ -67,7 +67,7 @@ String path2 = "";
 											</div>
 
 											<div class="badge badge-success">
-												<%=(double)(cardInfoService.getCountCardInfoByJob("4"))/(double)(cardInfoService.getCountAll())*100%>%
+												<%=Math.round((double)(cardInfoService.getCountCardInfoByJob("4"))/(double)(cardInfoService.getCountAll())*100)%>%
 											</div>
 										</div>
 
@@ -80,7 +80,7 @@ String path2 = "";
 												<span class="infobox-data-number"><%=cardInfoService.getCountCardInfoByJob("5")%></span>
 												<div class="infobox-content">家属</div>
 											</div>
-											<div class="badge badge-success"><%=(double)(cardInfoService.getCountCardInfoByJob("5"))/(double)(cardInfoService.getCountAll())*100%>%</div>
+											<div class="badge badge-success"><%=Math.round((double)(cardInfoService.getCountCardInfoByJob("5"))/(double)(cardInfoService.getCountAll())*100)%>%</div>
 										</div>
 										
 										<div class="infobox infobox-pink  ">
@@ -92,7 +92,7 @@ String path2 = "";
 												<span class="infobox-data-number"><%=cardInfoService.getCountCardInfoByJob("6")%></span>
 												<div class="infobox-content">其他</div>
 											</div>
-											<div class="badge badge-success"><%=(double)cardInfoService.getCountCardInfoByJob("6")/(double)(cardInfoService.getCountAll())*100%>%</div>
+											<div class="badge badge-success"><%=Math.round((double)cardInfoService.getCountCardInfoByJob("6")/(double)(cardInfoService.getCountAll())*100)%>%</div>
 										</div>
 
 										<div class="infobox infobox-red  ">
@@ -104,7 +104,7 @@ String path2 = "";
 												<span class="infobox-data-number"><%=cardInfoService.getCountCardInfoByStatus(com.bnu.card.util.DefaultValue.DETAINED)%></span>
 												<div class="infobox-content">滞留</div>
 											</div>
-											<div class="badge badge-success"><%=(double)(cardInfoService.getCountCardInfoByStatus(com.bnu.card.util.DefaultValue.DETAINED))/(double)(cardInfoService.getCountAll())*100%>%</div>
+											<div class="badge badge-success"><%=Math.round((double)(cardInfoService.getCountCardInfoByStatus(com.bnu.card.util.DefaultValue.DETAINED))/(double)(cardInfoService.getCountAll())*100)%>%</div>
 										</div>
 
 										<div class="infobox infobox-orange2  ">
@@ -116,7 +116,7 @@ String path2 = "";
 												<div class="infobox-content">借出</div>
 											</div>
 
-											<div class="badge badge-success"><%=(double)(cardInfoService.getCountCardInfoByStatus(com.bnu.card.util.DefaultValue.LEND))/(double)(cardInfoService.getCountAll())*100%>%</div>
+											<div class="badge badge-success"><%=Math.round((double)(cardInfoService.getCountCardInfoByStatus(com.bnu.card.util.DefaultValue.LEND))/(double)(cardInfoService.getCountAll())*100)%>%</div>
 										</div>
 
 									</div>
