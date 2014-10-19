@@ -46,6 +46,10 @@ public class SysRolesService {
 	public SysRoles getRole(Long id) {
 		return rolesDao.findOne(id);
 	}
+	
+	public SysRoles getSysRolesByRoleCode(String code) {
+		return rolesDao.findByCode(code);
+	}
 
 	@Transactional(readOnly = false)
 	public void saveRole(SysRoles code) {

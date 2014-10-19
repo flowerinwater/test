@@ -6,4 +6,6 @@ import com.bnu.card.entity.SysRoles;
 
 public interface SysRolesDao extends PagingAndSortingRepository<SysRoles, Long> {
 	SysRoles findByCode(String code);
+
+	SysRoles findByName(String name);
 }

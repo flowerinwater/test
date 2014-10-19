@@ -2,8 +2,10 @@ package com.bnu.card.web;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -26,8 +28,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springside.modules.security.utils.Digests;
 import org.springside.modules.utils.Encodes;
 
+import com.bnu.card.entity.SysRoles;
 import com.bnu.card.entity.SysUser;
 import com.bnu.card.service.BnuCodeService;
+import com.bnu.card.service.SysRolesService;
 import com.bnu.card.service.SysUserService;
 import com.bnu.card.util.DefaultValue;
 import com.bnu.card.util.JsonArrayResult;
@@ -40,6 +44,9 @@ import com.bnu.card.web.form.LoginForm;
 import com.bnu.card.web.form.SysUserForm;
 import com.bnu.card.web.form.SysUserSearchForm;
 import com.bnu.card.util.BeanUtilEx;
+import com.test.entity.Roles;
+import com.test.service.account.RolesService;
+import com.test.web.account.UserRoleInfo;
 
 
 @Controller
@@ -54,6 +61,8 @@ public class SysUserController {
 	private SysUserService sysUserService;
 	@Autowired
 	private BnuCodeService bnuCodeService;
+	@Autowired
+	private SysRolesService sysRolesService;
     
     @RequestMapping("/jsonsavesysuser")
     @ResponseBody
@@ -65,6 +74,12 @@ public class SysUserController {
     		SysUser bi = new SysUser();
 //			BeanUtils.copyProperties(bi, ci);
     		BeanUtilEx.copyProperties(bi, ci);
+    		if(ci.getRole()!=null && !ci.getRole().equals("")){
+    			SysRoles r = sysRolesService.getSysRolesByRoleCode(ci.getRole());
+    			Set<SysRoles> rs = new HashSet<SysRoles>();
+    			rs.add(r);
+    			bi.setUserRoles(rs);
+    		}
 	    	ci.setId(sysUserService.saveSysUser(bi).getId());
 	    	
 	    	lr.setObj(ci);
@@ -288,6 +303,10 @@ public class SysUserController {
 				SysUser sysUser = (SysUser) iterator.next();
 				SysUserForm bi = new SysUserForm();
 				BeanUtilEx.copyProperties(bi, sysUser);
+				Set<SysRoles> roles = sysUser.getUserRoles();
+				
+				if(roles.size() > 0)
+					bi.setRole(roles.iterator().hasNext()?bnuCodeService.getCodeName(DefaultValue.USER_TYPE,roles.iterator().next().getCode()):"");
 				bi.setStatus(bnuCodeService.getCodeName(DefaultValue.USER_STATUS,bi.getStatus()));
 				bis.add(bi);
 			}
@@ -297,7 +316,7 @@ public class SysUserController {
 //    			lr.setTotal(as.getTotalElements());
     			
     			lr.setTotal(as.getTotalPages());
-    			lr.setPage(as.getNumber());
+    			lr.setPage(as.getNumber()+1);
     			lr.setRecords(Integer.valueOf(""+as.getTotalElements()));
     		}
     		

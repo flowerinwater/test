@@ -391,11 +391,13 @@ public class SysUserService {
 				c.setName(ci.getName());
 				c.setMemo(ci.getMemo());
 				c.setStatus(ci.getStatus());
+				c.setUserRoles(ci.getUserRoles());
 			}else{
 				BeanUtilEx.copyProperties(c, ci);
 				c.setCreateDate(new Date());
 				c.setPassword(DefaultValue.DEFAULT_PASSWORD);
 				entryptPassword(c);
+				c.setUserRoles(ci.getUserRoles());
 			}
 			
 			

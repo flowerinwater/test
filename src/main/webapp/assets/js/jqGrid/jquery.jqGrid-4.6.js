@@ -8054,7 +8054,7 @@ $.jgrid.extend({
 							}
 						} else {
 							//ajaxOptions.contentType='application/json;charset=UTF-8';
-							alert(":" + JSON.stringify(ajaxOptions))
+							//alert(":" + JSON.stringify(ajaxOptions))
 							$.ajax(ajaxOptions); 
 						}
 					}
@@ -9094,7 +9094,7 @@ $.jgrid.extend({
 								if($.isFunction( o.delfunc )){
 									o.delfunc.call($t, dr);
 								}else{
-									alert(1234);
+									//alert(1234);
 							
 									$($t).jqGrid("delGridRow",dr,pDel);
 								}

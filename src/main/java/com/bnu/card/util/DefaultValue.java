@@ -16,6 +16,7 @@ public class DefaultValue {
 	public static final String OPERATE_TYPE = "operate_type";
 	public static final String CARD_TYPE4HISTORY = "cardtype4history";
 	public static final Object CURRENT_USER = "current_user";
+	public static final String USER_TYPE = "user_type";
 
 	public static String DEFAULT_PASSWORD = "12345678";
 
