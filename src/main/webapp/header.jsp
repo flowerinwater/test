@@ -79,15 +79,19 @@
 		<!-- page specific plugin styles -->
 		
 		<link rel="stylesheet" href="${ctx}/assets/css/jquery-ui-1.10.3.full.min.css"/>
-		<link rel="stylesheet" href="assets/css/datepicker.css" />
-		<link rel="stylesheet" href="assets/css/ui.jqgrid.css" />
+		<link rel="stylesheet" href="${ctx}/assets/css/datepicker.css" />
+		<link rel="stylesheet" href="${ctx}/assets/css/ui.jqgrid.css" />
 		
 		<!-- ace styles -->
 
 		<link rel="stylesheet" href="${ctx}/assets/css/ace.min.css" />
 		<link rel="stylesheet" href="${ctx}/assets/css/ace-rtl.min.css" />
 		<link rel="stylesheet" href="${ctx}/assets/css/ace-skins.min.css" />
-		<link rel="stylesheet" type="text/css" href="${ctx}/static/uploadify/uploadify.css"> 
+		<link rel="stylesheet" type="text/css" href="${ctx}/static/uploadify/uploadify.css">
+
+		<style>
+
+		</style>
 
 		<!--[if lte IE 8]>
 		  <link rel="stylesheet" href="assets/css/ace-ie.min.css" />

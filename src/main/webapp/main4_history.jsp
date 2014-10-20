@@ -27,14 +27,7 @@ String path2 = "历史查询";
  								</small>
 							</h1>
 							<div class="nav-search" id="nav-search">
-							<script>
-								function exportxls(){
-									var url = "${ctx}/exportExcel?type=StuList";
-									window.open(url);   
-								}
-							</script>
-							<button class="btn btn-info" onClick="exportxls()">导出</button>
-						</div><!-- #nav-search -->
+							</div><!-- #nav-search -->
 						</div><!-- /.page-header -->
 
 						<div class="row">
@@ -124,32 +117,6 @@ String path2 = "历史查询";
 
 
 		<script type="text/javascript">
-			var grid_data = 
-			[ 
-				{id:"1",name:"Desktop Computer",note:"note",stock:"Yes",ship:"FedEx", sdate:"2007-12-03"},
-				{id:"2",name:"Laptop",note:"Long text ",stock:"Yes",ship:"InTime",sdate:"2007-12-03"},
-				{id:"3",name:"LCD Monitor",note:"note3",stock:"Yes",ship:"TNT",sdate:"2007-12-03"},
-				{id:"4",name:"Speakers",note:"note",stock:"No",ship:"ARAMEX",sdate:"2007-12-03"},
-				{id:"5",name:"Laser Printer",note:"note2",stock:"Yes",ship:"FedEx",sdate:"2007-12-03"},
-				{id:"6",name:"Play Station",note:"note3",stock:"No", ship:"FedEx",sdate:"2007-12-03"},
-				{id:"7",name:"Mobile Telephone",note:"note",stock:"Yes",ship:"ARAMEX",sdate:"2007-12-03"},
-				{id:"8",name:"Server",note:"note2",stock:"Yes",ship:"TNT",sdate:"2007-12-03"},
-				{id:"9",name:"Matrix Printer",note:"note3",stock:"No", ship:"FedEx",sdate:"2007-12-03"},
-				{id:"10",name:"Desktop Computer",note:"note",stock:"Yes",ship:"FedEx", sdate:"2007-12-03"},
-				{id:"11",name:"Laptop",note:"Long text ",stock:"Yes",ship:"InTime",sdate:"2007-12-03"},
-				{id:"12",name:"LCD Monitor",note:"note3",stock:"Yes",ship:"TNT",sdate:"2007-12-03"},
-				{id:"13",name:"Speakers",note:"note",stock:"No",ship:"ARAMEX",sdate:"2007-12-03"},
-				{id:"14",name:"Laser Printer",note:"note2",stock:"Yes",ship:"FedEx",sdate:"2007-12-03"},
-				{id:"15",name:"Play Station",note:"note3",stock:"No", ship:"FedEx",sdate:"2007-12-03"},
-				{id:"16",name:"Mobile Telephone",note:"note",stock:"Yes",ship:"ARAMEX",sdate:"2007-12-03"},
-				{id:"17",name:"Server",note:"note2",stock:"Yes",ship:"TNT",sdate:"2007-12-03"},
-				{id:"18",name:"Matrix Printer",note:"note3",stock:"No", ship:"FedEx",sdate:"2007-12-03"},
-				{id:"19",name:"Matrix Printer",note:"note3",stock:"No", ship:"FedEx",sdate:"2007-12-03"},
-				{id:"20",name:"Desktop Computer",note:"note",stock:"Yes",ship:"FedEx", sdate:"2007-12-03"},
-				{id:"21",name:"Laptop",note:"Long text ",stock:"Yes",ship:"InTime",sdate:"2007-12-03"},
-				{id:"22",name:"LCD Monitor",note:"note3",stock:"Yes",ship:"TNT",sdate:"2007-12-03"},
-				{id:"23",name:"Speakers",note:"note",stock:"No",ship:"ARAMEX",sdate:"2007-12-03"}
-			];	
 			
 			jQuery(function($) {
 				var grid_selector = "#grid-table";
@@ -169,10 +136,11 @@ String path2 = "历史查询";
 					mtype:"post",
 					
 					height: 350,
-					colNames:['维护时间', '操作人员','名称','卡类型', '操作类型', '备注'],
+					colNames:['维护时间', '操作人员','卡片ID','名称','卡类型', '操作类型', '备注'],
 					colModel:[
 						{name:'operateDate',index:'operateDate',width:100, sorttype:"int", editable: false},  
 			      {name:'operatorName',index:'operatorName',width:100,editable:false},  
+			      {name:'registerCardId',index:'registerCardId',width:100,editable:false},  
 			      {name:'name',index:'name',width:100,editable:false},  
 			      {name:'cardType',index:'cardType',width:100,editable:false},  
 			      {name:'operateType',index:'operateType',width:100,editable:false},  

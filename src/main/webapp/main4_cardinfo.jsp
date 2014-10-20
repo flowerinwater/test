@@ -55,7 +55,11 @@ String path2 = "学生户籍卡信息登记";
 
 															<div class="col-xs-12 col-sm-9">
 																<div class="clearfix">
-																	<input type="text" name="gender" id="gender" class="col-xs-12 col-sm-9" />
+																	<select class="col-xs-12 col-sm-9" id="gender" name="gender">
+																		<option value="">&nbsp;</option>
+																		<option value="1">男</option>
+																		<option value="2">女</option>
+																	</select>
 																</div>
 															</div>
 														</div>
@@ -82,12 +86,20 @@ String path2 = "学生户籍卡信息登记";
 
 															<div class="col-xs-12 col-sm-9">
 																<div class="clearfix">
-																	<input type="text" name="job" id="job" class="col-xs-12 col-sm-9" />
+																	<select class="col-xs-12 col-sm-9" id="job" name="job">
+																		<option value="">&nbsp;</option>
+																		<option value="1">本科生</option>
+																		<option value="2">研究生</option>
+																		<option value="3">博士生</option>
+																		<option value="4">教工</option>
+																		<option value="5">家属</option>
+																		<option value="6">其他</option>
+																	</select>
 																</div>
 															</div>
 														</div>
 														<div class="form-group">
-															<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="address">本市(县)其他住址*:</label>
+															<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="address">本市(县)其他住址【学号工作证号】*:</label>
 
 															<div class="col-xs-12 col-sm-9">
 																<div class="clearfix">
@@ -202,11 +214,14 @@ String path2 = "学生户籍卡信息登记";
 														</div>
 														
 														<div class="form-group">
-															<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="birthDay">出生日期:</label>
+															<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="birthDay">出生日期【YYYY-MM-DD】:</label>
 
 															<div class="col-xs-12 col-sm-9">
 																<div class="clearfix">
-																	<input type="text" name="birthDay" id="birthDay" class="col-xs-12 col-sm-9"/><span class="label label-warning">YYYY-MM-DD</span>
+																	<input class="col-xs-12 col-sm-9 date-picker" id="birthDay" name="birthDay"  type="text" data-date-format="yyyy-mm-dd" />
+																	<span class="input-group-addon">
+																		<i class="icon-calendar bigger-110"></i>
+																	</span>
 																</div>
 															</div>
 														</div>
@@ -238,7 +253,13 @@ String path2 = "学生户籍卡信息登记";
 
 															<div class="col-xs-12 col-sm-9">
 																<div class="clearfix">
-																	<input type="text" name="bloodType" id="bloodType" class="col-xs-12 col-sm-9" />
+																	<select class="col-xs-12 col-sm-9" id="bloodType" name="bloodType">
+																		<option value="">&nbsp;</option>
+																		<option value="A">A</option>
+																		<option value="B">B</option>
+																		<option value="O">O</option>
+																		<option value="AB">AB</option>
+																	</select>
 																</div>
 															</div>
 														</div>
@@ -248,7 +269,11 @@ String path2 = "学生户籍卡信息登记";
 
 															<div class="col-xs-12 col-sm-9">
 																<div class="clearfix">
-																	<input type="text" name="educationInfo" id="educationInfo" class="col-xs-12 col-sm-9" />
+																	<select class="col-xs-12 col-sm-9" id="educationInfo" name="educationInfo">
+																		<option value="">&nbsp;</option>
+																		<option value="1">研究生</option>
+																		<option value="2">本科生</option>
+																	</select>
 																</div>
 															</div>
 														</div>
@@ -258,7 +283,11 @@ String path2 = "学生户籍卡信息登记";
 
 															<div class="col-xs-12 col-sm-9">
 																<div class="clearfix">
-																	<input type="text" name="marriageInfo" id="marriageInfo" class="col-xs-12 col-sm-9" />
+																	<select class="col-xs-12 col-sm-9" id="marriageInfo" name="marriageInfo">
+																		<option value="0">未婚</option>
+																		<option value="1">已婚</option>
+																		<option value="2">未知</option>
+																	</select>
 																</div>
 															</div>
 														</div>
@@ -268,7 +297,10 @@ String path2 = "学生户籍卡信息登记";
 
 															<div class="col-xs-12 col-sm-9">
 																<div class="clearfix">
-																	<input type="text" name="militarySituation" id="militarySituation" class="col-xs-12 col-sm-9" />
+																	<select class="col-xs-12 col-sm-9" id="militarySituation" name="militarySituation">
+																		<option value="0">未服兵役</option>
+																		<option value="1">已服兵役</option>
+																	</select>
 																</div>
 															</div>
 														</div>
@@ -813,9 +845,9 @@ String path2 = "学生户籍卡信息登记";
 		<script src="${ctx}/assets/js/typeahead-bs2.min.js"></script>
 
 		<!-- page specific plugin scripts -->
-		<script src="assets/js/date-time/bootstrap-datepicker.min.js"></script>
-		<script src="assets/js/jqGrid/jquery.jqGrid-4.6.js"></script>
-		<script src="assets/js/jqGrid/i18n/grid.locale-cn.js"></script>
+		<script src="${ctx}/assets/js/date-time/bootstrap-datepicker.min.js"></script>
+		<script src="${ctx}/assets/js/jqGrid/jquery.jqGrid-4.6.js"></script>
+		<script src="${ctx}/assets/js/jqGrid/i18n/grid.locale-cn.js"></script>
 		
 		<!-- ace scripts -->
 
@@ -824,7 +856,6 @@ String path2 = "学生户籍卡信息登记";
 		<script src="${ctx}/assets/js/select2.min.js"></script>
 		<script src="${ctx}/assets/js/jquery.validate.min.js"></script>
 		<script src="${ctx}/assets/js/bootbox.min.js"></script>
-		<script src="${ctx}/assets/js/date-time/bootstrap-datepicker.min.js"></script>
 
 		<!-- inline scripts related to this page -->
 
@@ -863,7 +894,7 @@ String path2 = "学生户籍卡信息登记";
                 switch(this.type){  
                     case 'passsword':  
                     case 'select-multiple':  
-                    case 'select-one':  
+                    case 'select-one':
                     case 'text':  
                     case 'textarea':  
                         $(this).val('');  
@@ -1374,6 +1405,11 @@ String path2 = "学生户籍卡信息登记";
 				}
 				
 				
+				$('.date-picker').datepicker({autoclose:true}).next().on(ace.click_event, function(){
+					$(this).prev().focus();
+				});
+				
+				
 				$('.alert-danger').hide();
 				$('.alert-info').hide();
 				
@@ -1417,7 +1453,7 @@ String path2 = "学生户籍卡信息登记";
 							required: "请输入职业(卡类型).",
 						},
 						address: {
-							required: "请输入本市(县)其他住址.",
+							required: "请输入本市(县)其他住址【学号工作证号】.",
 						},
 						academe: {
 							required: "请输入服务处所(院系所).",
@@ -1697,7 +1733,7 @@ String path2 = "学生户籍卡信息登记";
 					mtype:"post",
 					
 					height: 350,
-					colNames:['id', '状态','名称','性别', '民族', '籍贯','身份证','住址','出生地','生源地','备注','编辑'],
+					colNames:['id', '状态','名称','性别', '民族', '籍贯','身份证','住址【学号工作证号】','出生地','生源地','备注','编辑'],
 					colModel:[
 						{name:'id',index:'id',width:20, sorttype:"int", editable: false},  
 			      {name:'status',index:'status',width:30,editable:false},  

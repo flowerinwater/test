@@ -75,7 +75,7 @@
 		border: 1px solid #98CCE7;
 		border-radius: 20px;
 		box-shadow:inset rgba(255,255,255,0.6) 0 1px 1px, rgba(0,0,0,0.1) 0 1px 1px;
-		color: #FFF;
+		color: #000;
 		cursor: pointer;
 		float: right;
 		font: bold 13px Arial;
