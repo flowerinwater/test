@@ -1619,6 +1619,10 @@ public class CardInfoController {
                 
                 for (CardInfoXlsVo c : cifs) {
 					System.out.println(c.getName());
+					
+					if(c.getName().equals("姓名"))
+            			continue;
+					
 					//校验
 					List<CardInfo> cis = cardInfoService.findCardInfoByIdentityCard(c.getIdentityCard());
 					String errMsg = "";
@@ -1654,7 +1658,7 @@ public class CardInfoController {
 //					if(!c.getMilitarySituation().equals("未服兵役") && !c.getMilitarySituation().equals("已服兵役") && !c.getMilitarySituation().equals("未知"))
 //						errMsg += "兵役情况填写错误,";
 //					
-					if(!c.getJob().equals("本科生") && !c.getJob().equals("研究生") && !c.getJob().equals("博士生") && !c.getJob().equals("教工") && !c.getJob().equals("家属") && !c.getJob().equals("其他"))
+					if(!c.getJob().equals("本科生") && !c.getJob().equals("硕士生") && !c.getJob().equals("博士生") && !c.getJob().equals("教工") && !c.getJob().equals("家属") && !c.getJob().equals("其他"))
 						errMsg += "职业填写错误,";
 //					
 					if(errMsg.length() >0)
@@ -1669,9 +1673,15 @@ public class CardInfoController {
                 	lr.setMsg("错误信息如下：<br>" + "文件["+fileName+"]未能解析出数据!");
             	}else{
                 	List<CardInfo> cis = new ArrayList<CardInfo>();
+                	int ingoreCount = 0;
                 	for (Iterator iterator = cifs.iterator(); iterator.hasNext();) {
                 		CardInfoXlsVo cif1 = (CardInfoXlsVo) iterator.next();
                 		CardInfo ci = new CardInfo();
+                		
+                		if(cif1.getName().equals("姓名")){
+                			ingoreCount++;
+                			continue;
+                		}
                 		
                 		BeanUtilEx.copyProperties(ci, cif1);
                 		ci.setGender(bnuCodeService.getCodeValue(DefaultValue.GENDER_TYPE, cif1.getGender()));
@@ -1705,7 +1715,7 @@ public class CardInfoController {
                 	cardInfoService.saveCardInfos(cis);
                 	
 	                lr.setSuccess(true);
-	                lr.setMsg("上传成功");
+	                lr.setMsg("上传成功[" + cis.size() + "/" + cifs.size() + "],ignore[姓名:" + ingoreCount + "]");
                 }
             } catch (IOException e) {  
                 lr.setSuccess(false);
