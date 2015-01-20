@@ -139,7 +139,7 @@ String path2 = "学生情况查询";
 					mtype:"post",
 					
 					height: 350,
-					colNames:['id', '状态','名称','性别', '民族', '籍贯','身份证','住址','出生地','生源地','备注'],
+					colNames:['id', '状态','名称','性别', '民族', '籍贯','身份证','住址(学号工作证号)','出生地','生源地','备注'],
 					colModel:[
 						{name:'id',index:'id',width:100, sorttype:"int", editable: false},  
 			      {name:'status',index:'status',width:100,editable:false},  

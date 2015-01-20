@@ -27,13 +27,7 @@ String path2 = "预警查询";
  								</small>
 							</h1>
 							<div class="nav-search" id="nav-search">
-							<script>
-								function exportxls(){
-									var url = "${ctx}/exportExcel?type=StuList";
-									window.open(url);   
-								}
-							</script>
-							<button class="btn btn-info" onClick="exportxls()">导出</button>
+							
 						</div><!-- #nav-search -->
 						</div><!-- /.page-header -->
 

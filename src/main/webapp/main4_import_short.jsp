@@ -132,8 +132,9 @@ String path2 = "导入数据";
 		
 		<script type="text/javascript">  
 
-$(function() {  
-    $("#file").uploadify({  
+
+jQuery(document).ready(function(){ 
+	$("#file").uploadify({  
         method   : 'post',  
         swf           : '${ctx}/static/uploadify/uploadify.swf',  // uploadify.swf在项目中的路径  
         uploader      : '${ctx}/uploadcards4shortinfo',  // 后台UploadController处理上传的方法  
@@ -151,8 +152,10 @@ $(function() {
 					//alert(o.msg);
 					$("#res").html(o.msg);
 				} 
-    });  
-});
+    });
+}); 
+
+
 function up(){
 	$('#file').uploadify('upload');
 }
@@ -160,6 +163,7 @@ function up(){
 function upcancel(){
 	$('#file').uploadify('cancel');
 }
+
 </script>
 
 </body>

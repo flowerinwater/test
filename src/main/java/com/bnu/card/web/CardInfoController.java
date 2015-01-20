@@ -1005,7 +1005,7 @@ public class CardInfoController {
 				for (Iterator iterator1 = returnAs.iterator(); iterator1.hasNext();) {
 					Object[] object1 = (Object[]) iterator1.next();
 					
-					if(object1[0].toString().equals(object[0].toString())){
+					if(object1[0] !=null && object[0]!=null && object1[0].toString().equals(object[0].toString())){
 						m.put("return",object1[1]);
 						break;
 					}
